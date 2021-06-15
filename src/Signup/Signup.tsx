@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -7,6 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Button, Link } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../providers/AuthProvider";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,12 +51,42 @@ export default function Signup(): JSX.Element {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [repeatPassword, setRepeatPassword] = useState<string>("");
-  const emailRef = React.useRef<HTMLInputElement>(null);
-  const passwordRef = React.useRef<HTMLInputElement>(null);
-  const repeatPasswordRef = React.useRef<HTMLInputElement>(null);
-  const firstnameRef = React.useRef<HTMLInputElement>(null);
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const repeatPasswordRef = useRef<HTMLInputElement>(null);
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
   const classes = useStyles();
+  const history = useHistory();
+  const { signUp } = useAuth();
 
+  async function handleSubmit(
+    e: React.MouseEvent<HTMLFormElement>
+  ): Promise<void> {
+    e.preventDefault();
+    setLoading(true);
+    if (
+      passwordRef?.current?.value &&
+      emailRef?.current?.value &&
+      repeatPasswordRef?.current?.value
+    ) {
+      if (passwordRef.current.value !== repeatPasswordRef.current.value) {
+        setLoading(false);
+        return setError("Passwords do not match");
+      }
+      try {
+        setError("");
+        await signUp(emailRef.current.value, passwordRef.current.value);
+        history.push("/");
+      } catch (error) {
+        console.log("emailL:", emailRef.current.value);
+        setError(error.message);
+        setLoading(false);
+      }
+    }
+  }
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -62,14 +94,14 @@ export default function Signup(): JSX.Element {
           <LockOutlinedIcon />
         </Avatar>
         <Typography className={classes.signUpHeader}>Sign up</Typography>
-
-        <form className={classes.form}>
+        {error}
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container direction="column" spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
+              {/* <TextField
                 required
                 fullWidth
-                ref={firstnameRef}
+                inputRef={firstNameRef}
                 label="First Name:"
                 name="first-name"
                 value={firstName}
@@ -79,12 +111,13 @@ export default function Signup(): JSX.Element {
             <Grid item xs={12} sm={6}>
               <TextField
                 required
+                inputRef={lastNameRef}
                 fullWidth
                 value={lastName}
                 label="Last Name:"
-                name="brandName"
+                name="lastName"
                 onChange={(e) => setLastName(e.target.value)}
-              />
+              /> */}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -92,7 +125,7 @@ export default function Signup(): JSX.Element {
                 value={email}
                 type="email"
                 id="email"
-                ref={emailRef}
+                inputRef={emailRef}
                 fullWidth
                 label="Email Address:"
                 name="email"
@@ -102,7 +135,7 @@ export default function Signup(): JSX.Element {
             <Grid item xs={12}>
               <TextField
                 required
-                ref={passwordRef}
+                inputRef={passwordRef}
                 fullWidth
                 id="password"
                 name="password"
@@ -115,7 +148,7 @@ export default function Signup(): JSX.Element {
             <Grid item xs={12}>
               <TextField
                 required
-                ref={repeatPasswordRef}
+                inputRef={repeatPasswordRef}
                 id="repeatPassword"
                 fullWidth
                 name="password"

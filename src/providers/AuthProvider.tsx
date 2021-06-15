@@ -33,11 +33,11 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   const [user, setUser] = useState<firebase.User | null>(null);
 
   function signUp(email: string, password: string) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return auth.createUserWithEmailAndPassword(email.trim(), password);
   }
 
   function signIn(email: string, password: string) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return auth.signInWithEmailAndPassword(email.trim(), password);
   }
 
   function resetPassword(email: string) {
