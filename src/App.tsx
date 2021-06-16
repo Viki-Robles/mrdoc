@@ -1,4 +1,5 @@
-import SignUp from "../src/Signup/Signup";
+import React from 'react'
+import SignUp from './components/Signup/Signup'
 
 function App(): JSX.Element {
   return (
@@ -6,7 +7,7 @@ function App(): JSX.Element {
       <header>Mr Doc</header>
       <SignUp />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

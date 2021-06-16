@@ -17,6 +17,8 @@
     "@types/react-router-dom": "^5.1.7",
     "firebase": "^8.6.2",
     "firebase-tools": "^9.11.0",
+    "node-plop": "^0.26.2",
+    "plop": "^2.7.4",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -32,7 +34,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "new": "plop",
+    "new:component": "plop component",
+    "new:hook": "plop hook",
+    "new:util": "plop util"
+
   },
   "eslintConfig": {
     "extends": [
