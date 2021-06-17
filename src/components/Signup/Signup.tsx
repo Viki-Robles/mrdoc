@@ -1,13 +1,17 @@
 import React, { useState, useRef } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { Button, Link } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import {
+  Grid,
+  Box,
+  TextField,
+  Avatar,
+  makeStyles,
+  Button,
+  Link,
+  Container,
+  Typography,
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useAuth } from "../../providers/AuthProvider";
 
 const useStyles = makeStyles((theme) => ({
@@ -98,7 +102,7 @@ export default function Signup(): JSX.Element {
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container direction="column" spacing={2}>
             <Grid item xs={12} sm={6}>
-              {/* <TextField
+              <TextField
                 required
                 fullWidth
                 inputRef={firstNameRef}
@@ -117,7 +121,7 @@ export default function Signup(): JSX.Element {
                 label="Last Name:"
                 name="lastName"
                 onChange={(e) => setLastName(e.target.value)}
-              /> */}
+              />
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -169,7 +173,11 @@ export default function Signup(): JSX.Element {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/login" variant="body2" className={classes.loginLink}>
+              <Link
+                href="/sign-in"
+                variant="body2"
+                className={classes.loginLink}
+              >
                 Already have an account? Log in
               </Link>
             </Grid>
