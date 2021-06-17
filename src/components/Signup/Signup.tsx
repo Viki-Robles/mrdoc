@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useAuth } from "../../providers/AuthProvider";
+import { firestore } from "../../config/firebase";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -70,6 +71,8 @@ export default function Signup(): JSX.Element {
     e: React.MouseEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault();
+    const db = firestore;
+
     setLoading(true);
     if (
       passwordRef?.current?.value &&
@@ -82,15 +85,21 @@ export default function Signup(): JSX.Element {
       }
       try {
         setError("");
+        const userRef = db.collection("users").add({
+          firstName: firstName,
+          lastName: lastName,
+        });
+        setFirstName(firstName);
+        setLastName(lastName);
         await signUp(emailRef.current.value, passwordRef.current.value);
-        history.push("/");
+        history.push("/dashboard");
       } catch (error) {
-        console.log("emailL:", emailRef.current.value);
         setError(error.message);
         setLoading(false);
       }
     }
   }
+
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
