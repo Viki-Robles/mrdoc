@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
   },
   signUpHeader: {
     marginTop: theme.spacing(2),
-    textAlign: "center",
     marginBottom: theme.spacing(2),
     color: "#0f6fde",
     fontFamily: "Karla,Helvetica,sans-serif",
@@ -66,7 +65,6 @@ export default function SignIn(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const classes = useStyles();
-
   const history = useHistory();
 
   async function handleSubmit(
@@ -94,6 +92,7 @@ export default function SignIn(): JSX.Element {
           <LockOutlinedIcon />
         </Avatar>
         <Typography
+          align="center"
           component="h1"
           variant="h5"
           className={classes.signUpHeader}

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { SIGN_UP_PAGE, SIGN_IN_PAGE, DASHBOARD_PAGE } from "./paths/paths";
 import NavBar from "./components/NavBar/NavBar";
-import SignUp from "./components/Signup/Signup";
+import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
 import { Dashboard } from "./components/Dashboard/Dashboard";
 import { AuthProvider } from "./providers/AuthProvider";

@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import {
   Link,
-  Grid,
-  Box,
   Toolbar,
-  CssBaseline,
   Drawer,
   Hidden,
   IconButton,

@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import {
   Grid,
-  Box,
   TextField,
   Avatar,
   makeStyles,
@@ -56,8 +55,10 @@ export default function Signup(): JSX.Element {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [repeatPassword, setRepeatPassword] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const repeatPasswordRef = useRef<HTMLInputElement>(null);
@@ -89,8 +90,12 @@ export default function Signup(): JSX.Element {
           firstName: firstName,
           lastName: lastName,
         });
+        const usernameRef = db.collection("username").add({
+          username: username,
+        });
         setFirstName(firstName);
         setLastName(lastName);
+        setUsername(username);
         await signUp(emailRef.current.value, passwordRef.current.value);
         history.push("/dashboard");
       } catch (error) {
@@ -110,6 +115,17 @@ export default function Signup(): JSX.Element {
         {error}
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container direction="column" spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                inputRef={usernameRef}
+                fullWidth
+                value={username}
+                label="Username:"
+                name="username"
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 required
