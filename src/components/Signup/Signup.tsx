@@ -13,12 +13,14 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useAuth } from "../../providers/AuthProvider";
 import { firestore } from "../../config/firebase";
+import { SIGN_IN_PAGE_PATH } from "../../config/paths";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginTop: "45px",
   },
   lock: {
     margin: theme.spacing(1),
@@ -35,21 +37,19 @@ const useStyles = makeStyles((theme) => ({
   formControlLabel: {
     fontSize: "0.3rem",
   },
-  signUpHeader: {
-    textAlign: "center",
-    marginBottom: theme.spacing(2),
-    color: "#0f6fde",
-    fontFamily: "Karla,Helvetica,sans-serif",
-    fontWeight: 400,
-    letterSpacing: "normal",
-    fontSize: "20px",
-  },
   loginLink: {
     color: "#0f6fde",
   },
+  welcome: {
+    color: "#0f6fde",
+    fontSize: "25px",
+    fontWeight: 600,
+    textAlign: "center",
+    marginBottom: theme.spacing(2),
+  },
 }));
 
-export default function Signup(): JSX.Element {
+export function SignUp(): JSX.Element {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -111,7 +111,7 @@ export default function Signup(): JSX.Element {
         <Avatar className={classes.lock}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography className={classes.signUpHeader}>Sign up</Typography>
+        <Typography className={classes.welcome}>Welcome to medipal</Typography>
         {error}
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container direction="column" spacing={2}>
@@ -199,7 +199,7 @@ export default function Signup(): JSX.Element {
           <Grid container justify="flex-end">
             <Grid item>
               <Link
-                href="/sign-in"
+                href={SIGN_IN_PAGE_PATH}
                 variant="body2"
                 className={classes.loginLink}
               >

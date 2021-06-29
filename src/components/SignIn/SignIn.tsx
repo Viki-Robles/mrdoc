@@ -14,6 +14,7 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useAuth } from "../../providers/AuthProvider";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { SIGN_UP_PAGE_PATH } from "../../config/paths";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(): JSX.Element {
+export function SignIn(): JSX.Element {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -143,7 +144,7 @@ export default function SignIn(): JSX.Element {
           <Grid container alignItems="flex-end" direction="column">
             <Grid>
               <Link
-                href="/sign-up"
+                href={SIGN_UP_PAGE_PATH}
                 variant="body2"
                 className={classes.loginLink}
               >

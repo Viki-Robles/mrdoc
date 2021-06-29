@@ -1,16 +1,33 @@
-import React from "react";
-import { Typography } from "@material-ui/core";
+import React, { Fragment } from "react";
+import { Box, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../providers/AuthProvider";
-import { BorderWrapper } from "../BorderWrapper/BorderWrapper";
+import { firestore } from "../../config/firebase";
+
+const useStyles = makeStyles((theme) => ({
+  dashboardTitle: {
+    marginTop: "80px",
+    padding: "40px",
+  },
+}));
 
 export const Dashboard = (): JSX.Element => {
+  const classes = useStyles();
   const { user } = useAuth();
+  const db = firestore;
+  db.collection("username")
+    .get()
+    .then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        console.log(doc.data());
+      });
+    });
 
   return (
-    <BorderWrapper>
-      <Typography align="left" variant="h4">
+    <Fragment>
+      <Typography className={classes.dashboardTitle}>
         Hi {user?.email}
       </Typography>
-    </BorderWrapper>
+    </Fragment>
   );
 };
