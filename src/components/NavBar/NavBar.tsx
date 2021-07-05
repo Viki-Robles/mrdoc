@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LINKS = [
   { label: "Dashboard", href: "/dashboard", icon: dashboard },
-  { label: "Treatments", href: "", icon: doctor },
+  { label: "Treatments", href: "/treatments", icon: doctor },
   { label: "Bookings", href: "/bookings", icon: booking },
   { label: "Contract", href: "", icon: contract },
 ];

@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
+import { Box } from "@material-ui/core";
 
 
 export interface {{pascalCase name}}Props {
   // children: ReactNode
 }
 
-export const {{pascalCase name}} = ({ sx }: {{pascalCase name}}Props): JSX.Element => {
+export const {{pascalCase name}} = ({ children }: {{pascalCase name}}Props): JSX.Element => {
   return (
-    <Box sx={{ obj "...sx" }}>
+    <Box>
       <Box>{{name}}</Box>
     </Box>
   )

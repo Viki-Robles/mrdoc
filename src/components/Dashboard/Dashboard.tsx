@@ -6,8 +6,8 @@ import { firestore } from "../../config/firebase";
 
 const useStyles = makeStyles((theme) => ({
   dashboardTitle: {
-    marginTop: "80px",
-    padding: "40px",
+    marginTop: "0px",
+    padding: "0px",
   },
 }));
 
@@ -26,7 +26,7 @@ export const Dashboard = (): JSX.Element => {
   return (
     <Fragment>
       <Typography className={classes.dashboardTitle}>
-        Hi {user?.email}
+        Dashboard {user?.email}
       </Typography>
     </Fragment>
   );
