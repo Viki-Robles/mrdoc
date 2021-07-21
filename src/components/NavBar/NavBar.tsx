@@ -1,12 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Button,
-  IconButton,
-} from "@material-ui/core";
+import { List, ListItem, ListItemText, IconButton } from "@material-ui/core";
 import booking from "../NavBar/images/booking.svg";
 import contract from "../NavBar/images/contract.svg";
 import doctor from "../NavBar/images/doctor.svg";
@@ -24,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#042444",
     height: "100vh",
     [theme.breakpoints.down("xs")]: {
-      width: "100%",
+      width: "50%",
       position: "absolute",
     },
   },

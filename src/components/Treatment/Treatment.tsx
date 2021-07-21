@@ -55,7 +55,6 @@ export function Treatment({
   category,
 }: TreatmentProps): JSX.Element {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
 
   return (
     <Card className={classes.root} key={id}>

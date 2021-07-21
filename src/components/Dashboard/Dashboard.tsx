@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
-import { Box, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../providers/AuthProvider";
 import { firestore } from "../../config/firebase";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   dashboardTitle: {
     marginTop: "0px",
     padding: "0px",

@@ -16,7 +16,7 @@ import {
   TREATMENTS_PAGE_PATH,
   BOOKINGS_PAGE_PATH,
 } from "./config/paths";
-import { useApolloClient } from "../src/utils/useApolloClient/useApolloClient";
+import { useApolloClient } from "./hooks/useApolloClient/useApolloClient";
 import { ApolloProvider } from "@apollo/client";
 
 function App(): JSX.Element {
@@ -26,16 +26,16 @@ function App(): JSX.Element {
       <ApolloProvider client={client}>
         <Router>
           <AuthProvider>
-            <Layout>
-              <Switch>
+            <Switch>
+              <Route path={SIGN_UP_PAGE_PATH} component={SignUp} />
+              <Route path={SIGN_IN_PAGE_PATH} component={SignIn} />
+              <Layout>
                 <Route path={WELCOME_PAGE_PATH} component={Welcome} />
-                <Route path={SIGN_UP_PAGE_PATH} component={SignUp} />
-                <Route path={SIGN_IN_PAGE_PATH} component={SignIn} />
                 <Route path={DASHBOARD_PAGE_PATH} component={Dashboard} />
                 <Route path={BOOKINGS_PAGE_PATH} component={Bookings} />
                 <Route path={TREATMENTS_PAGE_PATH} component={Treatments} />
-              </Switch>
-            </Layout>
+              </Layout>
+            </Switch>
           </AuthProvider>
         </Router>
       </ApolloProvider>

@@ -40,20 +40,20 @@ export const Treatments = (): JSX.Element => {
   return (
     <Fragment>
       <Button onClick={() => setShowCategory(!showCategory)}>Dentist</Button>
+
       <Box display="flex" flexWrap="wrap" justifyContent="space-around" m={2}>
-        {data?.clinics &&
-          data?.clinics?.map(({ name, id, price, location, subcategory }) => {
-            return (
-              <Treatment
-                name={name}
-                id={id}
-                price={price}
-                location={location}
-                key={id}
-                subcategory={subcategory}
-              />
-            );
-          })}
+        {data?.clinics?.map(({ name, id, price, location, subcategory }) => {
+          return (
+            <Treatment
+              name={name}
+              id={id}
+              price={price}
+              location={location}
+              key={id}
+              subcategory={subcategory}
+            />
+          );
+        })}
       </Box>
     </Fragment>
   );

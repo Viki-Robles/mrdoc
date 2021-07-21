@@ -24,6 +24,7 @@
     "firebase-tools": "^9.14.0",
     "graphql": "^15.5.1",
     "graphql-hooks": "^5.2.0",
+    "graphql-request": "^3.4.0",
     "graphql-tag": "^2.12.5",
     "node-plop": "^0.26.2",
     "plop": "^2.7.4",
