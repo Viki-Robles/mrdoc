@@ -16,9 +16,9 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 
 export interface TreatmentProps {
   children?: ReactNode;
-  name?: string | null;
-  location?: string;
-  price?: number;
+  name: string | null;
+  location: string;
+  price: number;
   id?: number;
   subcategory?: string;
   category?: string;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { SignUp } from "./components/SignUp/SignUp";
@@ -16,29 +16,38 @@ import {
   TREATMENTS_PAGE_PATH,
   BOOKINGS_PAGE_PATH,
 } from "./config/paths";
-import { useApolloClient } from "./hooks/useApolloClient/useApolloClient";
-import { ApolloProvider } from "@apollo/client";
+import { QueryClientProvider, QueryClient } from "react-query";
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 15000,
+      suspense: true,
+    },
+  },
+});
 
 function App(): JSX.Element {
-  const client = useApolloClient();
   return (
     <div className="App">
-      <ApolloProvider client={client}>
-        <Router>
-          <AuthProvider>
-            <Switch>
-              <Route path={SIGN_UP_PAGE_PATH} component={SignUp} />
-              <Route path={SIGN_IN_PAGE_PATH} component={SignIn} />
-              <Layout>
-                <Route path={WELCOME_PAGE_PATH} component={Welcome} />
-                <Route path={DASHBOARD_PAGE_PATH} component={Dashboard} />
-                <Route path={BOOKINGS_PAGE_PATH} component={Bookings} />
-                <Route path={TREATMENTS_PAGE_PATH} component={Treatments} />
-              </Layout>
-            </Switch>
-          </AuthProvider>
-        </Router>
-      </ApolloProvider>
+      <Suspense fallback={"Loading"}>
+        <QueryClientProvider client={queryClient}>
+          <Router>
+            <AuthProvider>
+              <Switch>
+                <Route path={SIGN_UP_PAGE_PATH} component={SignUp} />
+                <Route path={SIGN_IN_PAGE_PATH} component={SignIn} />
+                <Layout>
+                  <Route path={WELCOME_PAGE_PATH} component={Welcome} />
+                  <Route path={DASHBOARD_PAGE_PATH} component={Dashboard} />
+                  <Route path={BOOKINGS_PAGE_PATH} component={Bookings} />
+                  <Route path={TREATMENTS_PAGE_PATH} component={Treatments} />
+                </Layout>
+              </Switch>
+            </AuthProvider>
+          </Router>
+        </QueryClientProvider>
+      </Suspense>
     </div>
   );
 }

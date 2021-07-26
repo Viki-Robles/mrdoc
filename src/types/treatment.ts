@@ -1,8 +1,7 @@
-export interface Treatment {
+export interface TreatmentModel {
   name: string;
-  id: number;
-  category: string | null;
-  location: string | null;
-  subcategory: string | null;
+  category: string;
+  location: string;
   price: number;
+  id: number;
 }

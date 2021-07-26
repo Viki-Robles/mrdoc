@@ -1,73 +1,91 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useMemo } from "react";
 import { Box, Grid, Typography, Button } from "@material-ui/core";
-import { useQuery, gql, useLazyQuery, useMutation } from "@apollo/client";
+import { gql } from "graphql-request";
 import { Treatment } from "../Treatment/Treatment";
-// import { DENTIST_CATEGORY } from "../../utils/graphql/clinics";
+import { useGqlQuery } from "../../hooks/useGqlQuery/useGqlQuery";
+import { useQueryClient, useQuery } from "react-query";
+import { TreatmentModel } from "../../types/treatment";
 
 export const GET_TREATMENTS = gql`
   query {
-    clinics {
-      location
-      name
-      price
-      subcategory
-      id
-    }
-  }
-`;
-
-export const GET_CATEGORY_DENTIST = gql`
-  query {
-    clinics(where: { category: { _eq: "Dentist" } }) {
+    dentist(where: { category: { _eq: "Root Canal" } }) {
       category
       location
       name
       price
-      id
+    }
+    eyeCare(where: { category: { _eq: "Cataract Surgery" } }) {
+      category
+      location
+      name
+      price
     }
   }
 `;
 
-export const DENTIST_CATEGORY = gql`
-  mutation {
-    update_clinics(
-      where: { category: { _eq: "Dentist" } }
-      _set: { category: "Dentist" }
-    ) {
-      affected_rows
-      returning {
-        category
-        location
-        id
-        name
-      }
+export const GET_EYE_CARE = gql`
+  query {
+    eyeCare {
+      category
+      location
+      name
+      price
     }
   }
 `;
-export interface TreatmentsProps {
-  location: string;
+
+export const GET_DENTIST_DATA = gql`
+  query {
+    dentist {
+      category
+      location
+      name
+      price
+    }
+  }
+`;
+
+export const GET_ROOT_CANAL_TREATMENT = gql`
+  query {
+    dentist(where: { category: { _eq: "Root Canal" } }) {
+      location
+      name
+      price
+      category
+    }
+  }
+`;
+
+export interface TreatmentData {
+  dentist: TreatmentModel[];
 }
-
 export const Treatments = (): JSX.Element => {
-  const [getClinics, { data, loading, error }] = useMutation(DENTIST_CATEGORY);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) console.log(error);
+  const [visible, setIsVisible] = useState<boolean>(false);
+  const getDentistData = useGqlQuery<TreatmentData>(
+    "getDentistData",
+    GET_DENTIST_DATA
+  );
+  const dentistData = useMemo(
+    () => getDentistData?.data?.dentist,
+    [getDentistData]
+  );
+  console.log(getDentistData, "data");
 
   return (
     <Fragment>
-      <Button onClick={() => getClinics()}>Dentist</Button>
-      {data && (
+      <Button onClick={() => setIsVisible(!visible)}>Dentist</Button>
+      {/* 
+      <Button>Eye Care</Button> */}
+      {visible && (
         <Box display="flex" flexWrap="wrap" justifyContent="space-around" m={2}>
-          {data?.clinics?.map(({ name, id, price, location, subcategory }) => {
+          {dentistData?.map(({ name, price, location, category, id }) => {
             return (
               <Treatment
+                key={id}
                 name={name}
-                id={id}
                 price={price}
                 location={location}
-                key={id}
-                subcategory={subcategory}
+                category={category}
               />
             );
           })}
