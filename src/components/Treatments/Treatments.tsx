@@ -4,18 +4,32 @@ import { Treatment } from "../Treatment/Treatment";
 import { useFetchData } from "../../hooks/useFetchData/useFetchData";
 
 export const Treatments = (): JSX.Element => {
-  const [showDental, setShowDental] = useState<boolean>(true);
-  const [showEyeCare, setShowEyeCare] = useState<boolean>(true);
+  const [showDental, setShowDental] = useState(true);
+  const [showEyeCare, setShowEyeCare] = useState(true);
   const { dentistData, eyeCareData } = useFetchData();
 
-  const toggleDental = () => {
-    setShowDental(showDental);
-    setShowEyeCare(!showEyeCare);
+  const toggleDental = (): void => {
+    if (showDental) {
+      setShowDental(showDental);
+      setShowEyeCare(!showEyeCare);
+    }
+    //this needs to be improved
+    if (!showDental) {
+      setShowDental(!showDental);
+      setShowEyeCare(showEyeCare);
+    }
   };
 
-  const toggleEyeCare = () => {
-    setShowDental(!showDental);
-    setShowEyeCare(showEyeCare);
+  const toggleEyeCare = (): void => {
+    if (showEyeCare) {
+      setShowEyeCare(showEyeCare);
+      setShowDental(!showDental);
+    }
+    //this needs to be improved
+    if (!showEyeCare) {
+      setShowEyeCare(!showEyeCare);
+      setShowDental(showDental);
+    }
   };
 
   return (
