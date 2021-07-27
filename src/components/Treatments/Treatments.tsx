@@ -1,11 +1,11 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { Box, Button } from "@material-ui/core";
 import { Treatment } from "../Treatment/Treatment";
 import { useFetchData } from "../../hooks/useFetchData/useFetchData";
 
 export const Treatments = (): JSX.Element => {
   const [showDental, setShowDental] = useState(true);
-  const [showEyeCare, setShowEyeCare] = useState(true);
+  const [showEyeCare, setShowEyeCare] = useState<boolean>(true);
   const { dentistData, eyeCareData } = useFetchData();
 
   const toggleDental = (): void => {
@@ -36,9 +36,9 @@ export const Treatments = (): JSX.Element => {
     <Fragment>
       <Button onClick={toggleDental}>Dentist</Button>
       <Button onClick={toggleEyeCare}>Eye Care</Button>
-      {showDental && (
-        <Box display="flex" flexWrap="wrap" justifyContent="space-around" m={2}>
-          {dentistData?.map(({ name, price, location, category, id }) => {
+      <Box display="flex" flexWrap="wrap" justifyContent="space-around" m={2}>
+        {showDental &&
+          dentistData?.map(({ name, price, location, category, id }) => {
             return (
               <Treatment
                 key={id}
@@ -49,11 +49,8 @@ export const Treatments = (): JSX.Element => {
               />
             );
           })}
-        </Box>
-      )}
-      {showEyeCare && (
-        <Box display="flex" flexWrap="wrap" justifyContent="space-around" m={2}>
-          {eyeCareData?.map(({ name, price, location, category, id }) => {
+        {showEyeCare &&
+          eyeCareData?.map(({ name, price, location, category, id }) => {
             return (
               <Treatment
                 key={id}
@@ -64,8 +61,7 @@ export const Treatments = (): JSX.Element => {
               />
             );
           })}
-        </Box>
-      )}
+      </Box>
     </Fragment>
   );
 };
