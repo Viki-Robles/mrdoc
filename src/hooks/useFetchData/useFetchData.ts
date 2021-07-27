@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { gql } from "graphql-request";
 import { useGqlQuery } from "../../hooks/useGqlQuery/useGqlQuery";
-import { TreatmentData } from "../../types/treatment";
+import { TreatmentData } from "../../types/treatments";
 
 export const GET_TREATMENTS = gql`
   query {
