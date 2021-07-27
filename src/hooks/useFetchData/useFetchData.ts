@@ -1,7 +1,10 @@
 import { useMemo } from "react";
 import { gql } from "graphql-request";
 import { useGqlQuery } from "../../hooks/useGqlQuery/useGqlQuery";
-import { TreatmentData } from "../../types/treatments";
+import {
+  TreatmentDentistData,
+  TreatmentEyeCareData,
+} from "../../types/treatments";
 
 export const GET_TREATMENTS = gql`
   query {
@@ -27,6 +30,7 @@ export const GET_EYE_CARE = gql`
       location
       name
       price
+      id
     }
   }
 `;
@@ -58,15 +62,14 @@ export const GET_ROOT_CANAL_TREATMENT = gql`
  * @description
  */
 export const useFetchData = () => {
-  const getDentistData = useGqlQuery<TreatmentData>(
+  const getDentistData = useGqlQuery<TreatmentDentistData>(
     "getDentistData",
     GET_DENTIST_DATA
   );
-  const getEyeCareData = useGqlQuery<TreatmentData>(
+  const getEyeCareData = useGqlQuery<TreatmentEyeCareData>(
     "getEyeCareData",
     GET_EYE_CARE
   );
-  const getAllData = useGqlQuery<TreatmentData>("getAllData", GET_TREATMENTS);
 
   const dentistData = useMemo(
     () => getDentistData?.data?.dentist,
@@ -74,7 +77,7 @@ export const useFetchData = () => {
   );
 
   const eyeCareData = useMemo(
-    () => getEyeCareData?.data?.dentist,
+    () => getEyeCareData?.data?.eyeCare,
     [getEyeCareData]
   );
   return {

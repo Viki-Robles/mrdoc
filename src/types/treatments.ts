@@ -6,6 +6,10 @@ export interface TreatmentDataModel {
   id: number;
 }
 
-export interface TreatmentData {
+export interface TreatmentDentistData {
   dentist: TreatmentDataModel[];
+}
+
+export interface TreatmentEyeCareData {
+  eyeCare: TreatmentDataModel[];
 }
