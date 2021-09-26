@@ -6,7 +6,6 @@ export interface FormGroupProps {
   label: string
   note?: string
   name: string
-  info?: string
   sx?: ThemeUIStyleObject
   children: ReactNode
 }
@@ -14,7 +13,6 @@ export interface FormGroupProps {
 export const FormGroup = ({
   label,
   name,
-  info,
   note,
   children,
   sx,
