@@ -1,4 +1,4 @@
-export {};
+export {}
 // import React, { Fragment, useState } from "react";
 // import { Box, Button } from "@material-ui/core";
 // import { Treatment } from "../Treatment/Treatment";

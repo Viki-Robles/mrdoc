@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react'
 
 export const Dashboard = () => {
-  return <div>Dashboard</div>;
-};
+  return <div>Dashboard</div>
+}
 
 // import React, { Fragment } from "react";
 // import { Typography } from "@material-ui/core";
