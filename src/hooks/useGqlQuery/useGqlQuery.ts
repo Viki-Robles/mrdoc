@@ -1,6 +1,5 @@
-import { DocumentNode } from "graphql";
 import { QueryKey, useQuery, UseQueryResult } from "react-query";
-import { graphQlClient } from "../../utils/graphql/client";
+import { graphQlClient } from "../../graphql/client";
 
 export const useGqlQuery = <ResponseData = unknown, Variables = unknown>(
   queryKey: QueryKey,

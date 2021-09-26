@@ -1,9 +1,10 @@
 export interface TreatmentDataModel {
-  name: string;
-  category: string;
+  name: string | null;
   location: string;
   price: number;
-  id: number;
+  id: string;
+  category: string;
+  treatment_id: string;
 }
 
 export interface TreatmentDentistData {

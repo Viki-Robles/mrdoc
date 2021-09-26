@@ -3,20 +3,18 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { SignUp } from "./components/SignUp/SignUp";
 import { SignIn } from "./components/SignIn/SignIn";
-import { Welcome } from "./components/Welcome/Welcome";
+// import { Welcome } from "./components/Welcome/Welcome";
 import { Dashboard } from "./components/Dashboard/Dashboard";
-import { Bookings } from "./components/Bookings/Bookings";
 import { AuthProvider } from "./providers/AuthProvider";
-import { Treatments } from "./components/Treatments/Treatments";
+// import { Treatments } from "./components/Treatments/Treatments";
 import {
   SIGN_IN_PAGE_PATH,
   SIGN_UP_PAGE_PATH,
   DASHBOARD_PAGE_PATH,
-  WELCOME_PAGE_PATH,
-  TREATMENTS_PAGE_PATH,
-  BOOKINGS_PAGE_PATH,
+  HOME_PAGE_PATH,
 } from "./config/paths";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { NotFound } from "./components/NotFound/NotFound";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,24 +28,19 @@ export const queryClient = new QueryClient({
 function App(): JSX.Element {
   return (
     <div className="App">
-      <Suspense fallback={"Loading"}>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
           <Router>
-            <AuthProvider>
-              <Switch>
-                <Route path={SIGN_UP_PAGE_PATH} component={SignUp} />
-                <Route path={SIGN_IN_PAGE_PATH} component={SignIn} />
-                <Layout>
-                  <Route path={WELCOME_PAGE_PATH} component={Welcome} />
-                  <Route path={DASHBOARD_PAGE_PATH} component={Dashboard} />
-                  <Route path={BOOKINGS_PAGE_PATH} component={Bookings} />
-                  <Route path={TREATMENTS_PAGE_PATH} component={Treatments} />
-                </Layout>
-              </Switch>
-            </AuthProvider>
+            <Switch>
+              <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
+              <Route exact path={SIGN_IN_PAGE_PATH} component={SignIn} />
+              <Route exact path={HOME_PAGE_PATH} component={SignIn} />
+              <Route exact path={DASHBOARD_PAGE_PATH} component={Dashboard} />
+              <Route exact path="*" component={NotFound} />
+            </Switch>
           </Router>
-        </QueryClientProvider>
-      </Suspense>
+        </AuthProvider>
+      </QueryClientProvider>
     </div>
   );
 }
