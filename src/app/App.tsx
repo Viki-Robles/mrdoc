@@ -1,17 +1,17 @@
-import React, { Suspense } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { SignIn } from "./components/SignIn/SignIn";
-import { Dashboard } from "./components/Dashboard/Dashboard";
-import { AuthProvider } from "./providers/AuthProvider";
+import React, { Suspense } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { SignIn } from '../components/SignIn/SignIn'
+import { Dashboard } from '../components/Dashboard/Dashboard'
+import { AuthProvider } from '../providers/AuthProvider'
 import {
   SIGN_IN_PAGE_PATH,
   SIGN_UP_PAGE_PATH,
   DASHBOARD_PAGE_PATH,
   HOME_PAGE_PATH,
-} from "./config/paths";
-import { QueryClientProvider, QueryClient } from "react-query";
-import { NotFound } from "./components/NotFound/NotFound";
-import { SignUp } from "./components/SignUp/SignUp";
+} from '../config/paths'
+import { QueryClientProvider, QueryClient } from 'react-query'
+import { NotFound } from '../components/NotFound/NotFound'
+import { SignUp } from '../components/SignUp/SignUp'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,7 +20,7 @@ export const queryClient = new QueryClient({
       suspense: true,
     },
   },
-});
+})
 
 function App(): JSX.Element {
   return (
@@ -39,7 +39,7 @@ function App(): JSX.Element {
         </AuthProvider>
       </QueryClientProvider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
