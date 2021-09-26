@@ -10,7 +10,7 @@ import {
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
-import { FormGroup } from "../../components/FormGroup/FormGroup";
+import { FormGroup } from "../FormGroup/FormGroup";
 import { DASHBOARD_PAGE_PATH, SIGN_IN_PAGE_PATH } from "../../config/paths";
 import { useAuth } from "../../providers/AuthProvider";
 import { passwordValidation } from "../../utils/passwordValidation/passwordValidation";

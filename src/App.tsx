@@ -1,12 +1,8 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Layout } from "./components/Layout/Layout";
-import { SignUp } from "./components/SignUp/SignUp";
 import { SignIn } from "./components/SignIn/SignIn";
-// import { Welcome } from "./components/Welcome/Welcome";
 import { Dashboard } from "./components/Dashboard/Dashboard";
 import { AuthProvider } from "./providers/AuthProvider";
-// import { Treatments } from "./components/Treatments/Treatments";
 import {
   SIGN_IN_PAGE_PATH,
   SIGN_UP_PAGE_PATH,
@@ -15,6 +11,7 @@ import {
 } from "./config/paths";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { NotFound } from "./components/NotFound/NotFound";
+import { SignUp } from "./components/SignUp/SignUp";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
