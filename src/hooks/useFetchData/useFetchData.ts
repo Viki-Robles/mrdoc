@@ -1,64 +1,13 @@
 import { useMemo } from "react";
-import { gql } from "graphql-request";
 import { useGqlQuery } from "../../hooks/useGqlQuery/useGqlQuery";
+import { GET_DENTIST_DATA, GET_EYE_CARE_DATA } from "../../graphql/treatments";
 import {
   TreatmentDentistData,
   TreatmentEyeCareData,
 } from "../../types/treatments";
 
-export const GET_TREATMENTS = gql`
-  query {
-    dentist(where: { category: { _eq: "Root Canal" } }) {
-      category
-      location
-      name
-      price
-    }
-    eyeCare(where: { category: { _eq: "Cataract Surgery" } }) {
-      category
-      location
-      name
-      price
-    }
-  }
-`;
-
-export const GET_EYE_CARE = gql`
-  query {
-    eyeCare {
-      category
-      location
-      name
-      price
-      id
-    }
-  }
-`;
-
-export const GET_DENTIST_DATA = gql`
-  query {
-    dentist {
-      category
-      location
-      name
-      price
-    }
-  }
-`;
-
-export const GET_ROOT_CANAL_TREATMENT = gql`
-  query {
-    dentist(where: { category: { _eq: "Root Canal" } }) {
-      location
-      name
-      price
-      category
-    }
-  }
-`;
-
 /**
- * @name useFetchData
+ * @name useFetchData this hook is fetching the dental and eye care data
  * @description
  */
 export const useFetchData = () => {
@@ -68,7 +17,7 @@ export const useFetchData = () => {
   );
   const getEyeCareData = useGqlQuery<TreatmentEyeCareData>(
     "getEyeCareData",
-    GET_EYE_CARE
+    GET_EYE_CARE_DATA
   );
 
   const dentistData = useMemo(

@@ -1,214 +1,128 @@
-import React, { useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import {
+  Input,
+  ThemeUIStyleObject,
   Grid,
-  TextField,
-  Avatar,
-  makeStyles,
   Button,
-  Link,
+  Text,
   Container,
-  Typography,
-} from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+} from "theme-ui";
+import { Form, Formik } from "formik";
+import * as Yup from "yup";
+import { useHistory } from "react-router-dom";
+import { FormGroup } from "../../components/FormGroup/FormGroup";
+import { DASHBOARD_PAGE_PATH, SIGN_IN_PAGE_PATH } from "../../config/paths";
 import { useAuth } from "../../providers/AuthProvider";
-import { firestore } from "../../config/firebase";
-import { SIGN_IN_PAGE_PATH } from "../../config/paths";
+import { passwordValidation } from "../../utils/passwordValidation/passwordValidation";
+import { FormWrapper } from "../FormWrapper/FormWrapper";
+import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: "45px",
-  },
-  lock: {
-    margin: theme.spacing(1),
-    backgroundColor: "#0f6fde",
-  },
-  form: {
-    width: "100%",
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: "black",
-    textTransform: "none",
-  },
-  formControlLabel: {
-    fontSize: "0.3rem",
-  },
-  loginLink: {
-    color: "#0f6fde",
-  },
-  welcome: {
-    color: "#0f6fde",
-    fontSize: "25px",
-    fontWeight: 600,
-    textAlign: "center",
-    marginBottom: theme.spacing(2),
-  },
-}));
+interface SignupFormValues {
+  email: string;
+  password: string;
+  repeatPassword: string;
+}
 
-export function SignUp(): JSX.Element {
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [repeatPassword, setRepeatPassword] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
-  const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const repeatPasswordRef = useRef<HTMLInputElement>(null);
-  const firstNameRef = useRef<HTMLInputElement>(null);
-  const lastNameRef = useRef<HTMLInputElement>(null);
-  const classes = useStyles();
-  const history = useHistory();
+const SignUpSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: passwordValidation,
+  repeatPassword: Yup.string().when("password", {
+    is: (val: string) => val && val.length > 0,
+    then: Yup.string()
+      .oneOf([Yup.ref("password")], "Both passwords need to be the same")
+      .required("Required"),
+  }),
+});
+
+export interface SignupProps {
+  sx?: ThemeUIStyleObject;
+}
+
+export const SignUp = ({ sx }: SignupProps): JSX.Element => {
   const { signUp } = useAuth();
-
-  async function handleSubmit(
-    e: React.MouseEvent<HTMLFormElement>
-  ): Promise<void> {
-    e.preventDefault();
-    const db = firestore;
-
-    setLoading(true);
-    if (
-      passwordRef?.current?.value &&
-      emailRef?.current?.value &&
-      repeatPasswordRef?.current?.value
-    ) {
-      if (passwordRef.current.value !== repeatPasswordRef.current.value) {
-        setLoading(false);
-        return setError("Passwords do not match");
-      }
-      try {
-        setError("");
-        const userRef = db.collection("users").add({
-          firstName: firstName,
-          lastName: lastName,
-        });
-        const usernameRef = db.collection("username").add({
-          username: username,
-        });
-        setFirstName(firstName);
-        setLastName(lastName);
-        setUsername(username);
-        await signUp(emailRef.current.value, passwordRef.current.value);
-        history.push("/dashboard");
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    }
-  }
+  const [formError, setFormError] = useState<string>("");
+  const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
+  const history = useHistory();
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.lock}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography className={classes.welcome}>Welcome to medipal</Typography>
-        {error}
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                inputRef={usernameRef}
-                fullWidth
-                value={username}
-                label="Username:"
-                name="username"
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                inputRef={firstNameRef}
-                label="First Name:"
-                name="first-name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                inputRef={lastNameRef}
-                fullWidth
-                value={lastName}
-                label="Last Name:"
-                name="lastName"
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                value={email}
-                type="email"
-                id="email"
-                inputRef={emailRef}
-                fullWidth
-                label="Email Address:"
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                inputRef={passwordRef}
-                fullWidth
-                id="password"
-                name="password"
-                label="Password:"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                inputRef={repeatPasswordRef}
-                id="repeatPassword"
-                fullWidth
-                name="password"
-                label="Repeat password:"
-                type="repeat password"
-                onChange={(e) => setRepeatPassword(e.target.value)}
-                value={repeatPassword}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Register
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link
-                href={SIGN_IN_PAGE_PATH}
-                variant="body2"
-                className={classes.loginLink}
-              >
-                Already have an account? Log in
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
+    <Container sx={{ ...sx }}>
+      <FormWrapper title="Create account">
+        <Formik
+          initialValues={{
+            email: "",
+            password: "",
+            repeatPassword: "",
+          }}
+          onSubmit={async (values: SignupFormValues) => {
+            setFormSubmitting(true);
+            try {
+              const result = await signUp(values.email, values.password);
+              try {
+                history.push(DASHBOARD_PAGE_PATH);
+              } catch (error) {
+                console.log(`🚀 ~ signup error`, error);
+              }
+            } catch (error) {
+              console.log(error);
+              setFormError(formError);
+              setFormSubmitting(false);
+            }
+          }}
+          validationSchema={SignUpSchema}
+        >
+          {({ getFieldProps }) => (
+            <Form>
+              <FormGroup label="Email address" name="email">
+                <Input
+                  sx={{ borderColor: "rgb(209, 218, 230)" }}
+                  {...getFieldProps("email")}
+                  id="email"
+                />
+              </FormGroup>
+              <FormGroup label="Password" name="password">
+                <Input
+                  sx={{
+                    borderColor: "rgb(209, 218, 230)",
+                  }}
+                  {...getFieldProps("password")}
+                  type="password"
+                  id="password"
+                />
+              </FormGroup>
+              <FormGroup label="Repeat password" name="repeatPassword">
+                <Input
+                  sx={{
+                    borderColor: "rgb(209, 218, 230)",
+                  }}
+                  {...getFieldProps("repeatPassword")}
+                  type="password"
+                  id="repeatPassword"
+                />
+              </FormGroup>
+              <Grid>
+                <Button type="submit" sx={{ mt: 1, bg: "#3F88F5" }}>
+                  Sign up
+                </Button>
+                <Link to={{ pathname: SIGN_IN_PAGE_PATH }}>
+                  <Text
+                    sx={{
+                      display: "inline-block",
+                      textDecoration: "none",
+                      textAlign: "center",
+                      margin: "0 auto",
+                      fontSize: 1,
+                      color: "#3F88F5",
+                    }}
+                  >
+                    Do you already have an account? Please login in here.
+                  </Text>
+                </Link>
+              </Grid>
+              {formError}
+            </Form>
+          )}
+        </Formik>
+      </FormWrapper>
     </Container>
   );
-}
+};

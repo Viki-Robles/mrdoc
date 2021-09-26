@@ -1,169 +1,94 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+import { Input, Button, Grid, Text, Container } from "theme-ui";
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import {
-  Grid,
-  Box,
-  TextField,
-  Avatar,
-  makeStyles,
-  Button,
-  Link,
-  Container,
-  Typography,
-} from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { Form, Formik, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { DASHBOARD_PAGE_PATH, SIGN_UP_PAGE_PATH } from "../../config/paths";
 import { useAuth } from "../../providers/AuthProvider";
-import { Alert, AlertTitle } from "@material-ui/lab";
-import { SIGN_UP_PAGE_PATH } from "../../config/paths";
+import { FormGroup } from "../../components/FormGroup/FormGroup";
+import { FormWrapper } from "../FormWrapper/FormWrapper";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  lock: {
-    margin: theme.spacing(1),
-    backgroundColor: "#0f6fde",
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(5),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: "black",
-    textTransform: "none",
-  },
-  formControlLabel: {
-    fontSize: "0.3rem",
-  },
-  signUpHeader: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-    color: "#0f6fde",
-    fontFamily: "Karla,Helvetica,sans-serif",
-    fontWeight: 600,
-    letterSpacing: "normal",
-  },
-  loginLink: {
-    color: "#0f6fde",
-  },
+interface SignInFormValues {
+  email: string;
+  password: string;
+}
 
-  forgotPassword: {
-    color: "#0f6fde",
-    textAlign: "right",
-  },
-}));
+const SignInSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Required").min(8).max(200),
+});
 
-export function SignIn(): JSX.Element {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+export const SignIn = (): JSX.Element => {
   const { signIn } = useAuth();
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const classes = useStyles();
+  const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
+  const [formError, setFormError] = useState<string>("");
   const history = useHistory();
 
-  async function handleSubmit(
-    e: React.MouseEvent<HTMLFormElement>
-  ): Promise<void> {
-    e.preventDefault();
-    if (emailRef?.current?.value && passwordRef?.current?.value) {
-      {
-        try {
-          setError("");
-          setLoading(true);
-          await signIn(emailRef.current.value, passwordRef.current.value);
-          history.push("/dashboard");
-        } catch {
-          setError("Failed to sign in. Incorrect email or password.");
-        }
-        setLoading(false);
-      }
-    }
-  }
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.lock}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography
-          align="center"
-          component="h1"
-          variant="h5"
-          className={classes.signUpHeader}
+    <Container>
+      <FormWrapper title="Welcome back">
+        <Formik
+          initialValues={{
+            email: "",
+            password: "",
+          }}
+          onSubmit={async (values: SignInFormValues) => {
+            setFormSubmitting(true);
+            try {
+              await signIn(values.email, values.password);
+              history.push(DASHBOARD_PAGE_PATH);
+            } catch (error) {
+              setFormError(formError);
+              setFormSubmitting(false);
+            }
+          }}
+          validationSchema={SignInSchema}
         >
-          Welcome back to mediPal
-        </Typography>
-        {error && (
-          <Alert severity="error">
-            <AlertTitle>{error}</AlertTitle>
-          </Alert>
-        )}
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                value={email}
-                type="email"
-                id="email"
-                inputRef={emailRef}
-                fullWidth
-                label="Email Address:"
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                inputRef={passwordRef}
-                fullWidth
-                id="password"
-                name="password"
-                label="Password:"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            disabled={loading}
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Log in
-          </Button>
-          <Grid container alignItems="flex-end" direction="column">
-            <Grid>
-              <Link
-                href={SIGN_UP_PAGE_PATH}
-                variant="body2"
-                className={classes.loginLink}
-              >
-                Need an account?
-              </Link>
-            </Grid>
-            <Grid>
-              <Link
-                href="/forgot-password"
-                variant="body2"
-                className={classes.forgotPassword}
-              >
-                Forgot password?
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={5}>{/* <Copyright /> */}</Box>
+          {({ getFieldProps }) => (
+            <Form>
+              <FormGroup label="You email address" name="email">
+                <Input
+                  sx={{ borderColor: "rgb(209, 218, 230)" }}
+                  {...getFieldProps("email")}
+                  id="email"
+                />
+              </FormGroup>
+              <FormGroup label="Password" name="password">
+                <Input
+                  sx={{ width: "400px", borderColor: "rgb(209, 218, 230)" }}
+                  {...getFieldProps("password")}
+                  type="password"
+                  id="password"
+                />
+              </FormGroup>
+              <Grid>
+                <Button type="submit" sx={{ mt: 1, bg: "#3F88F5" }}>
+                  Log in
+                </Button>
+                <Link to={SIGN_UP_PAGE_PATH}>
+                  <Text
+                    sx={{
+                      display: "inline-block",
+                      textDecoration: "none",
+                      fontSize: 1,
+                      color: "#3F88F5",
+                    }}
+                  >
+                    Dont have an account? Please Sign up here.
+                  </Text>
+                </Link>
+              </Grid>
+              <br />
+              {formError && (
+                <ErrorMessage name="subject">
+                  {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                </ErrorMessage>
+              )}
+            </Form>
+          )}
+        </Formik>
+      </FormWrapper>
     </Container>
   );
-}
+};
