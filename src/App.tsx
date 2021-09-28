@@ -11,7 +11,7 @@ import {
 } from './config/paths'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { NotFound } from './components/NotFound/NotFound'
-import { SignUp } from './components/SignUp/SignUp'
+// import { SignUp } from './components/SignUp/SignUp'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
