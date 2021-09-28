@@ -26,69 +26,67 @@ export const SignIn = (): JSX.Element => {
   const history = useHistory()
 
   return (
-    <Container>
-      <FormWrapper title="Welcome back">
-        <Formik
-          initialValues={{
-            email: '',
-            password: '',
-          }}
-          onSubmit={async (values: SignInFormValues) => {
-            setFormSubmitting(true)
-            try {
-              await signIn(values.email, values.password)
-              history.push(DASHBOARD_PAGE_PATH)
-            } catch (error) {
-              setFormError(formError)
-              setFormSubmitting(false)
-            }
-          }}
-          validationSchema={SignInSchema}
-        >
-          {({ getFieldProps }) => (
-            <Form>
-              <FormGroup label="You email address" name="email">
-                <Input
-                  sx={{ borderColor: 'rgb(209, 218, 230)' }}
-                  {...getFieldProps('email')}
-                  id="email"
-                />
-              </FormGroup>
-              <FormGroup label="Password" name="password">
-                <Input
-                  sx={{ width: '400px', borderColor: 'rgb(209, 218, 230)' }}
-                  {...getFieldProps('password')}
-                  type="password"
-                  id="password"
-                />
-              </FormGroup>
-              <Grid>
-                <Button type="submit" sx={{ mt: 1 }} variant="buttons.primary">
-                  Log in
-                </Button>
-                <Link to={SIGN_UP_PAGE_PATH}>
-                  <Text
-                    sx={{
-                      display: 'inline-block',
-                      textDecoration: 'none',
-                      fontSize: 1,
-                      color: '#3F88F5',
-                    }}
-                  >
-                    Dont have an account? Please Sign up here.
-                  </Text>
-                </Link>
-              </Grid>
-              <br />
-              {formError && (
-                <ErrorMessage name="subject">
-                  {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
-                </ErrorMessage>
-              )}
-            </Form>
-          )}
-        </Formik>
-      </FormWrapper>
-    </Container>
+    <FormWrapper title="Welcome back">
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        onSubmit={async (values: SignInFormValues) => {
+          setFormSubmitting(true)
+          try {
+            await signIn(values.email, values.password)
+            history.push(DASHBOARD_PAGE_PATH)
+          } catch (error) {
+            setFormError(formError)
+            setFormSubmitting(false)
+          }
+        }}
+        validationSchema={SignInSchema}
+      >
+        {({ getFieldProps }) => (
+          <Form>
+            <FormGroup label="You email address" name="email">
+              <Input
+                sx={{ borderColor: 'rgb(209, 218, 230)' }}
+                {...getFieldProps('email')}
+                id="email"
+              />
+            </FormGroup>
+            <FormGroup label="Password" name="password">
+              <Input
+                sx={{ width: '400px', borderColor: 'rgb(209, 218, 230)' }}
+                {...getFieldProps('password')}
+                type="password"
+                id="password"
+              />
+            </FormGroup>
+            <Grid>
+              <Button type="submit" sx={{ mt: 1 }} variant="buttons.primary">
+                Log in
+              </Button>
+              <Link to={SIGN_UP_PAGE_PATH}>
+                <Text
+                  sx={{
+                    display: 'inline-block',
+                    textDecoration: 'none',
+                    fontSize: 1,
+                    color: '#3F88F5',
+                  }}
+                >
+                  Dont have an account? Please Sign up here.
+                </Text>
+              </Link>
+            </Grid>
+            <br />
+            {formError && (
+              <ErrorMessage name="subject">
+                {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
+              </ErrorMessage>
+            )}
+          </Form>
+        )}
+      </Formik>
+    </FormWrapper>
   )
 }

@@ -45,6 +45,7 @@
     "dev": "react-scripts start",
     "build": "CI= react-scripts build",
     "test": "jest",
+    "cypress:open": "cypress open",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts",
     "type-check": "tsc --noEmit",
@@ -54,7 +55,7 @@
     "new:util": "plop util"
   },
   "engines": {
-    "node": "14 || v14.17.6 || ^14.16.0 || ^16.0.0"
+    "node": "14 || v14.17.6 || ^14.16.0 || ^v16.6.1"
   },
   "eslintConfig": {
     "extends": [
@@ -78,6 +79,7 @@
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
     "autoprefixer": "^10.2.6",
+    "cypress": "^8.5.0",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
