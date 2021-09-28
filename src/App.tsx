@@ -11,7 +11,7 @@ import {
 } from './config/paths'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { NotFound } from './components/NotFound/NotFound'
-// import { SignUp } from './components/SignUp/SignUp'
+import { SignUp } from './components/SignUp/SignUp'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,7 +29,7 @@ function App(): JSX.Element {
         <AuthProvider>
           <Router>
             <Switch>
-              {/* <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} /> */}
+              <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
               <Route exact path={SIGN_IN_PAGE_PATH} component={SignIn} />
               <Route exact path={HOME_PAGE_PATH} component={SignIn} />
               <Route exact path={DASHBOARD_PAGE_PATH} component={Dashboard} />
