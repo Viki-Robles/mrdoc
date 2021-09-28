@@ -63,7 +63,7 @@ export const SignIn = (): JSX.Element => {
                 />
               </FormGroup>
               <Grid>
-                <Button type="submit" sx={{ mt: 1, bg: '#3F88F5' }}>
+                <Button type="submit" sx={{ mt: 1 }} variant="buttons.primary">
                   Log in
                 </Button>
                 <Link to={SIGN_UP_PAGE_PATH}>
