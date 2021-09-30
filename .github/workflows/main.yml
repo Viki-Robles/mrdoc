@@ -24,12 +24,20 @@ jobs:
         run: yarn --prefer-offline
       - name: Run linters
         run: yarn lint
-  build:
-    runs-on: ubuntu-latest
+  Test:
+    - name: Run Jest
+      runs-on: ubuntu-latest
+    
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: Install Dependencies
-        run: yarn install
-      - name: Build
-        run: yarn build
+      - name: Test using Jest
+        run: yarn run jest
+
+  # Build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v2
+  #     - name: Install Dependencies
+  #       run: yarn install
+  #     - name: Build
+  #       run: yarn build
