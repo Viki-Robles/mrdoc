@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request'
 
 export const GET_TREATMENTS = gql`
   query {
@@ -15,7 +15,7 @@ export const GET_TREATMENTS = gql`
       price
     }
   }
-`;
+`
 
 export const GET_EYE_CARE_DATA = gql`
   query {
@@ -28,7 +28,7 @@ export const GET_EYE_CARE_DATA = gql`
       treatment_id
     }
   }
-`;
+`
 
 export const GET_DENTIST_DATA = gql`
   query {
@@ -40,7 +40,7 @@ export const GET_DENTIST_DATA = gql`
       treatment_id
     }
   }
-`;
+`
 
 export const GET_ROOT_CANAL_TREATMENT = gql`
   query {
@@ -51,4 +51,4 @@ export const GET_ROOT_CANAL_TREATMENT = gql`
       category
     }
   }
-`;
+`
