@@ -17,7 +17,7 @@ import { passwordValidation } from '../../utils/passwordValidation/passwordValid
 import { FormWrapper } from '../FormWrapper/FormWrapper'
 import { Link } from 'react-router-dom'
 
-interface SignupFormValues {
+interface SignUpFormValues {
   email: string
   password: string
   repeatPassword: string
@@ -34,11 +34,11 @@ const SignUpSchema = Yup.object().shape({
   }),
 })
 
-export interface SignupProps {
+export interface SignUpProps {
   sx?: ThemeUIStyleObject
 }
 
-export const SignUp = ({ sx }: SignupProps): JSX.Element => {
+export const SignUp = ({ sx }: SignUpProps): JSX.Element => {
   const { signUp } = useAuth()
   const [formError, setFormError] = useState<string>('')
   const [formSubmitting, setFormSubmitting] = useState<boolean>(false)
@@ -53,7 +53,7 @@ export const SignUp = ({ sx }: SignupProps): JSX.Element => {
             password: '',
             repeatPassword: '',
           }}
-          onSubmit={async (values: SignupFormValues) => {
+          onSubmit={async (values: SignUpFormValues) => {
             setFormSubmitting(true)
             try {
               const result = await signUp(values.email, values.password)
