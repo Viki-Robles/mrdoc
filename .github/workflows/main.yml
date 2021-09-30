@@ -18,8 +18,5 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: Install yarn
-        if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: yarn ci
       - name: Lint
         run: yarn run lint
