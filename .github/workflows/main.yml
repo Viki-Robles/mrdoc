@@ -1,22 +1,32 @@
 name: Lint
+
 on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
+
 jobs:
-  lint:
+  run-linters:
+    name: Run linters
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out repository code
+      - name: Check out Git repository
         uses: actions/checkout@v2
-      - name: Set up node env
-        uses: actions/setup-node@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: 'v16.6.1'
-      - name: Cache node modules
-        uses: actions/cache@v2
+          node-version: v16.6.1
+
+      # ESLint and Prettier must be in `package.json`
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
         with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: Lint
-        run: yarn run eslint
+          eslint: true
+          prettier: true
