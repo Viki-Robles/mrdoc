@@ -1,4 +1,4 @@
-name: Lint & Build
+name: Lint & Test
 
 on:
   push:
@@ -11,7 +11,6 @@ jobs:
   run-linters:
     name: Run linters
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
@@ -24,20 +23,7 @@ jobs:
         run: yarn --prefer-offline
       - name: Run linters
         run: yarn lint
-  Test:
-    - name: Run Jest
-      runs-on: ubuntu-latest
-    
-    steps:
-      - name: Test using Jest
-        run: yarn run jest
-
-  # Build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check out repository code
-  #       uses: actions/checkout@v2
-  #     - name: Install Dependencies
-  #       run: yarn install
-  #     - name: Build
-  #       run: yarn build
+      - name: Test
+        run: yarn test
+  #   - name: Build
+  #     run: yarn build
