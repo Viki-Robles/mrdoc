@@ -19,10 +19,7 @@ export const FormGroup = ({
 }: FormGroupProps): JSX.Element => {
   return (
     <Box sx={{ mb: 4, ...sx }}>
-      <Label
-        htmlFor={name}
-        sx={{ mb: 1, alignItems: 'center', maxWidth: '200px' }}
-      >
+      <Label htmlFor={name} sx={{ mb: 1, alignItems: 'center', width: 'auto' }}>
         {label}
       </Label>
       {children}

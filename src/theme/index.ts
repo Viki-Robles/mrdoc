@@ -18,6 +18,7 @@ import { images } from './images'
 import { motion } from './motion'
 import { lists } from './lists'
 import { utils } from './utils'
+import { alerts } from './alerts'
 
 declare module 'theme-ui' {
   interface Theme {
@@ -29,6 +30,7 @@ declare module 'theme-ui' {
 }
 
 export const theme: Theme = {
+  alerts,
   utils,
   lists,
   borders,

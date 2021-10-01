@@ -1,6 +1,6 @@
 import { Theme } from 'theme-ui'
 
-const brand = '#0064dc'
+const brand = '#3F88F5'
 const brandDark = '#0014a0'
 const brandDarker = '#001450'
 const bright = '#fff'

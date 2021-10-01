@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Input, Button, Grid, Text } from 'theme-ui'
+import { Input, Button, Grid, Text, ThemeUIStyleObject } from 'theme-ui'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import { Form, Formik, ErrorMessage } from 'formik'
@@ -8,6 +8,10 @@ import { DASHBOARD_PAGE_PATH, SIGN_UP_PAGE_PATH } from '../../config/paths'
 import { useAuth } from '../../providers/AuthProvider'
 import { FormGroup } from '../../components/FormGroup/FormGroup'
 import { FormWrapper } from '../FormWrapper/FormWrapper'
+
+export interface SignInProps {
+  sx?: ThemeUIStyleObject
+}
 
 interface SignInFormValues {
   email: string
@@ -19,14 +23,14 @@ const SignInSchema = Yup.object().shape({
   password: Yup.string().required('Required').min(8).max(200),
 })
 
-export const SignIn = (): JSX.Element => {
+export const SignIn = ({ sx }: SignInProps): JSX.Element => {
   const { signIn } = useAuth()
   const [formSubmitting, setFormSubmitting] = useState<boolean>(false)
   const [formError, setFormError] = useState<string>('')
   const history = useHistory()
 
   return (
-    <FormWrapper title="Welcome back">
+    <FormWrapper title="Welcome back" sx={{ ...sx }}>
       <Formik
         initialValues={{
           email: '',
@@ -71,7 +75,7 @@ export const SignIn = (): JSX.Element => {
                     display: 'inline-block',
                     textDecoration: 'none',
                     fontSize: 1,
-                    color: '#3F88F5',
+                    color: 'brand',
                   }}
                 >
                   Dont have an account? Please Sign up here.

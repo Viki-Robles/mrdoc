@@ -9,7 +9,7 @@ on:
       - master
 jobs:
   run-linters:
-    name: Run linters
+    name: Lint & Jest
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
