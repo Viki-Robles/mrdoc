@@ -1,7 +1,7 @@
 import { Theme } from 'theme-ui'
 
 const brand = '#3F88F5'
-const brandDark = '#0014a0'
+const brandDark = '#0A345F'
 const brandDarker = '#001450'
 const bright = '#fff'
 const dark = '#000'
@@ -48,8 +48,7 @@ export const baseColors = {
     300: '#93c5fd',
     400: '#60a5fa',
     500: brand,
-    800: brandDark,
-    900: brandDarker,
+    800: '#0A345F',
   },
   indigo: {
     __default: '#6366f1',
@@ -181,6 +180,7 @@ export type Colors = {
   bright: string
   dark: string
   brand: string
+  brandDarker: string
 }
 
 export const colors: Theme['colors'] = {
