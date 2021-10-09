@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { SignIn } from './components/SignIn/SignIn'
 import { Dashboard } from './components/Dashboard/Dashboard'
@@ -8,10 +8,12 @@ import {
   SIGN_UP_PAGE_PATH,
   DASHBOARD_PAGE_PATH,
   HOME_PAGE_PATH,
+  DOCTOR_PROFILE_PAGE_PATH,
 } from './config/paths'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { NotFound } from './components/NotFound/NotFound'
 import { SignUp } from './components/SignUp/SignUp'
+import { DoctorDashboard } from './components/DoctorDashboard/DoctorDashboard'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,15 +29,22 @@ function App(): JSX.Element {
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Router>
-            <Switch>
-              <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
-              <Route exact path={SIGN_IN_PAGE_PATH} component={SignIn} />
-              <Route exact path={HOME_PAGE_PATH} component={SignIn} />
-              <Route exact path={DASHBOARD_PAGE_PATH} component={Dashboard} />
-              <Route exact path="*" component={NotFound} />
-            </Switch>
-          </Router>
+          <Suspense fallback={'Loading'}>
+            <Router>
+              <Switch>
+                <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
+                <Route exact path={SIGN_IN_PAGE_PATH} component={SignIn} />
+                <Route exact path={HOME_PAGE_PATH} component={SignIn} />
+                <Route exact path={DASHBOARD_PAGE_PATH} component={Dashboard} />
+                <Route
+                  exact
+                  path={`${DOCTOR_PROFILE_PAGE_PATH}/:doctor_id`}
+                  component={DoctorDashboard}
+                />
+                <Route exact path="*" component={NotFound} />
+              </Switch>
+            </Router>
+          </Suspense>
         </AuthProvider>
       </QueryClientProvider>
     </div>

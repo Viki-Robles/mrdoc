@@ -49,7 +49,7 @@ export const SignUp = ({ sx }: SignUpProps): JSX.Element => {
         onSubmit={async (values: SignUpFormValues) => {
           setFormSubmitting(true)
           try {
-            const result = await signUp(values.email, values.password)
+            await signUp(values.email, values.password)
             try {
               history.push(DASHBOARD_PAGE_PATH)
             } catch (error) {
