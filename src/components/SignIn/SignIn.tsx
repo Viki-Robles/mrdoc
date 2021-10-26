@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Input, Button, Grid, Text, ThemeUIStyleObject } from 'theme-ui'
+import { Input, Button, Grid, Text, ThemeUIStyleObject, Alert } from 'theme-ui'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import { Form, Formik, ErrorMessage } from 'formik'
@@ -41,8 +41,14 @@ export const SignIn = ({ sx }: SignInProps): JSX.Element => {
           try {
             await signIn(values.email, values.password)
             history.push(DASHBOARD_PAGE_PATH)
-          } catch (error) {
-            setFormError(formError)
+          } catch (error: unknown) {
+            let errorMessage = 'error.unknown'
+            if (typeof error === 'string') {
+              errorMessage = error.toUpperCase()
+            } else if (error instanceof Error) {
+              errorMessage = error.message
+            }
+            setFormError(errorMessage)
             setFormSubmitting(false)
           }
         }}
@@ -73,9 +79,9 @@ export const SignIn = ({ sx }: SignInProps): JSX.Element => {
                 <Text
                   sx={{
                     display: 'inline-block',
-                    textDecoration: 'none',
-                    fontSize: 1,
                     color: 'brand',
+                    textDecoration: 'none',
+                    fontSize: 2,
                   }}
                 >
                   Dont have an account? Please Sign up here.
@@ -83,11 +89,7 @@ export const SignIn = ({ sx }: SignInProps): JSX.Element => {
               </Link>
             </Grid>
             <br />
-            {formError && (
-              <ErrorMessage name="subject">
-                {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
-              </ErrorMessage>
-            )}
+            {formError && <Alert variant="error">{formError}</Alert>}
           </Form>
         )}
       </Formik>

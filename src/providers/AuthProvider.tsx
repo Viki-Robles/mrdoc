@@ -1,4 +1,10 @@
-import React, { ReactNode, useEffect, useState, useContext } from 'react'
+import React, {
+  ReactNode,
+  useEffect,
+  useState,
+  useContext,
+  createContext,
+} from 'react'
 import { auth } from '../config/firebase'
 import {
   Auth,
@@ -8,11 +14,25 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from 'firebase/auth'
+import { MrDocRoles, MrDocContactType } from '../types/mrDocRoles'
+import { MrDocUser } from '../types/users'
 
 export interface AuthProviderProps {
   children?: ReactNode
 }
 
+export interface UserContextState {
+  isAuthenticated: boolean
+  isLoading: boolean
+  user?: MrDocUser
+  id?: string
+  role?: MrDocRoles
+  contactType?: MrDocContactType
+}
+
+export const UserStateContext = createContext<UserContextState>(
+  {} as UserContextState,
+)
 export interface AuthContextModel {
   auth: Auth
   user: User | null
@@ -58,4 +78,8 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
     auth,
   }
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
+}
+
+export const useUserContext = (): UserContextState => {
+  return useContext(UserStateContext)
 }

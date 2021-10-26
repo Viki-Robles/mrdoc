@@ -14,6 +14,7 @@ import { QueryClientProvider, QueryClient } from 'react-query'
 import { NotFound } from './components/NotFound/NotFound'
 import { SignUp } from './components/SignUp/SignUp'
 import { DoctorDashboard } from './components/DoctorDashboard/DoctorDashboard'
+import { Layout } from './components/Layout/Layout'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,12 +36,18 @@ function App(): JSX.Element {
                 <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
                 <Route exact path={SIGN_IN_PAGE_PATH} component={SignIn} />
                 <Route exact path={HOME_PAGE_PATH} component={SignIn} />
-                <Route exact path={DASHBOARD_PAGE_PATH} component={Dashboard} />
-                <Route
-                  exact
-                  path={`${DOCTOR_PROFILE_PAGE_PATH}/:doctor_id`}
-                  component={DoctorDashboard}
-                />
+                <Layout>
+                  <Route
+                    exact
+                    path={DASHBOARD_PAGE_PATH}
+                    component={Dashboard}
+                  />
+                  <Route
+                    exact
+                    path={`${DOCTOR_PROFILE_PAGE_PATH}/:doctor_id`}
+                    component={DoctorDashboard}
+                  />
+                </Layout>
                 <Route exact path="*" component={NotFound} />
               </Switch>
             </Router>

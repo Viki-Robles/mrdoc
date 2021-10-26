@@ -39,12 +39,7 @@ const globalFontStyles = `
     src: url('/fonts/ClearSans-Bold.woff') format('woff');
     font-weight: 600;
   }
-  @font-face {
-    font-family: 'Clear Sans';
-    src: url('/fonts/ClearSans-BoldItalic.woff') format('woff');
-    font-weight: 700;
-    font-style: italic;
-  }
+ 
 `
 export const GlobalStyles = (): JSX.Element => (
   <Global

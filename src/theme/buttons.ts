@@ -18,7 +18,6 @@ const sharedButtonStyles = {
   borderRadius: 'full',
   cursor: 'pointer',
   lineHeight: 1,
-  border: '2px solid',
   '&:disabled': {
     ...disabledStyles,
   },
@@ -198,44 +197,6 @@ export const buttons: Theme['buttons'] = {
     },
   },
 
-  actionBar: {
-    variant: 'buttons.unstyled',
-    display: 'inline-flex',
-    alignItems: 'center',
-    height: 'actionBar',
-    whiteSpace: 'nowrap',
-    color: 'neutral.600',
-    fontWeight: 'body',
-    '&:disabled': {
-      ...disabledStyles,
-    },
-  },
-
-  actionBarIcon: {
-    cursor: 'pointer',
-    bg: 'bright',
-    width: 'sidebarCollapsed',
-    height: '49px',
-    p: 0,
-    borderRadius: 0,
-    borderRight: '1px solid',
-    borderColor: 'muted',
-    color: 'neutral.600',
-    '&:hover': {
-      color: 'primary',
-    },
-    span: {
-      variant: 'motion.transitions.all',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '31px',
-      height: '31px',
-      bg: 'neutral.200',
-      borderRadius: 'full',
-    },
-  },
-
   unstyled: {
     p: 0,
     borderRadius: 0,
@@ -244,6 +205,34 @@ export const buttons: Theme['buttons'] = {
     fontFamily: 'inherit',
     cursor: 'pointer',
     textAlign: 'inherit',
+    variant: 'utils.focusVisibleInset',
+    '&': {
+      variant: 'motion.transitions.all',
+    },
+  },
+
+  call: {
+    ...sharedButtonStyles,
+    bg: '#F8DEAC',
+    borderRadius: '50px',
+    color: '#F0A330',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    fontWeight: 'semibold',
+    variant: 'utils.focusVisibleInset',
+    '&': {
+      variant: 'motion.transitions.all',
+    },
+  },
+
+  mail: {
+    ...sharedButtonStyles,
+    bg: '#ADF69B',
+    borderRadius: '50px',
+    color: '#51D124',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    fontWeight: 'semibold',
     variant: 'utils.focusVisibleInset',
     '&': {
       variant: 'motion.transitions.all',

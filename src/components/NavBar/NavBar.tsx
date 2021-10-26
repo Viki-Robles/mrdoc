@@ -4,7 +4,7 @@ import doctor from '../NavBar/images/doctor.svg'
 import dashboard from '../NavBar/images/dashboard.svg'
 import { Grid, Text, Box, Image } from 'theme-ui'
 import { Link } from 'react-router-dom'
-import { SIGN_UP_PAGE_PATH } from '../../config/paths'
+import { DASHBOARD_PAGE_PATH, SIGN_UP_PAGE_PATH } from '../../config/paths'
 
 const LINKS = [
   { label: 'Dashboard', href: '/dashboard', icon: dashboard },
@@ -19,7 +19,7 @@ export default function NavBar(): JSX.Element {
       sx={{
         display: 'grid',
         height: '100vh',
-        maxWidth: ['15vw', '8vw'],
+        width: ['10%', '5%'],
         bg: 'blue.800',
         color: 'bright',
       }}
@@ -28,7 +28,10 @@ export default function NavBar(): JSX.Element {
         sx={{ display: 'grid', justifyContent: 'center', alignItems: 'center' }}
       >
         <Image src={dashboard} />
-        <Image src={doctor} />
+        <Link to={DASHBOARD_PAGE_PATH}>
+          <Image src={doctor} />
+        </Link>
+
         <Image src={booking} />
       </Box>
       <Box

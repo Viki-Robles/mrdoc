@@ -103,8 +103,8 @@ export const SignUp = ({ sx }: SignUpProps): JSX.Element => {
                     textDecoration: 'none',
                     textAlign: 'center',
                     margin: '0 auto',
-                    fontSize: 1,
-                    color: '#3F88F5',
+                    fontSize: 2,
+                    color: 'brand',
                   }}
                 >
                   Do you already have an account? Please login in here.
