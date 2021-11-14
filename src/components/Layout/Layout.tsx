@@ -9,7 +9,7 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
     <Flex>
       <NavBar />
-      <Box>{children}</Box>
+      <Box sx={{ ml: 11 }}>{children}</Box>
     </Flex>
   )
 }

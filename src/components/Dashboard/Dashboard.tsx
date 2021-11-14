@@ -8,17 +8,29 @@ import { useFetchDoctorsByNationality } from '../../hooks/useFetchDoctorsByNatio
 export const Dashboard = (): JSX.Element => {
   const [toggle, setToggle] = useState<boolean>(false)
   const { doctorsData } = useFetchDoctors()
-  const nationalityData = useFetchDoctorsByNationality(nationality.Spanish)
+  const polishDoctorsData = useFetchDoctorsByNationality(nationality.Polish)
 
   return (
     <Box>
-      <Flex sx={{ gap: 4 }}>
+      {/* <Flex sx={{ gap: 4 }}>
         <Button onClick={() => setToggle(!toggle)}>Spanish</Button>
-      </Flex>
-      {/* {toggle &&
-        nationalityData.data?.doctors.map(({ first_name }) => {
-          return <div key={first_name}>{first_name}</div>
-        })} */}
+        {toggle &&
+          polishDoctorsData.data?.doctors.map(
+            ({ first_name, last_name, doctor_id, profession, skill }) => {
+              return (
+                <DoctorItem
+                  key={doctor_id}
+                  last_name={last_name}
+                  first_name={first_name}
+                  profession={profession}
+                  languages={skill.skill_name}
+                  doctor_id={doctor_id}
+                />
+              )
+            },
+          )}
+      </Flex> */}
+
       <Flex sx={{ gap: 8, margin: 4, flexWrap: 'wrap' }}>
         {doctorsData &&
           doctorsData.map(
