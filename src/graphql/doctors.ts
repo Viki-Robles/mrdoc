@@ -49,3 +49,20 @@ export const GET_DOCTOR_BY_ID = gql`
     }
   }
 `
+export const GET_DOCTORS_NY_NATIONALITY = gql`
+  query getDoctorsByNationality($nationality: String!) {
+    doctors(where: { nationality: { _eq: $nationality } }) {
+      contact_number
+      doctor_id
+      first_name
+      last_name
+      nationality
+      profession
+      skill {
+        skill_group
+        skill_id
+        skill_name
+      }
+    }
+  }
+`
