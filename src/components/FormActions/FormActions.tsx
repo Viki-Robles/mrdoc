@@ -1,9 +1,9 @@
-import React, { ReactNode } from "react";
-import { ThemeUIStyleObject, Flex } from "theme-ui";
+import React, { ReactNode } from 'react'
+import { ThemeUIStyleObject, Flex } from 'theme-ui'
 
 export interface FormActionsProps {
-  sx?: ThemeUIStyleObject;
-  children: ReactNode;
+  sx?: ThemeUIStyleObject
+  children: ReactNode
 }
 
 export const FormActions = ({
@@ -16,11 +16,11 @@ export const FormActions = ({
         my: 5,
         gap: 5,
         gridRowGap: 3,
-        flexWrap: "wrap",
+        flexWrap: 'wrap',
         ...sx,
       }}
     >
       {children}
     </Flex>
-  );
-};
+  )
+}

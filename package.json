@@ -50,6 +50,7 @@
     "dev": "react-scripts start",
     "build": "CI= react-scripts build",
     "test": "jest",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "cypress:open": "cypress open",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts",
