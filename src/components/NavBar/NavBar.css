@@ -2,7 +2,7 @@
   position: fixed;
   background-color: var(--bg-primary);
   transition: width 600ms ease;
-  background: #2a2e35;
+  background: #072646;
   z-index: 10;
 }
 
