@@ -1,13 +1,7 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { Box } from 'theme-ui'
 
-export interface NationalityFlagsProps {
-  children: ReactNode
-}
-
-export const NationalityFlags = ({
-  children,
-}: NationalityFlagsProps): JSX.Element => {
+export const NationalityFlags = (): JSX.Element => {
   return (
     <Box>
       <Box>NationalityFlags</Box>
