@@ -4,8 +4,9 @@ import { nationality } from '../../types/nationality'
 import { useFetchDoctorsByNationality } from '../../hooks/useFetchDoctorsByNationality/useFetchDoctorsByNationality'
 import { DoctorsGalleryItems } from '../DoctorsGalleryItems/DoctorsGalleryItems'
 import WrapperContainer from '../WrapperContainer/WrapperContainer'
+import { FavouriteProvider } from '../Favourite/FavouriteProvider'
 
-export const Dashboard = (): JSX.Element => {
+export const Dashboard = (doctor_id: string): JSX.Element => {
   const [toggle, setToggle] = useState<boolean>(false)
   const { doctorsData } = useFetchDoctors()
 
@@ -13,8 +14,10 @@ export const Dashboard = (): JSX.Element => {
   const spanishDoctorsData = useFetchDoctorsByNationality(nationality.Spanish)
 
   return (
-    <WrapperContainer>
-      <DoctorsGalleryItems data={doctorsData} />
-    </WrapperContainer>
+    <FavouriteProvider doctor_id={doctor_id}>
+      <WrapperContainer>
+        <DoctorsGalleryItems data={doctorsData} />
+      </WrapperContainer>
+    </FavouriteProvider>
   )
 }

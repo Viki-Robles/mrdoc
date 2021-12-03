@@ -29,7 +29,7 @@ export const HeroBar = (): JSX.Element => {
           Mr.Doc
         </Text>
         <Text></Text>
-        <Text>Picture</Text>
+        <Text></Text>
       </Flex>
     </Fragment>
   )

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Box, Button, Flex, Text, Grid, Image } from 'theme-ui'
 import { Link } from 'react-router-dom'
 import { DOCTOR_PROFILE_PAGE_PATH } from '../../config/paths'
+import { Favourite } from '../Favourite/Favourite'
 
 export interface DoctorItemProps {
   first_name?: string
@@ -76,6 +77,7 @@ export const DoctorItem = ({
         <Button variant="buttons.call">Call</Button>
         <Button variant="buttons.mail">Mail</Button>
       </Flex>
+      {/* <Favourite doctor_id={doctor_id} /> */}
     </Grid>
   )
 }
