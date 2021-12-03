@@ -58,7 +58,6 @@ function App(): JSX.Element {
                     component={Treatments}
                   />
                 </Layout>
-
                 <Route exact path="*" component={NotFound} />
               </Switch>
             </Router>

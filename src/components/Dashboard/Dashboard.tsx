@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Box } from 'theme-ui'
 import { useFetchDoctors } from '../../hooks/useFetchDoctors/useFetchDoctors'
 import { nationality } from '../../types/nationality'
 import { useFetchDoctorsByNationality } from '../../hooks/useFetchDoctorsByNationality/useFetchDoctorsByNationality'

@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react'
-import { Box, Flex } from 'theme-ui'
+import React from 'react'
+import { Flex } from 'theme-ui'
 import { Doctor } from '../../types/doctors'
 import { DoctorItem } from '../DoctorItem/DoctorItem'
 

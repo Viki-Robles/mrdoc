@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Box, Button, Flex, Text, Grid, Image } from 'theme-ui'
 import { Link } from 'react-router-dom'
 import { DOCTOR_PROFILE_PAGE_PATH } from '../../config/paths'
-import { Favourite } from '../Favourited/Favourited'
 
 export interface DoctorItemProps {
   first_name?: string
@@ -36,7 +35,7 @@ export const DoctorItem = ({
       <Text sx={{ color: 'neutral.980', fontWeight: 'bold', pt: 6 }}>
         Dr. {`${first_name} ${last_name}`}
       </Text>
-      {/* <Favourite doctor_id={doctor_id} /> */}
+
       <Flex
         sx={{ gap: 4, alignItems: 'center', mt: 4, mb: 4, flexWrap: 'wrap' }}
       >
