@@ -1,4 +1,8 @@
-export {}
+import React from 'react'
+
+export const Treatments = (): JSX.Element => {
+  return <div>treatments</div>
+}
 // import React, { Fragment, useState } from "react";
 // import { Box, Button } from "@material-ui/core";
 // import { Treatment } from "../Treatment/Treatment";

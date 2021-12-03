@@ -1,5 +1,6 @@
-import React, { ReactNode } from 'react'
+import React, { Fragment, ReactNode } from 'react'
 import { Grid, Box, Flex } from 'theme-ui'
+import { HeroBar } from '../HeroBar/HeroBar'
 import NavBar from '../NavBar/NavBar'
 
 export interface LayoutProps {
@@ -7,9 +8,12 @@ export interface LayoutProps {
 }
 export const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
-    <Flex>
-      <NavBar />
-      <Box sx={{ ml: 11 }}>{children}</Box>
-    </Flex>
+    <Fragment>
+      <HeroBar />
+      <Flex>
+        <NavBar />
+        <Box sx={{ ml: 10 }}>{children}</Box>
+      </Flex>
+    </Fragment>
   )
 }

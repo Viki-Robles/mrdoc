@@ -9,12 +9,14 @@ import {
   DASHBOARD_PAGE_PATH,
   HOME_PAGE_PATH,
   DOCTOR_PROFILE_PAGE_PATH,
+  TREATMENTS_PAGE_PATH,
 } from './config/paths'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { NotFound } from './components/NotFound/NotFound'
 import { SignUp } from './components/SignUp/SignUp'
 import { DoctorDashboard } from './components/DoctorDashboard/DoctorDashboard'
 import { Layout } from './components/Layout/Layout'
+import { Treatments } from './components/Treatments/Treatments'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,13 +32,13 @@ function App(): JSX.Element {
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Suspense fallback={'Loading'}>
-            <Router>
-              <Switch>
-                <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
-                <Route exact path={SIGN_IN_PAGE_PATH} component={SignIn} />
-                <Route exact path={HOME_PAGE_PATH} component={SignIn} />
-                <Layout>
+          <Router>
+            <Switch>
+              <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
+              <Route exact path={SIGN_IN_PAGE_PATH} component={SignIn} />
+              <Route exact path={HOME_PAGE_PATH} component={SignIn} />
+              <Layout>
+                <Suspense fallback={'Loading'}>
                   <Route
                     exact
                     path={DASHBOARD_PAGE_PATH}
@@ -47,11 +49,17 @@ function App(): JSX.Element {
                     path={`${DOCTOR_PROFILE_PAGE_PATH}/:doctor_id`}
                     component={DoctorDashboard}
                   />
-                </Layout>
-                <Route exact path="*" component={NotFound} />
-              </Switch>
-            </Router>
-          </Suspense>
+                  <Route
+                    exact
+                    path={TREATMENTS_PAGE_PATH}
+                    component={Treatments}
+                  />
+                </Suspense>
+              </Layout>
+
+              <Route exact path="*" component={NotFound} />
+            </Switch>
+          </Router>
         </AuthProvider>
       </QueryClientProvider>
     </div>

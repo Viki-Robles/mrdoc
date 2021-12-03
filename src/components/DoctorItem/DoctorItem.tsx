@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Button, Flex, Text, Grid, Image } from 'theme-ui'
 import { Link } from 'react-router-dom'
 import { DOCTOR_PROFILE_PAGE_PATH } from '../../config/paths'
+import { Favourite } from '../Favourited/Favourited'
 
 export interface DoctorItemProps {
   first_name?: string
@@ -22,7 +23,7 @@ export const DoctorItem = ({
     <Grid
       sx={{
         textAlign: 'center',
-        backgroundColor: '#F2F4FB',
+        backgroundColor: 'bright',
         borderRadius: 8,
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
         gap: 0,
@@ -35,6 +36,7 @@ export const DoctorItem = ({
       <Text sx={{ color: 'neutral.980', fontWeight: 'bold', pt: 6 }}>
         Dr. {`${first_name} ${last_name}`}
       </Text>
+      {/* <Favourite doctor_id={doctor_id} /> */}
       <Flex
         sx={{ gap: 4, alignItems: 'center', mt: 4, mb: 4, flexWrap: 'wrap' }}
       >

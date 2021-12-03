@@ -17,23 +17,16 @@ const LINKS = [
 export default function NavBar(): JSX.Element {
   return (
     <nav className="navbar">
-      <ul className="navbar-nav">
-        {LINKS.map(({ label, icon, href }) => {
-          return (
-            <li className="nav-item" key={label}>
-              <Link to={href} className="nav-link">
-                <Image
-                  src={icon}
-                  width={30}
-                  height={30}
-                  sx={{ margin: '0 1.5rem' }}
-                />
-                <span className="link-text">{label}</span>
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+      {LINKS.map(({ label, icon, href }) => {
+        return (
+          <div className="nav-item" key={label}>
+            <Link to={href} className="nav-link">
+              <Image src={icon} sx={{ margin: '0 1.5rem' }} />
+              <span className="link-text">{label}</span>
+            </Link>
+          </div>
+        )
+      })}
     </nav>
   )
 }
