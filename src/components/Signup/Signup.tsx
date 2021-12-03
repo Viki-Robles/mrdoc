@@ -8,7 +8,6 @@ import { DASHBOARD_PAGE_PATH, SIGN_IN_PAGE_PATH } from '../../config/paths'
 import { useAuth } from '../../providers/AuthProvider'
 import { passwordValidation } from '../../utils/passwordValidation/passwordValidation'
 import { FormWrapper } from '../FormWrapper/FormWrapper'
-import { ErrorMessageWrapper } from '../ErrorMessageWrapper/ErrorMessageWrapper'
 import { Link } from 'react-router-dom'
 
 interface SignUpFormValues {
@@ -32,7 +31,7 @@ export interface SignUpProps {
   sx?: ThemeUIStyleObject
 }
 
-export const SignUp = ({ sx }: SignUpProps): JSX.Element => {
+const SignUp = ({ sx }: SignUpProps): JSX.Element => {
   const { signUp } = useAuth()
   const [formError, setFormError] = useState<string>('')
   const [formSubmitting, setFormSubmitting] = useState<boolean>(false)
@@ -118,3 +117,4 @@ export const SignUp = ({ sx }: SignUpProps): JSX.Element => {
     </FormWrapper>
   )
 }
+export default SignUp

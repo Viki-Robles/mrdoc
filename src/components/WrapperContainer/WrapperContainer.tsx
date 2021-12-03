@@ -1,10 +1,12 @@
-import React, { ReactNode } from 'react' import { Box } from 'theme-ui'; export
-interface
-WrapperContainerProps { // children: ReactNode } export const
-WrapperContainer
-= ({ children }:
-WrapperContainerProps): JSX.Element => { return (
-<Box>
-  <Box>WrapperContainer</Box>
-</Box>
-) }
+import React, { ReactNode } from 'react'
+import { Box } from 'theme-ui'
+
+interface WrapperContainerProps {
+  children: ReactNode
+}
+
+const WrapperContainer = ({ children }: WrapperContainerProps): JSX.Element => {
+  return <Box sx={{ mt: 9, ml: 10 }}>{children}</Box>
+}
+
+export default WrapperContainer

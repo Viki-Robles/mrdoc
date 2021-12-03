@@ -1,8 +1,9 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { SignIn } from './components/SignIn/SignIn'
 import { Dashboard } from './components/Dashboard/Dashboard'
 import { AuthProvider } from './providers/AuthProvider'
+import { QueryClientProvider, QueryClient } from 'react-query'
 import {
   SIGN_IN_PAGE_PATH,
   SIGN_UP_PAGE_PATH,
@@ -11,12 +12,14 @@ import {
   DOCTOR_PROFILE_PAGE_PATH,
   TREATMENTS_PAGE_PATH,
 } from './config/paths'
-import { QueryClientProvider, QueryClient } from 'react-query'
-import { NotFound } from './components/NotFound/NotFound'
-import { SignUp } from './components/SignUp/SignUp'
-import { DoctorDashboard } from './components/DoctorDashboard/DoctorDashboard'
-import { Layout } from './components/Layout/Layout'
-import { Treatments } from './components/Treatments/Treatments'
+
+const NotFound = lazy(() => import('./components/NotFound/NotFound'))
+const SignUp = lazy(() => import('./components/SignUp/SignUp'))
+const DoctorDashboard = lazy(
+  () => import('./components/DoctorDashboard/DoctorDashboard'),
+)
+const Layout = lazy(() => import('./components/Layout/Layout'))
+const Treatments = lazy(() => import('./components/Treatments/Treatments'))
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,13 +35,13 @@ function App(): JSX.Element {
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Router>
-            <Switch>
-              <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
-              <Route exact path={SIGN_IN_PAGE_PATH} component={SignIn} />
-              <Route exact path={HOME_PAGE_PATH} component={SignIn} />
-              <Layout>
-                <Suspense fallback={'Loading'}>
+          <Suspense fallback={'Loading'}>
+            <Router>
+              <Switch>
+                <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
+                <Route exact path={SIGN_IN_PAGE_PATH} component={SignIn} />
+                <Route exact path={HOME_PAGE_PATH} component={SignIn} />
+                <Layout>
                   <Route
                     exact
                     path={DASHBOARD_PAGE_PATH}
@@ -54,12 +57,12 @@ function App(): JSX.Element {
                     path={TREATMENTS_PAGE_PATH}
                     component={Treatments}
                   />
-                </Suspense>
-              </Layout>
+                </Layout>
 
-              <Route exact path="*" component={NotFound} />
-            </Switch>
-          </Router>
+                <Route exact path="*" component={NotFound} />
+              </Switch>
+            </Router>
+          </Suspense>
         </AuthProvider>
       </QueryClientProvider>
     </div>

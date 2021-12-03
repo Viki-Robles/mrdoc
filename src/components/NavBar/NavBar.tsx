@@ -21,7 +21,12 @@ export default function NavBar(): JSX.Element {
         return (
           <div className="nav-item" key={label}>
             <Link to={href} className="nav-link">
-              <Image src={icon} sx={{ margin: '0 1.5rem' }} />
+              <Image
+                src={icon}
+                sx={{ margin: '0 1.5rem' }}
+                width={30}
+                height={30}
+              />
               <span className="link-text">{label}</span>
             </Link>
           </div>

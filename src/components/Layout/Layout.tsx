@@ -6,14 +6,17 @@ import NavBar from '../NavBar/NavBar'
 export interface LayoutProps {
   children: ReactNode
 }
-export const Layout = ({ children }: LayoutProps): JSX.Element => {
+
+const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
     <Fragment>
       <HeroBar />
       <Flex>
         <NavBar />
-        <Box sx={{ ml: 10 }}>{children}</Box>
+        <Box>{children}</Box>
       </Flex>
     </Fragment>
   )
 }
+
+export default Layout

@@ -11,7 +11,7 @@ export const DoctorsGalleryItems = ({
   data,
 }: DoctorsGalleryItemsProps): JSX.Element => {
   return (
-    <Flex sx={{ gap: 4, flexWrap: 'wrap', pt: 10 }}>
+    <Flex sx={{ gap: 4, flexWrap: 'wrap' }}>
       {data &&
         data?.map(({ first_name, last_name, doctor_id, profession, skill }) => {
           return (
