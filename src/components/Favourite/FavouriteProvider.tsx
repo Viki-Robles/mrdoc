@@ -9,35 +9,34 @@ interface FavouriteProps {
 interface FavouriteContextProps {
   isFaved: (doctor_id: string) => boolean
   faves: string[]
-  setFavouritedArray: () => void
+  setFavourites: (doctor_id) => void
 }
 
 interface UseFavouriteReturn {
   isFaved: (doctor_id: string) => boolean
-  setFavouritedArray: () => void
+  setFavourites: (doctor_id) => void
   faves: string[]
 }
 
 const FavouritedContext = React.createContext<FavouriteContextProps>({
   faves: [],
-  setFavouritedArray: () => {
-    console.log('favourited-doctor')
+  setFavourites: (doctor_id) => {
+    console.log('default setFavourite state')
   },
-  isFaved: (doctor_id: string): boolean => {
+  isFaved: (doctor_id: string) => {
     return false
   },
 })
 
 export const useFavourite = (): UseFavouriteReturn => {
-  const { faves, setFavouritedArray, isFaved } = useContext(FavouritedContext)
-  return { faves, setFavouritedArray, isFaved }
+  const { faves, setFavourites, isFaved } = useContext(FavouritedContext)
+  return { faves, setFavourites, isFaved }
 }
 
 export const FavouriteProvider = ({
-  doctor_id,
   children,
 }: FavouriteProps): JSX.Element => {
-  const [faves, setFavouritedArray] = useLocalStorageState<string[]>(
+  const [faves, setFavourites] = useLocalStorageState<string[]>(
     'favourited-storage',
     [],
   )
@@ -46,19 +45,23 @@ export const FavouriteProvider = ({
     return faves.includes(doctor_id)
   }
 
-  const handdleFavourited = () => {
+  const handdleFavourited = (doctor_id: string): void => {
     const isFavouritedDoctor = isFaved(doctor_id)
     if (!isFavouritedDoctor) {
       const storageFaves = [...faves, doctor_id]
-      setFavouritedArray(storageFaves)
-      console.log('faves', storageFaves)
+      console.log('faves log', faves)
+      setFavourites(storageFaves)
+      console.log('setFavourites log', storageFaves)
+    } else {
+      const indexFavouritedId = faves.indexOf(doctor_id)
+      const updatedFaves = faves
+      updatedFaves.splice(indexFavouritedId, 1)
+      setFavourites(updatedFaves)
     }
-
-    return { faves, isFaved, handdleFavourited }
   }
   return (
     <FavouritedContext.Provider
-      value={{ isFaved, faves, setFavouritedArray: handdleFavourited }}
+      value={{ isFaved, faves, setFavourites: handdleFavourited }}
     >
       {children}
     </FavouritedContext.Provider>

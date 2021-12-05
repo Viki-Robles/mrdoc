@@ -1,5 +1,6 @@
 import React from 'react'
 import { Flex } from 'theme-ui'
+import { useFavourite } from '../Favourite/FavouriteProvider'
 import { Doctor } from '../../types/doctors'
 import { DoctorItem } from '../DoctorItem/DoctorItem'
 
@@ -10,6 +11,7 @@ export interface DoctorsGalleryItemsProps {
 export const DoctorsGalleryItems = ({
   data,
 }: DoctorsGalleryItemsProps): JSX.Element => {
+  // const { isFaved } = useFavourite()
   return (
     <Flex sx={{ gap: 4, flexWrap: 'wrap' }}>
       {data &&

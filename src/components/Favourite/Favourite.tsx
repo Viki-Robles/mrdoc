@@ -5,12 +5,15 @@ interface FavouriteProps {
   doctor_id: string
 }
 export const Favourite = ({ doctor_id }: FavouriteProps): JSX.Element => {
-  const { isFaved, setFavouritedArray } = useFavourite()
+  const { isFaved, setFavourites } = useFavourite()
   const favouriteDoctor = isFaved(doctor_id)
 
+  const handleToggleFave = (): void => {
+    setFavourites(doctor_id)
+  }
   return (
-    <button onClick={setFavouritedArray}>
-      {!favouriteDoctor ? 'isFavourite' : 'is not'}
+    <button onClick={handleToggleFave}>
+      {favouriteDoctor ? 'isFavourite' : 'is not'}
     </button>
   )
 }

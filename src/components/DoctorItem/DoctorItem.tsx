@@ -77,7 +77,7 @@ export const DoctorItem = ({
         <Button variant="buttons.call">Call</Button>
         <Button variant="buttons.mail">Mail</Button>
       </Flex>
-      {/* <Favourite doctor_id={doctor_id} /> */}
+      <Favourite doctor_id={doctor_id} />
     </Grid>
   )
 }
