@@ -8,7 +8,7 @@ import './NavBar.css'
 
 const LINKS = [
   { label: 'Dashboard', href: '/dashboard', icon: dashboard },
-  { label: 'Treatments', href: '/treatments', icon: doctor },
+  { label: 'Doctors', href: '/treatments', icon: doctor },
   { label: 'Appointments', href: '/bookings', icon: booking },
 ]
 
