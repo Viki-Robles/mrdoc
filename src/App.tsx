@@ -12,7 +12,6 @@ import {
   DOCTOR_PROFILE_PAGE_PATH,
   TREATMENTS_PAGE_PATH,
 } from './config/paths'
-import { FavouriteProvider } from './components/Favourite/FavouriteProvider'
 
 const NotFound = lazy(() => import('./components/NotFound/NotFound'))
 const SignUp = lazy(() => import('./components/SignUp/SignUp'))

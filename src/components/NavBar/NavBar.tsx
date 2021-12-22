@@ -1,33 +1,40 @@
 import React from 'react'
-import './NavBar.css'
 import { Link } from 'react-router-dom'
-import booking from './images/booking.svg'
-import contract from './images/contract.svg'
-import doctor from './images/doctor.svg'
+import booking from './images/appointment.svg'
+import payment from './images/payment.svg'
+import doctor from './images/doctors.svg'
 import dashboard from './images/dashboard.svg'
-import { Image } from 'theme-ui'
+import './NavBar.css'
 
 const LINKS = [
   { label: 'Dashboard', href: '/dashboard', icon: dashboard },
   { label: 'Treatments', href: '/treatments', icon: doctor },
-  { label: 'Bookings', href: '/bookings', icon: booking },
-  { label: 'Contract', href: '/contract', icon: contract },
+  { label: 'Appointments', href: '/bookings', icon: booking },
 ]
+
+const FILES = [{ label: 'Payment', href: '/payment', icon: payment }]
 
 export default function NavBar(): JSX.Element {
   return (
     <nav className="navbar">
+      <h3 className="nav-header">MEDICINE</h3>
       {LINKS.map(({ label, icon, href }) => {
         return (
           <div className="nav-item" key={label}>
             <Link to={href} className="nav-link">
-              <Image
-                src={icon}
-                sx={{ margin: '0 1.5rem' }}
-                width={30}
-                height={30}
-              />
-              <span className="link-text">{label}</span>
+              <img className="nav-image" src={icon} width={40} height={40} />
+              <div className="link-text">{label}</div>
+            </Link>
+          </div>
+        )
+      })}
+      <h3 className="nav-header">FILES</h3>
+      {FILES.map(({ label, icon, href }) => {
+        return (
+          <div className="nav-item" key={label}>
+            <Link to={href} className="nav-link">
+              <img className="nav-image" src={icon} width={40} height={40} />
+              <div className="link-text">{label}</div>
             </Link>
           </div>
         )

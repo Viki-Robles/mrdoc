@@ -30,6 +30,7 @@ export const DoctorItem = ({
         p: 4,
       }}
     >
+      <Favourite doctor_id={doctor_id} />
       <div>
         <Image width={70} height={70} />
       </div>
@@ -42,7 +43,7 @@ export const DoctorItem = ({
       >
         <Box
           sx={{
-            color: '#7794F5',
+            color: '#5165CF',
             backgroundColor: '#D2DBF9',
             fontWeight: 'medium',
             borderRadius: '20px',
@@ -58,8 +59,8 @@ export const DoctorItem = ({
               display: 'inline-block',
               border: '2px solid',
               borderRadius: '20px',
-              color: '#7794F5',
-              borderColor: '#7794F5',
+              color: '#5165CF',
+              borderColor: '#5165CF',
               backgroundColor: 'bright',
               fontWeight: 'medium',
               textDecoration: 'none',
@@ -77,7 +78,6 @@ export const DoctorItem = ({
         <Button variant="buttons.call">Call</Button>
         <Button variant="buttons.mail">Mail</Button>
       </Flex>
-      <Favourite doctor_id={doctor_id} />
     </Grid>
   )
 }

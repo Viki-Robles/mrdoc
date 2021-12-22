@@ -10,7 +10,6 @@ export interface LayoutProps {
 const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
     <Fragment>
-      <HeroBar />
       <Flex>
         <NavBar />
         <Box>{children}</Box>

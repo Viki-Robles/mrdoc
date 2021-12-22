@@ -1,7 +1,8 @@
 .navbar {
-  background-color: #f8fbff;
+  background-color: white;
   padding-top: 100px;
   height: 100vh;
+  width: 220px;
   z-index: 10;
 }
 
@@ -17,14 +18,25 @@
 .nav-link {
   display: flex;
   text-decoration: none;
-  margin-bottom: 20%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10%;
+  color: #52575c;
 }
-
+.nav-link:visited {
+  color: #52575c;
+}
 .nav-item {
+  display: flex;
+  justify-content: flex-start;
   list-style: none;
 }
 
 .link-text {
-  color: #878ca8;
-  font-weight: bold;
+  color: #52575c;
+  font-weight: 400;
+}
+
+.nav-image {
+  margin: 0 1.5rem;
 }

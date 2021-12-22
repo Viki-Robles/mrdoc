@@ -11,7 +11,6 @@ export interface DoctorsGalleryItemsProps {
 export const DoctorsGalleryItems = ({
   data,
 }: DoctorsGalleryItemsProps): JSX.Element => {
-  // const { isFaved } = useFavourite()
   return (
     <Flex sx={{ gap: 4, flexWrap: 'wrap' }}>
       {data &&
