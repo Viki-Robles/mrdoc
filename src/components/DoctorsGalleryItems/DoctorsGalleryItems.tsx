@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react'
 import { Flex, Input } from 'theme-ui'
 import { Doctor } from '../../types/doctors'
 import { DoctorItem } from '../DoctorItem/DoctorItem'
+import SmallWrapper from '../SmallWrapper/SmallWrapper'
 
 export interface DoctorsGalleryItemsProps {
   data: Doctor[] | undefined
@@ -11,6 +12,7 @@ export const DoctorsGalleryItems = ({
   data,
 }: DoctorsGalleryItemsProps): JSX.Element => {
   const [searchTerm, setSearchTerm] = useState('')
+  const doctorsSum = data?.length
 
   return (
     <Fragment>
@@ -20,11 +22,12 @@ export const DoctorsGalleryItems = ({
           mb: 6,
           backgroundColor: 'bright',
           border: 'transparent',
+          br: 8,
         }}
         placeholder="Search by language..."
         onChange={(event) => setSearchTerm(event.target.value)}
       />
-
+      <SmallWrapper data={doctorsSum} />
       <Flex sx={{ gap: 4, flexWrap: 'wrap' }}>
         {data &&
           data
