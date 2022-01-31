@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Text, Grid } from 'theme-ui'
+import { Box, Flex, Text } from 'theme-ui'
 
 interface SmallWrapperProps {
   data: any
@@ -31,9 +31,9 @@ function SmallWrapper({ data }: SmallWrapperProps): JSX.Element {
       <Text
         sx={{
           alignSelf: 'center',
-          ml: '10px',
           color: '#52575C',
           fontWeight: 'semibold',
+          ml: 2,
         }}
       >
         Doctors

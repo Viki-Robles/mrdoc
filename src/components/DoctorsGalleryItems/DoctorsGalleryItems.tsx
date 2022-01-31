@@ -19,10 +19,10 @@ export const DoctorsGalleryItems = ({
       <Input
         sx={{
           width: '450px',
-          mb: 6,
           backgroundColor: 'bright',
           border: 'transparent',
           br: 8,
+          mb: 6,
         }}
         placeholder="Search by language..."
         onChange={(event) => setSearchTerm(event.target.value)}

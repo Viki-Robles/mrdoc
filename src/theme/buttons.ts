@@ -238,4 +238,17 @@ export const buttons: Theme['buttons'] = {
       variant: 'motion.transitions.all',
     },
   },
+  save: {
+    ...sharedButtonStyles,
+    bg: '#697AF4',
+    borderRadius: '10px',
+    color: '#ffff',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    fontWeight: 'semibold',
+    variant: 'utils.focusVisibleInset',
+    '&': {
+      variant: 'motion.transitions.all',
+    },
+  },
 }

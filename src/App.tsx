@@ -1,7 +1,5 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { SignIn } from './components/SignIn/SignIn'
-import { Dashboard } from './components/Dashboard/Dashboard'
 import { AuthProvider } from './providers/AuthProvider'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import {
@@ -11,15 +9,19 @@ import {
   HOME_PAGE_PATH,
   DOCTOR_PROFILE_PAGE_PATH,
   TREATMENTS_PAGE_PATH,
+  USER_PROFILE_PAGE_PATH,
 } from './config/paths'
 
-const NotFound = lazy(() => import('./components/NotFound/NotFound'))
 const SignUp = lazy(() => import('./components/SignUp/SignUp'))
+const SignIn = lazy(() => import('./components/SignIn/SignIn'))
+const Layout = lazy(() => import('./components/Layout/Layout'))
 const DoctorDashboard = lazy(
   () => import('./components/DoctorDashboard/DoctorDashboard'),
 )
-const Layout = lazy(() => import('./components/Layout/Layout'))
+const Dashboard = lazy(() => import('./components/Dashboard/Dashboard'))
 const Treatments = lazy(() => import('./components/Treatments/Treatments'))
+const UserProfile = lazy(() => import('./components/UserProfile/UserProfile'))
+const NotFound = lazy(() => import('./components/NotFound/NotFound'))
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -57,8 +59,13 @@ function App(): JSX.Element {
                     path={TREATMENTS_PAGE_PATH}
                     component={Treatments}
                   />
+                  <Route
+                    exact
+                    path={USER_PROFILE_PAGE_PATH}
+                    component={UserProfile}
+                  />
                 </Layout>
-                <Route exact path="*" component={NotFound} />
+                <Route path="*" component={NotFound} />
               </Switch>
             </Router>
           </Suspense>
