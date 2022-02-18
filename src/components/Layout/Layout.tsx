@@ -1,5 +1,6 @@
 import React, { Fragment, ReactNode } from 'react'
-import { Box, Flex } from 'theme-ui'
+import { Flex } from 'theme-ui'
+import { useUserContext } from '../../providers/AuthProvider'
 import NavBar from '../NavBar/NavBar'
 import WrapperContainer from '../WrapperContainer/WrapperContainer'
 
@@ -8,10 +9,11 @@ export interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
+  const { isLoading } = useUserContext()
   return (
     <Fragment>
       <Flex>
-        <NavBar />
+        <NavBar isLoading={isLoading} />
         <WrapperContainer>{children}</WrapperContainer>
       </Flex>
     </Fragment>

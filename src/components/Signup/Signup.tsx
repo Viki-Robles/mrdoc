@@ -41,6 +41,7 @@ const SignUp = ({ sx }: SignUpProps): JSX.Element => {
     <FormWrapper title="Create account" sx={{ ...sx }}>
       <Formik
         initialValues={{
+          username: '',
           email: '',
           password: '',
           repeatPassword: '',
@@ -64,6 +65,13 @@ const SignUp = ({ sx }: SignUpProps): JSX.Element => {
       >
         {({ getFieldProps }) => (
           <Form>
+            <FormGroup label="Username" name="username">
+              <Input
+                sx={{ borderColor: 'rgb(209, 218, 230)' }}
+                {...getFieldProps('username')}
+                id="username"
+              />
+            </FormGroup>
             <FormGroup label="Email address" name="email">
               <Input
                 sx={{ borderColor: 'rgb(209, 218, 230)' }}

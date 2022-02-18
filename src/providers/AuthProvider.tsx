@@ -5,7 +5,7 @@ import React, {
   useContext,
   createContext,
 } from 'react'
-import { auth } from '../config/firebase'
+import { auth, db } from '../config/firebase'
 import {
   Auth,
   UserCredential,
@@ -13,9 +13,13 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  updateEmail,
+  UserInfo,
 } from 'firebase/auth'
 import { MrDocRoles, MrDocContactType } from '../types/mrDocRoles'
 import { MrDocUser } from '../types/users'
+import { collection } from '@firebase/firestore'
+import { addDoc } from 'firebase/firestore'
 
 export interface AuthProviderProps {
   children?: ReactNode
@@ -24,7 +28,7 @@ export interface AuthProviderProps {
 export interface UserContextState {
   isAuthenticated: boolean
   isLoading: boolean
-  user?: MrDocUser
+  user: MrDocUser
   id?: string
   role?: MrDocRoles
   contactType?: MrDocContactType
@@ -35,10 +39,11 @@ export const UserStateContext = createContext<UserContextState>(
 )
 export interface AuthContextModel {
   auth: Auth
-  user: User | null
+  user: User | null | undefined
   signIn: (email: string, password: string) => Promise<UserCredential>
-  signUp: (email: string, password: string) => Promise<UserCredential>
+  signUp: (email: string, password: string) => Promise<void>
   sendPasswordResetEmail?: (email: string) => Promise<void>
+  updateEmail?: (email: string) => Promise<void>
 }
 
 export const AuthContext = React.createContext<AuthContextModel>(
@@ -50,10 +55,22 @@ export function useAuth(): AuthContextModel {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User | null | undefined>()
 
-  function signUp(email: string, password: string): Promise<UserCredential> {
-    return createUserWithEmailAndPassword(auth, email, password)
+  async function signUp(email: string, password: string): Promise<void> {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password)
+      const user = res.user
+      await addDoc(collection(db, 'users'), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: 'local',
+        email: user.email,
+      })
+    } catch (err) {
+      console.error(err)
+      alert(err)
+    }
   }
 
   function signIn(email: string, password: string): Promise<UserCredential> {
@@ -61,6 +78,10 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   }
   function resetPassword(email: string): Promise<void> {
     return sendPasswordResetEmail(auth, email)
+  }
+
+  function updateUserEmail(newEmail: string, user: User): Promise<void> {
+    return updateEmail(user, newEmail)
   }
   useEffect(() => {
     //function that firebase notifies you if a user is set
@@ -75,6 +96,7 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
     user,
     signIn,
     resetPassword,
+    updateUserEmail,
     auth,
   }
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>

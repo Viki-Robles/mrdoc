@@ -8,6 +8,8 @@ import { DASHBOARD_PAGE_PATH, SIGN_UP_PAGE_PATH } from '../../config/paths'
 import { useAuth } from '../../providers/AuthProvider'
 import { FormGroup } from '../../components/FormGroup/FormGroup'
 import { FormWrapper } from '../FormWrapper/FormWrapper'
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
+import { db } from '../../config/firebase'
 
 export interface SignInProps {
   sx?: ThemeUIStyleObject
@@ -39,7 +41,21 @@ const SignIn = ({ sx }: SignInProps): JSX.Element => {
         onSubmit={async (values: SignInFormValues) => {
           setFormSubmitting(true)
           try {
-            await signIn(values.email, values.password)
+            const res = await signIn(values.email, values.password)
+            const user = res.user
+            const q = query(
+              collection(db, 'users'),
+              where('uid', '==', user.uid),
+            )
+            const docs = await getDocs(q)
+            if (docs.docs.length === 0) {
+              await addDoc(collection(db, 'users'), {
+                uid: user.uid,
+                name: user.displayName,
+                authProvider: 'google',
+                email: user.email,
+              })
+            }
             history.push(DASHBOARD_PAGE_PATH)
           } catch (error: unknown) {
             let errorMessage = 'error.unknown'

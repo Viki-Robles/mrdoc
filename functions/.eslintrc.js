@@ -1,53 +1,29 @@
 module.exports = {
-  parser: '@typescript-eslint/parser', // Specifies the ESLint parser
-  plugins: ['prettier', '@typescript-eslint', 'react'],
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
+  root: true,
   env: {
-    browser: true,
-    node: true,
     es6: true,
-    jest: true,
+    node: true,
   },
-  globals: {
-    cy: true,
-  },
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module', // Allows for the use of imports
-  },
-  rules: {
-    'react/prop-types': 'off', // Disable prop-types as we use TypeScript for type checking
-    'react/display-name': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'auto',
-      },
-    ],
-  },
-  overrides: [
-    // Override some TypeScript rules just for .js files
-    {
-      files: ['*.js'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off', //
-      },
-    },
+  extends: [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "google",
   ],
-}
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: ["tsconfig.json", "tsconfig.dev.json"],
+    sourceType: "module",
+  },
+  ignorePatterns: [
+    "/lib/**/*", // Ignore built files.
+  ],
+  plugins: [
+    "@typescript-eslint",
+    "import",
+  ],
+  rules: {
+    quotes: ["error", "double"],
+  },
+};

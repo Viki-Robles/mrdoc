@@ -14,4 +14,3 @@ const Dashboard = (doctor_id: string): JSX.Element => {
 }
 
 export default Dashboard
-// AIzaSyDOqxeYk8c8lZgzfowR4iITzPcdsUybkLI

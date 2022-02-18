@@ -35,9 +35,9 @@ export const queryClient = new QueryClient({
 function App(): JSX.Element {
   return (
     <div className="App">
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <Suspense fallback={'Loading'}>
+      <Suspense fallback={'Loading'}>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
             <Router>
               <Switch>
                 <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
@@ -68,9 +68,9 @@ function App(): JSX.Element {
                 <Route path="*" component={NotFound} />
               </Switch>
             </Router>
-          </Suspense>
-        </AuthProvider>
-      </QueryClientProvider>
+          </AuthProvider>
+        </QueryClientProvider>
+      </Suspense>
     </div>
   )
 }
