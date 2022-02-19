@@ -9,21 +9,28 @@ function SmallWrapper({ data }: SmallWrapperProps): JSX.Element {
   return (
     <Flex
       sx={{
+        display: 'flex',
         width: '200px',
-        height: '50px',
-        bg: 'bright',
+        height: '60px',
+        border: 'transparent',
+        borderRadius: 6,
+        bg: '#343B96',
+        padding: 3,
         mb: 6,
       }}
     >
       <Box
         sx={{
-          bg: '#E7EFFC',
-          color: '#5165CF',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           width: '40px',
-          alignSelf: 'center',
-          padding: '5px',
-          fontWeight: 'normal',
-          borderRadius: '5px',
+          height: '40px',
+          color: '#5165CF',
+          fontSize: 5,
+          fontWeight: 'bold',
+          borderRadius: 8,
+          bg: '#E7EFFC',
         }}
       >
         {data}
@@ -31,8 +38,9 @@ function SmallWrapper({ data }: SmallWrapperProps): JSX.Element {
       <Text
         sx={{
           alignSelf: 'center',
-          color: '#52575C',
           fontWeight: 'semibold',
+          fontSize: 5,
+          color: 'bright',
           ml: 2,
         }}
       >
