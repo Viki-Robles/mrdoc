@@ -28,21 +28,7 @@
 .nav-link:visited {
   color: #52575c;
 }
-.nav-item {
-  display: flex;
-  justify-content: flex-start;
-  list-style: none;
-}
-
-.link-text {
-  color: #52575c;
-  font-weight: 400;
-}
 
 .nav-image {
   margin: 0 1.5rem;
-}
-
-.nav-header {
-  text-align: center;
 }

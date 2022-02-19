@@ -7,6 +7,8 @@ const bright = '#fff'
 const dark = '#000'
 const purple = '#a855f7'
 const purpleDark = '#6d28d9'
+const doctorInner = '#D2DBF9'
+const doctorOuter = '#5165CF'
 
 export const chartColors = [
   '#00beff',

@@ -3,7 +3,7 @@ import { Box } from 'theme-ui'
 import { useFetchDoctorsById } from '../../hooks/useFetchDoctorsById/useFetchDoctorsById'
 import { useParams } from 'react-router-dom'
 
-const DoctorDashboard = (): JSX.Element | null => {
+const DoctorProfile = (): JSX.Element | null => {
   const { doctor_id } = useParams<{
     doctor_id: string
   }>()
@@ -21,4 +21,4 @@ const DoctorDashboard = (): JSX.Element | null => {
   return null
 }
 
-export default DoctorDashboard
+export default DoctorProfile
