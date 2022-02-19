@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Flex, Text, Grid, Image } from 'theme-ui'
+import { Box, Flex, Text, Grid, Image } from 'theme-ui'
 import { Link } from 'react-router-dom'
 import { DOCTOR_PROFILE_PAGE_PATH } from '../../config/paths'
 import { Favourite } from '../Favourite/Favourite'
