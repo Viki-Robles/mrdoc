@@ -14,13 +14,11 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   updateEmail,
-  getAuth,
 } from 'firebase/auth'
 import { MrDocRoles, MrDocContactType } from '../types/mrDocRoles'
 import { MrDocUser } from '../types/users'
 import { collection } from '@firebase/firestore'
 import { addDoc } from 'firebase/firestore'
-// import admin from 'firebase-admin'
 
 export interface AuthProviderProps {
   children?: ReactNode
@@ -93,7 +91,6 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
     return updateEmail(user, newEmail)
   }
   useEffect(() => {
-    //function that firebase notifies you if a user is set
     const unsubsrcibe = auth.onAuthStateChanged((user) => {
       setUser(user)
     })
