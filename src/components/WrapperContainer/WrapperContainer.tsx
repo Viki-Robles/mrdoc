@@ -6,7 +6,24 @@ interface WrapperContainerProps {
 }
 
 const WrapperContainer = ({ children }: WrapperContainerProps): JSX.Element => {
-  return <Box sx={{ mt: 9, ml: 10, mr: 8 }}>{children}</Box>
+  return (
+    <Box
+      sx={{
+        width: '100%',
+        mr: 4,
+        mt: 5,
+        ml: 2,
+        mb: 5,
+        borderRadius: '2%',
+        border: '1px solid',
+        borderColor: '#f3f8ff',
+        backgroundColor: '#f3f8ff',
+        padding: 4,
+      }}
+    >
+      {children}
+    </Box>
+  )
 }
 
 export default WrapperContainer

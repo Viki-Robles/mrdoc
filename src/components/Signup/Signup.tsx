@@ -14,6 +14,7 @@ interface SignUpFormValues {
   email: string
   password: string
   repeatPassword: string
+  displayName: string
 }
 
 const SignUpSchema = Yup.object().shape({
@@ -41,7 +42,7 @@ const SignUp = ({ sx }: SignUpProps): JSX.Element => {
     <FormWrapper title="Create account" sx={{ ...sx }}>
       <Formik
         initialValues={{
-          username: '',
+          displayName: '',
           email: '',
           password: '',
           repeatPassword: '',
@@ -49,7 +50,7 @@ const SignUp = ({ sx }: SignUpProps): JSX.Element => {
         onSubmit={async (values: SignUpFormValues) => {
           setFormSubmitting(true)
           try {
-            await signUp(values.email, values.password)
+            await signUp(values.displayName, values.email, values.password)
             try {
               history.push(DASHBOARD_PAGE_PATH)
             } catch (error) {
@@ -65,11 +66,11 @@ const SignUp = ({ sx }: SignUpProps): JSX.Element => {
       >
         {({ getFieldProps }) => (
           <Form>
-            <FormGroup label="Username" name="username">
+            <FormGroup label="Username" name="displayName">
               <Input
                 sx={{ borderColor: 'rgb(209, 218, 230)' }}
-                {...getFieldProps('username')}
-                id="username"
+                {...getFieldProps('displayName')}
+                id="displayName"
               />
             </FormGroup>
             <FormGroup label="Email address" name="email">

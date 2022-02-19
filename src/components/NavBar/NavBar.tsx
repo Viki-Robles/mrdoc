@@ -22,26 +22,22 @@ const FILES = [{ label: 'Payment', href: '/payment', icon: payment }]
 export default function NavBar({ isLoading }: NavBarProps): JSX.Element {
   return (
     <nav className="navbar">
-      <h3 className="nav-header">MEDICINE</h3>
       {!isLoading &&
         LINKS.map(({ label, icon, href }) => {
           return (
             <div className="nav-item" key={label}>
               <Link to={href} className="nav-link">
                 <img className="nav-image" src={icon} width={40} height={40} />
-                <div className="link-text">{label}</div>
               </Link>
             </div>
           )
         })}
-      <h3 className="nav-header">FILES</h3>
       {!isLoading &&
         FILES.map(({ label, icon, href }) => {
           return (
             <div className="nav-item" key={label}>
               <Link to={href} className="nav-link">
                 <img className="nav-image" src={icon} width={40} height={40} />
-                <div className="link-text">{label}</div>
               </Link>
             </div>
           )

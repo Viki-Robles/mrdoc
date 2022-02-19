@@ -17,7 +17,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "noImplicitAny": false,
-    "jsx": "react-jsx"
+    "jsx": "react"
   },
-  "include": ["src", "graphql"]
+  "include": ["src"]
 }

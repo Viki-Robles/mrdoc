@@ -24,7 +24,7 @@ export const DoctorsGalleryItems = ({
           br: 8,
           mb: 6,
         }}
-        placeholder="Search by language..."
+        placeholder="Search"
         onChange={(event) => setSearchTerm(event.target.value)}
       />
       <SmallWrapper data={doctorsSum} />
