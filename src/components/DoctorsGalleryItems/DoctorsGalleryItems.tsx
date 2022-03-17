@@ -3,7 +3,6 @@ import { Flex, Input, Box } from 'theme-ui'
 import { Doctor } from '../../types/doctors'
 import { DoctorItem } from '../DoctorItem/DoctorItem'
 import SmallWrapper from '../SmallWrapper/SmallWrapper'
-import { UserProfile } from '../UserProfile/UserProfile'
 
 export interface DoctorsGalleryItemsProps {
   data: Doctor[] | undefined

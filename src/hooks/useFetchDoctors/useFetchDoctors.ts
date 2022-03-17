@@ -8,7 +8,7 @@ import { DoctorsDataModel } from '../../types/doctors'
  * @description
  */
 
-export const useFetchDoctors = () => {
+export const useFetchDoctors = (): Record<string, any> => {
   const getDoctorsData = useGqlQuery<DoctorsDataModel>(
     'getDoctorsData',
     GET_ALL_DOCTORS,
@@ -18,7 +18,5 @@ export const useFetchDoctors = () => {
     () => getDoctorsData?.data?.doctors,
     [getDoctorsData],
   )
-  return {
-    doctorsData,
-  }
+  return { doctorsData }
 }

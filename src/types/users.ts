@@ -8,6 +8,7 @@ export enum AccountStatus {
 
 export interface MrDocUser {
   id: string
+  uid: string
   first_name: string
   last_name: string
   contact_number: string | null

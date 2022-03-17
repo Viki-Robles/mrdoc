@@ -58,7 +58,7 @@ export function useAuth(): AuthContextModel {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
-  const [user, setUser] = useState<User | null | undefined>()
+  const [user, setUser] = useState<User>()
 
   const signUp = async (
     displayName: string,
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
       const user = res.user
       await addDoc(collection(db, 'users'), {
         uid: user?.uid,
-        displayName,
+        displayName: user?.displayName,
         authProvider: 'local',
         email: user?.email,
       })
@@ -90,9 +90,12 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   function updateUserEmail(newEmail: string, user: User): Promise<void> {
     return updateEmail(user, newEmail)
   }
+
   useEffect(() => {
     const unsubsrcibe = auth.onAuthStateChanged((user) => {
-      setUser(user)
+      if (user) {
+        setUser(user)
+      }
     })
     return unsubsrcibe
   }, [])

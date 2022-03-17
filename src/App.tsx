@@ -22,6 +22,7 @@ const Dashboard = lazy(() => import('./components/Dashboard/Dashboard'))
 const Treatments = lazy(() => import('./components/Treatments/Treatments'))
 const Account = lazy(() => import('./components/Account/Account'))
 const NotFound = lazy(() => import('./components/NotFound/NotFound'))
+const Loader = lazy(() => import('./components/Loader/Loader'))
 
 export const queryClient = new QueryClient({
   defaultOptions: {

@@ -74,10 +74,6 @@ export const DoctorItem = ({
       </Flex>
       <Text>Languages</Text>
       <Text>{languages}</Text>
-      {/* <Flex sx={{ justifyContent: 'space-between' }}>
-        <Button variant="buttons.call">Call</Button>
-        <Button variant="buttons.mail">Mail</Button>
-      </Flex> */}
     </Grid>
   )
 }

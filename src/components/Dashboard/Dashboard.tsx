@@ -1,31 +1,52 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { getDocs, collection, DocumentData } from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
 import { useFetchDoctors } from '../../hooks/useFetchDoctors/useFetchDoctors'
 import { DoctorsGalleryItems } from '../DoctorsGalleryItems/DoctorsGalleryItems'
 import { FavouriteProvider } from '../Favourite/FavouriteProvider'
 import { UserProfile } from '../UserProfile/UserProfile'
 import { Box } from 'theme-ui'
-import { getAuth } from '@firebase/auth'
-import { db } from '../../config/firebase'
 
-const Dashboard = (doctor_id: string): JSX.Element => {
+interface DashboardProps {
+  doctor_id: string
+}
+
+const Dashboard = ({ doctor_id }: DashboardProps): JSX.Element | null => {
+  const [users, setUsers] = useState<DocumentData>([])
   const { doctorsData } = useFetchDoctors()
-  const { currentUser } = getAuth()
 
-  // const getUsersDisplayName = (next, fallback) => {
-  //   const user = getAuth().onAuthStateChanged((authUser) => {
-  //     if (authUser) {
-  //       const dbUser = db.coll
-  //     }
-  //   })
-  // }
+  useEffect(() => {
+    ;(async () => {
+      const db = getFirestore()
+      const userRef = collection(db, 'users')
+      const users: any = []
+
+      try {
+        const snapshot = await getDocs(userRef)
+        snapshot.docs.forEach((doc) => {
+          users.push({
+            ...doc.data(),
+            id: doc.id,
+          })
+        })
+        setUsers(users)
+        console.log('userData:', users)
+      } catch (err: any) {
+        console.log(err.message)
+      }
+    })()
+  }, [])
 
   return (
     <FavouriteProvider doctor_id={doctor_id}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <DoctorsGalleryItems data={doctorsData} />
+        {users &&
+          users?.map(({ displayName }) => (
+            <div key={displayName}>{displayName}</div>
+          ))}
         <Box>
           <UserProfile />
-          <Box> {currentUser?.displayName}</Box>
         </Box>
       </Box>
     </FavouriteProvider>
@@ -33,32 +54,3 @@ const Dashboard = (doctor_id: string): JSX.Element => {
 }
 
 export default Dashboard
-
-// class Firebase {
-//   constructor() {
-//     app.initializeApp(config).firestore();
-//     /* helpers */
-//     this.fieldValue = app.firestore.FieldValue;
-
-//     /* Firebase APIs */
-//     this.auth = app.auth();
-//     this.db = app.firestore();
-
-// onAuthUserListener = (next, fallback) =>
-//     this.auth.onAuthStateChanged(authUser => {
-//       if (authUser) {
-//            this.db.collection('users').doc(authUser.uid)
-//               .get()
-//               .then(snapshot => {
-//                 const userData = snapshot.data();
-//                 console.log(userData);
-//                 //Do whatever you need with userData
-//                 //i.e. merging it with authUser
-//                 //......
-
-//                 next(authUser);
-//           });
-//       } else {
-//         fallback();
-//       }
-//     });
