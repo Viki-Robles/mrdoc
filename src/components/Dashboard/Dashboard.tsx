@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { getAuth } from 'firebase/auth'
 import { getDocs, collection, DocumentData } from 'firebase/firestore'
 import { getFirestore } from 'firebase/firestore'
 import { useFetchDoctors } from '../../hooks/useFetchDoctors/useFetchDoctors'
@@ -30,12 +31,19 @@ const Dashboard = ({ doctor_id }: DashboardProps): JSX.Element | null => {
           })
         })
         setUsers(users)
-        console.log('userData:', users)
+        // console.log('userData:', users)
       } catch (err: any) {
         console.log(err.message)
       }
     })()
   }, [])
+
+  // const auth = getAuth()
+  // const user = auth.currentUser
+  // if (user !== null) {
+  //   // The user object has basic properties such as display name, email, etc.
+  //   const displayName = user.displayName
+  // }
 
   return (
     <FavouriteProvider doctor_id={doctor_id}>
@@ -45,9 +53,8 @@ const Dashboard = ({ doctor_id }: DashboardProps): JSX.Element | null => {
           users?.map(({ displayName }) => (
             <div key={displayName}>{displayName}</div>
           ))}
-        <Box>
-          <UserProfile />
-        </Box>
+
+        <UserProfile />
       </Box>
     </FavouriteProvider>
   )
