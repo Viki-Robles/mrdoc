@@ -25,7 +25,7 @@ const SignInSchema = Yup.object().shape({
   password: Yup.string().required('Required').min(8).max(200),
 })
 
-const SignIn = ({ sx }: SignInProps): JSX.Element => {
+function SignIn({ sx }: SignInProps): JSX.Element {
   const { signIn } = useAuth()
   const [formSubmitting, setFormSubmitting] = useState<boolean>(false)
   const [formError, setFormError] = useState<string>('')

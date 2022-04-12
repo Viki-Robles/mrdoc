@@ -12,8 +12,8 @@ import {
   USER_PROFILE_PAGE_PATH,
 } from './config/paths'
 
-const SignUp = lazy(() => import('./components/SignUp/SignUp'))
 const SignIn = lazy(() => import('./components/SignIn/SignIn'))
+const SignUp = lazy(() => import('./components/SignUp/SignUp'))
 const Layout = lazy(() => import('./components/Layout/Layout'))
 const DoctorProfile = lazy(
   () => import('./components/DoctorProfile/DoctorProfile'),
@@ -22,7 +22,6 @@ const Dashboard = lazy(() => import('./components/Dashboard/Dashboard'))
 const Treatments = lazy(() => import('./components/Treatments/Treatments'))
 const Account = lazy(() => import('./components/Account/Account'))
 const NotFound = lazy(() => import('./components/NotFound/NotFound'))
-const Loader = lazy(() => import('./components/Loader/Loader'))
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,9 +35,9 @@ export const queryClient = new QueryClient({
 function App(): JSX.Element {
   return (
     <div className="App">
-      <Suspense fallback={'Loading'}>
-        <QueryClientProvider client={queryClient}>
-          <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <Suspense fallback={'Loading'}>
             <Router>
               <Switch>
                 <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
@@ -69,9 +68,9 @@ function App(): JSX.Element {
                 <Route path="*" component={NotFound} />
               </Switch>
             </Router>
-          </AuthProvider>
-        </QueryClientProvider>
-      </Suspense>
+          </Suspense>
+        </AuthProvider>
+      </QueryClientProvider>
     </div>
   )
 }

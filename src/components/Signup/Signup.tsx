@@ -32,7 +32,7 @@ export interface SignUpProps {
   sx?: ThemeUIStyleObject
 }
 
-const SignUp = ({ sx }: SignUpProps): JSX.Element => {
+function SignUp({ sx }: SignUpProps): JSX.Element {
   const { signUp } = useAuth()
   const [formError, setFormError] = useState<string>('')
   const [formSubmitting, setFormSubmitting] = useState<boolean>(false)
