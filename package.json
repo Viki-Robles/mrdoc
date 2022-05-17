@@ -130,7 +130,6 @@
     "eslint-plugin-react": "^7.23.2",
     "jest": "^27.2.4",
     "postcss": "^8.3.5",
-    "prettier": "2.4.1",
-    "ts-loader": "^9.2.6"
+    "prettier": "2.4.1"
   }
 }

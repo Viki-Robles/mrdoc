@@ -16,7 +16,6 @@ import {
   updateEmail,
 } from 'firebase/auth'
 import { MrDocRoles, MrDocContactType } from '../types/mrDocRoles'
-import { MrDocUser } from '../types/users'
 import { collection } from '@firebase/firestore'
 import { addDoc } from 'firebase/firestore'
 
@@ -27,7 +26,7 @@ export interface AuthProviderProps {
 export interface UserContextState {
   isAuthenticated: boolean
   isLoading: boolean
-  user: MrDocUser
+  user: User
   id?: string
   role?: MrDocRoles
   contactType?: MrDocContactType
@@ -70,7 +69,7 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
       const user = res.user
       await addDoc(collection(db, 'users'), {
         uid: user?.uid,
-        displayName: user?.displayName,
+        displayName,
         authProvider: 'local',
         email: user?.email,
       })

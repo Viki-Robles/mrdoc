@@ -11,6 +11,7 @@ export interface MrDocUser {
   uid: string
   first_name: string
   last_name: string
+  displayName: string | null
   contact_number: string | null
   profileImageUrl?: string | null
   email?: string | null
