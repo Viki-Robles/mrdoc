@@ -16,7 +16,7 @@ export const styles: Record<string, ThemeUIStyleObject> = {
     fontSize: 3,
     scrollBehavior: 'smooth',
     overflowY: 'scroll',
-    bg: 'transparent',
+    bg: '#f3f8ff',
 
     b: {
       fontWeight: 'medium',

@@ -1,56 +1,52 @@
 import React, { useState, useEffect } from 'react'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import {
-  doc,
-  getDocs,
-  getDoc,
-  DocumentData,
-  where,
-  query,
-  getDocFromServer,
-  getFirestore,
-} from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
+import { doc, getDoc, getFirestore } from 'firebase/firestore'
 import { useFetchDoctors } from '../../hooks/useFetchDoctors/useFetchDoctors'
 import { DoctorsGalleryItems } from '../DoctorsGalleryItems/DoctorsGalleryItems'
 import { FavouriteProvider } from '../Favourite/FavouriteProvider'
 import { UserProfile } from '../UserProfile/UserProfile'
 import { Box } from 'theme-ui'
 import { collection } from 'firebase/firestore'
-// import { useUserContext } from '../../providers/AuthProvider'
-// import { auth, db } from '../../config/firebase'
+import { useUserContext } from '../../providers/AuthProvider'
 
 interface DashboardProps {
   doctor_id: string
 }
 
 const Dashboard = ({ doctor_id }: DashboardProps): JSX.Element | null => {
-  const [users, setUsers] = useState([])
-  // const { doctorsData } = useFetchDoctors()
+  const [userDisplayName, setUserDisplayName] = useState('')
+  const { doctorsData } = useFetchDoctors()
+  const { user } = useUserContext()
 
-  useEffect(() => {
-    ;(async () => {
-      const db = getFirestore()
-      const collectionRef = collection(db, 'users')
-      const user = getAuth().currentUser?.uid
-      const docRef = doc(collectionRef, 'users', (user as string) || '')
-      const docSnap = await getDoc(docRef)
+  // useEffect(() => {
+  //   ;(async () => {
+  //     const db = getFirestore()
+  //     // get user's uid
+  //     const currentUserUid = getAuth().currentUser?.uid
 
-      docSnap.get('users').then((user) => {
-        if (user.exists()) {
-          user.data()
-          console.log('doc:', user.data())
-        }
-      })
-    })()
-  }, [])
+  //     const collectionRef = collection(db, 'users')
+  //     const docRef = doc(collectionRef, 'users', currentUserUid as string)
+  //     console.log('document', docRef)
+  //     const docSnap = await getDoc(docRef)
 
-  // const user = getAuth()?.currentUser?.uid
+  //     if (user) {
+  //       docSnap.get('users').then((user) => {
+  //         if (currentUserUid) {
+  //           user.data()
+  //           console.log('doc:', user.data())
+  //         }
+  //       })
+  //     }
+  //   })()
+  // })
+
+  // const user = getAuth()?.currentUserUid?.uid
   //https://firebase.google.com/docs/database/web/read-and-write
   return (
     <FavouriteProvider doctor_id={doctor_id}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        {/* <DoctorsGalleryItems data={doctorsData} /> */}
-        {JSON.stringify(users)}
+        <DoctorsGalleryItems data={doctorsData} />
+
         <UserProfile />
       </Box>
     </FavouriteProvider>
@@ -58,33 +54,6 @@ const Dashboard = ({ doctor_id }: DashboardProps): JSX.Element | null => {
 }
 
 export default Dashboard
-
-// useEffect(() => {
-//   ;(async () => {
-//     const users: any = []
-//     const db = getFirestore()
-//     const userRef = collection(db, 'users')
-//     // const userName = getAuth().currentUser?.displayName
-//     // const userDocument = query(userRef, where('displayName', '==', userName))
-//     // console.log('name', userName)
-//     try {
-//       const snapshot = await getDocs(userRef)
-//       console.log(users)
-//       snapshot.docs.forEach((doc) => {
-//         const { displayName } = doc.data()
-//         users.push({
-//           ...doc.data(),
-//           id: doc.id,
-//           displayName,
-//         })
-//       })
-//       console.log(users)
-//       setUsers(users)
-//     } catch (err: any) {
-//       console.log(err.message)
-//     }
-//   })()
-// }, [])
 
 // const auth = getAuth()
 //   onAuthStateChanged(auth, (user) => {

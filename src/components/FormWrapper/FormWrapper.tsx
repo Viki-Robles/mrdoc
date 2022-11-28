@@ -27,7 +27,7 @@ export const FormWrapper = ({
         backgroundColor: '#ffff',
         boxShadow: 'xl',
         width: 'fit-content',
-        p: '2em',
+        p: '1em 3em',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
