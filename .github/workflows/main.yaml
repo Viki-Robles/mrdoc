@@ -1,5 +1,4 @@
 name: build & lint & prettier
-run-name: ${{ github.actor }} is learning GitHub Actions
 on:
   push:
     branches:    
@@ -20,5 +19,4 @@ jobs:
   lint:
     steps:
     runs-on: ubuntu-latest
-      - uses: actions/checkout@v3
       - lint: yarn run lint
