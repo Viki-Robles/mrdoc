@@ -1,22 +1,27 @@
-name: build & lint & prettier
-on:
-  push:
-    branches:    
-      - master
+name: master preview
+
 jobs:
-  set-up-environment:
+  build_and_preview:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+      - name: Checkout code
         with:
           node-version: '16'
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - build: yarn run build
+      - name: Build
+        run: yarn run build
   lint:
-    steps:
     runs-on: ubuntu-latest
-      - lint: yarn run lint
+    steps:
+      - name: Lint
+        run: yarn run lint
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prettier
+        run: yarn run prettier
