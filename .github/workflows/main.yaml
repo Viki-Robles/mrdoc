@@ -1,32 +1,37 @@
 name: master preview
-on: [push]
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
-  build_and_preview:
+  run-linters:
+    name: Lint & Jest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - name: Checkout code
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: '16'
+          node-version: v16.6.1
+      - name: Install dependencies
+        run: yarn --prefer-offline
+      - name: Run linters
+        run: yarn lint
+      - name: Test
+        run: yarn test
   build:
     runs-on: ubuntu-latest
+    name: Build and Test
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - name: Build
-      - run: yarn run build
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - name: Lint
-      - run: yarn run lint
-  prettier:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - name: Prettier
-      - run: yarn run prettier
+      - uses: actions/checkout@v2
+        name: Check out repository
+      - uses: actions/setup-node@v1
+        name: Set up Node.js
+        with:
+          node-version: 16.10.0
