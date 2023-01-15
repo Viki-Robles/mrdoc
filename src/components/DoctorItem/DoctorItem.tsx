@@ -3,6 +3,7 @@ import { Box, Flex, Text, Grid, Image } from 'theme-ui'
 import { Link } from 'react-router-dom'
 import { DOCTOR_PROFILE_PAGE_PATH } from '../../config/paths'
 import { Favourite } from '../Favourite/Favourite'
+import avatar from '../../images/avatar.png'
 
 export interface DoctorItemProps {
   first_name?: string
@@ -32,7 +33,7 @@ export const DoctorItem = ({
     >
       <Favourite doctor_id={doctor_id} />
       <div>
-        <Image width={70} height={70} />
+        <Image src={avatar} variant="images.avatar" />
       </div>
       <Text sx={{ color: 'neutral.980', fontWeight: 'bold', pt: 6 }}>
         Dr. {`${first_name} ${last_name}`}

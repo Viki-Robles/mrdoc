@@ -14,7 +14,7 @@ export interface Doctor {
   avatar?: string
 }
 
-export interface LanguageDataModel {
+export interface Languages {
   language_name: string
   language_id: string
 }

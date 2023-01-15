@@ -19,13 +19,13 @@ export const DoctorsGalleryItems = ({
       <Box>
         <Input
           sx={{
-            width: '450px',
+            width: '100%',
             backgroundColor: 'bright',
             border: 'transparent',
             br: 8,
             mb: 6,
           }}
-          placeholder="Search"
+          placeholder="Search by language.."
           onChange={(event) => setSearchTerm(event.target.value)}
         />
         <SmallWrapper data={doctorsSum} />

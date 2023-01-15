@@ -35,6 +35,7 @@ export const GET_DOCTOR_BY_ID = gql`
       doctor_id
       first_name
       last_name
+      details
       nationality
       profession
       languages

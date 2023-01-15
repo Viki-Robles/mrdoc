@@ -10,10 +10,10 @@ function SmallWrapper({ data }: SmallWrapperProps): JSX.Element {
     <Flex
       sx={{
         display: 'flex',
-        width: '200px',
+        width: '250px',
         height: '60px',
         border: 'transparent',
-        borderRadius: 6,
+        borderRadius: 12,
         bg: '#343B96',
         padding: 3,
         mb: 6,
@@ -29,7 +29,7 @@ function SmallWrapper({ data }: SmallWrapperProps): JSX.Element {
           color: '#5165CF',
           fontSize: 5,
           fontWeight: 'bold',
-          borderRadius: 8,
+          borderRadius: 12,
           bg: '#E7EFFC',
         }}
       >
