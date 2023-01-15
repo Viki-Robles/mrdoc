@@ -15,7 +15,7 @@ interface QueryVariables {
  * @name useFetchDoctorsByNationality
  * @description This hook is fetching doctors by their nationality
  */
-export const useFetchDoctorsByNationality = (
+export const useFetchDoctorsByLanuageName = (
   language_name: string,
 ): UseQueryResult<Response, Error> => {
   return useGqlQuery<Response, QueryVariables>(

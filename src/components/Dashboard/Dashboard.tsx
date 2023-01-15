@@ -41,7 +41,7 @@ const Dashboard = ({ doctor_id }: DashboardProps): JSX.Element | null => {
   // })
 
   // const user = getAuth()?.currentUserUid?.uid
-  //https://firebase.google.com/docs/database/web/read-and-write
+
   return (
     <FavouriteProvider doctor_id={doctor_id}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

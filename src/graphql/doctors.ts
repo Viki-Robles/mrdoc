@@ -21,9 +21,11 @@ export const GET_ALL_DOCTORS = gql`
 `
 
 export const GET_DOCTOR_BY_LANGUAGE_NAME = gql`
-doctors(where: {doctors_by_lang: {language_name: {_eq: $language_name}}}) {
+doctors(where: {doctors_by_language: {language_name: {_eq: $language_name}}}) {
   first_name
   last_name
+  nationality
+  profession
 }
 `
 
