@@ -45,8 +45,8 @@ export const buttons: Theme['buttons'] = {
     ...sharedButtonStyles,
     ...sharedLargeButtonStyles,
     color: 'bright',
-    bg: 'primary',
-    borderColor: 'primary',
+    bg: 'blue.900',
+    borderColor: 'blue.900',
     '&:hover:not(:disabled),&:hover:not([aria-disabled="true"])': {
       bg: 'blue.800',
       borderColor: 'blue.800',
@@ -57,6 +57,8 @@ export const buttons: Theme['buttons'] = {
       borderColor: 'blue.900',
       color: 'background',
     },
+    fontWeight: 500,
+    fontSize: 4,
   },
 
   primarySmall: {

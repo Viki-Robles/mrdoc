@@ -5,7 +5,7 @@ export interface DoctorsDataModel {
 export interface Doctor {
   first_name: string
   last_name: string
-  languages: LanguageDataModel
+  languages: string
   doctor_id: string
   contact_number: number
   nationality: string

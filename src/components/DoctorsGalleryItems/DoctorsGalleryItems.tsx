@@ -36,8 +36,8 @@ export const DoctorsGalleryItems = ({
                 if (searchTerm === '') {
                   return val
                 } else if (
-                  val.languages.language_name &&
-                  val.languages?.language_name
+                  val.languages &&
+                  val.languages
                     .toLocaleLowerCase()
                     .includes(searchTerm.toLocaleLowerCase())
                 ) {
@@ -58,7 +58,7 @@ export const DoctorsGalleryItems = ({
                       last_name={last_name}
                       first_name={first_name}
                       profession={profession}
-                      languages={languages.language_name}
+                      languages={languages}
                       doctor_id={doctor_id}
                     />
                   )

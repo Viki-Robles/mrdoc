@@ -95,9 +95,9 @@ function SignIn({ sx }: SignInProps): JSX.Element {
                 <Text
                   sx={{
                     display: 'inline-block',
-                    color: 'brand',
                     textDecoration: 'none',
                     fontSize: 2,
+                    color: 'blue.900',
                   }}
                 >
                   Dont have an account? Please Sign up here.

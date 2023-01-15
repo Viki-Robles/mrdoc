@@ -18,6 +18,8 @@ export const FormWrapper = ({
   return (
     <Grid
       sx={{
+        maxWidth: '500px',
+        width: '100%',
         position: 'fixed',
         alignItems: 'center',
         justifyItems: 'center',
@@ -26,7 +28,6 @@ export const FormWrapper = ({
         borderColor: 'rgb(240, 243, 247)',
         backgroundColor: '#ffff',
         boxShadow: 'xl',
-        width: 'fit-content',
         p: '1em 3em',
         top: '50%',
         left: '50%',

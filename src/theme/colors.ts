@@ -52,6 +52,7 @@ export const baseColors = {
     400: '#60a5fa',
     500: brand,
     800: '#0A345F',
+    900: '#343B96',
   },
   indigo: {
     __default: '#6366f1',

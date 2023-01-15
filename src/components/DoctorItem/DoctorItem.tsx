@@ -68,7 +68,7 @@ export const DoctorItem = ({
               p: 2,
             }}
           >
-            View Profile
+            view profile
           </Text>
         </Link>
       </Flex>
