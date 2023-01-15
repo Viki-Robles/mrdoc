@@ -5,15 +5,16 @@ export interface DoctorsDataModel {
 export interface Doctor {
   first_name: string
   last_name: string
-  skill: SkillDataModel
+  languages: LanguageDataModel
   doctor_id: string
   contact_number: number
   nationality: string
   profession: string
+  details: string
+  avatar?: string
 }
 
-export interface SkillDataModel {
-  skill_group: string
-  skill_id: string
-  skill_name: string
+export interface LanguageDataModel {
+  language_name: string
+  language_id: string
 }

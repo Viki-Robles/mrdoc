@@ -3,35 +3,28 @@ import { gql } from 'graphql-request'
 export const GET_ALL_DOCTORS = gql`
   query getAllDoctors {
     doctors {
-      first_name
-      last_name
-      skill {
-        skill_group
-        skill_id
-        skill_name
-      }
-      doctor_id
       contact_number
+      doctor_id
+      first_name
+      languages
+      last_name
       nationality
       profession
+      details
+      avatar
+    }
+    languages {
+      language_id
+      language_name
     }
   }
 `
 
-export const GET_DOCTOR_BY_SKILL_NAME = gql`
-  query getDoctorBySkillName($skill_name: String!) {
-    doctors(where: { skill: { skill_name: { _eq: $skill_name } } }) {
-      first_name
-      last_name
-      nationality
-      profession
-      contact_number
-      doctor_id
-      skill {
-        skill_name
-      }
-    }
-  }
+export const GET_DOCTOR_BY_LANGUAGE_NAME = gql`
+doctors(where: {doctors_by_lang: {language_name: {_eq: $language_name}}}) {
+  first_name
+  last_name
+}
 `
 
 export const GET_DOCTOR_BY_ID = gql`
@@ -42,9 +35,7 @@ export const GET_DOCTOR_BY_ID = gql`
       last_name
       nationality
       profession
-      skill {
-        skill_name
-      }
+      languages
       contact_number
     }
   }
@@ -58,11 +49,7 @@ export const GET_DOCTORS_NY_NATIONALITY = gql`
       last_name
       nationality
       profession
-      skill {
-        skill_group
-        skill_id
-        skill_name
-      }
+      languages
     }
   }
 `

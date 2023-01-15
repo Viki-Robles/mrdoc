@@ -46,7 +46,6 @@ const Dashboard = ({ doctor_id }: DashboardProps): JSX.Element | null => {
     <FavouriteProvider doctor_id={doctor_id}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <DoctorsGalleryItems data={doctorsData} />
-
         <UserProfile />
       </Box>
     </FavouriteProvider>

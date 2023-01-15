@@ -36,7 +36,8 @@ export const DoctorsGalleryItems = ({
                 if (searchTerm === '') {
                   return val
                 } else if (
-                  val.skill.skill_name
+                  val.languages.language_name &&
+                  val.languages?.language_name
                     .toLocaleLowerCase()
                     .includes(searchTerm.toLocaleLowerCase())
                 ) {
@@ -44,14 +45,20 @@ export const DoctorsGalleryItems = ({
                 }
               })
               .map(
-                ({ first_name, last_name, doctor_id, profession, skill }) => {
+                ({
+                  first_name,
+                  last_name,
+                  doctor_id,
+                  profession,
+                  languages,
+                }) => {
                   return (
                     <DoctorItem
                       key={doctor_id}
                       last_name={last_name}
                       first_name={first_name}
                       profession={profession}
-                      languages={skill.skill_name}
+                      languages={languages.language_name}
                       doctor_id={doctor_id}
                     />
                   )
