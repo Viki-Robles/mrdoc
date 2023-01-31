@@ -33,9 +33,9 @@ export const useFavourite = (): UseFavouriteReturn => {
   return { faves, setFavourites, isFaved }
 }
 
-export const FavouriteProvider = ({
+export default function FavouriteProvider({
   children,
-}: FavouriteProps): JSX.Element => {
+}: FavouriteProps): JSX.Element {
   const [faves, setFavourites] = useLocalStorageState<string[]>(
     'favourited-storage',
     [],

@@ -1,16 +1,16 @@
 import React, { Fragment, useState } from 'react'
 import { Flex, Input, Box } from 'theme-ui'
 import { Doctor } from '../../types/doctors'
-import { DoctorItem } from '../DoctorItem/DoctorItem'
+import DoctorItem from '../DoctorItem/DoctorItem'
 import SmallWrapper from '../SmallWrapper/SmallWrapper'
 
 export interface DoctorsGalleryItemsProps {
   data: Doctor[] | undefined
 }
 
-export const DoctorsGalleryItems = ({
+export default function DoctorsGalleryItems({
   data,
-}: DoctorsGalleryItemsProps): JSX.Element => {
+}: DoctorsGalleryItemsProps): JSX.Element {
   const [searchTerm, setSearchTerm] = useState('')
   const doctorsSum = data?.length
 

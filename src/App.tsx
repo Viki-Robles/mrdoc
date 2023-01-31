@@ -20,7 +20,7 @@ const DoctorProfile = lazy(
 )
 const Dashboard = lazy(() => import('./components/Dashboard/Dashboard'))
 const Treatments = lazy(() => import('./components/Treatments/Treatments'))
-const Account = lazy(() => import('./components/Account/Account'))
+const UserProfile = lazy(() => import('./components/UserProfile/UserProfile'))
 const NotFound = lazy(() => import('./components/NotFound/NotFound'))
 
 export const queryClient = new QueryClient({
@@ -62,7 +62,7 @@ function App(): JSX.Element {
                   <Route
                     exact
                     path={USER_PROFILE_PAGE_PATH}
-                    component={Account}
+                    component={UserProfile}
                   />
                 </Layout>
                 <Route path="*" component={NotFound} />

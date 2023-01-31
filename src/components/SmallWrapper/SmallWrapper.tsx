@@ -30,7 +30,7 @@ function SmallWrapper({ data }: SmallWrapperProps): JSX.Element {
           fontSize: 5,
           fontWeight: 'bold',
           borderRadius: 12,
-          bg: '#E7EFFC',
+          bg: 'bright',
         }}
       >
         {data}

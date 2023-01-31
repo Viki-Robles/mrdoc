@@ -18,4 +18,12 @@ export const images = {
   flag: {
     width: '20px',
   },
+
+  avatarUser: {
+    width: 150,
+    height: 150,
+    borderRadius: '50%',
+    border: 'none',
+    borderColor: 'muted',
+  },
 }

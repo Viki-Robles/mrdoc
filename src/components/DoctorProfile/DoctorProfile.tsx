@@ -4,7 +4,7 @@ import { Box, Grid, Text, Image } from 'theme-ui'
 import { useFetchDoctorsById } from '../../hooks/useFetchDoctorsById/useFetchDoctorsById'
 import avatar from '../../images/avatar.png'
 
-const DoctorProfile = (): JSX.Element | null => {
+export default function DoctorProfile(): JSX.Element | null {
   const { doctor_id } = useParams<{
     doctor_id: string
   }>()
@@ -59,5 +59,3 @@ const DoctorProfile = (): JSX.Element | null => {
   }
   return null
 }
-
-export default DoctorProfile

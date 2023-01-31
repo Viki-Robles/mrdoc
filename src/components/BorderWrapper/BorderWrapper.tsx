@@ -9,14 +9,14 @@ export interface BorderWrapperProps {
   information?: string
 }
 
-export const BorderWrapper = ({
+export default function BorderWrapper({
   sx,
   title,
   children,
   subtitle,
   information,
   ...rest
-}: BorderWrapperProps): JSX.Element => {
+}: BorderWrapperProps): JSX.Element {
   return (
     <Box
       sx={{

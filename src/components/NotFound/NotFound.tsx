@@ -6,7 +6,7 @@ export interface NotFoundProps {
   sx?: ThemeUIStyleObject
 }
 
-const NotFound = ({ sx }: NotFoundProps): JSX.Element => {
+export default function NotFound({ sx }: NotFoundProps): JSX.Element {
   return (
     <Box sx={{ ...sx }}>
       <Box as="main" sx={{ textAlign: 'center', ...sx }}>
@@ -29,5 +29,3 @@ const NotFound = ({ sx }: NotFoundProps): JSX.Element => {
     </Box>
   )
 }
-
-export default NotFound

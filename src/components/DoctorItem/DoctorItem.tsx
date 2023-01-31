@@ -13,13 +13,13 @@ export interface DoctorItemProps {
   doctor_id: string
 }
 
-export const DoctorItem = ({
+export default function DoctorItem({
   first_name,
   last_name,
   profession,
   languages,
   doctor_id,
-}: DoctorItemProps): JSX.Element => {
+}: DoctorItemProps): JSX.Element {
   return (
     <Grid
       sx={{
