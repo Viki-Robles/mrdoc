@@ -1,6 +1,9 @@
+import { getAuth } from '@firebase/auth'
+import { userInfo } from 'os'
 import React from 'react'
 import { Box } from 'theme-ui'
 import { useFetchDoctors } from '../../hooks/useFetchDoctors/useFetchDoctors'
+import { useUserContext } from '../../providers/AuthProvider'
 import DoctorsGalleryItems from '../DoctorsGalleryItems/DoctorsGalleryItems'
 import FavouriteProvider from '../Favourite/FavouriteProvider'
 
@@ -12,6 +15,9 @@ export default function Dashboard({
   doctor_id,
 }: DashboardProps): JSX.Element | null {
   const { doctorsData } = useFetchDoctors()
+  const auth = getAuth()
+
+  console.log(auth.currentUser?.email)
 
   return (
     <FavouriteProvider doctor_id={doctor_id}>

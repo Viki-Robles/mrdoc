@@ -91,13 +91,22 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   }
 
   useEffect(() => {
-    const unsubsrcibe = auth.onAuthStateChanged((user) => {
+    const getToken = auth.onAuthStateChanged((user) => {
       if (user) {
-        setUser(user)
+        user
+          ?.getIdToken(true)
+          .then((token) => {
+            console.log('token:', token)
+          })
+          .catch((Error) => {
+            console.log(Error)
+          })
+      } else {
+        console.log('no token available')
       }
+      return getToken
     })
-    return unsubsrcibe
-  }, [])
+  })
 
   const values = {
     signUp,
