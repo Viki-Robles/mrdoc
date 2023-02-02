@@ -90,6 +90,37 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
     return updateEmail(user, newEmail)
   }
 
+  // useEffect(() => {
+  //   const getToken = auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       return user
+  //         .getIdToken()
+  //         .then((token) =>
+  //           auth?.currentUser?.getIdTokenResult().then((result) => {
+  //             if (result.claims['https://hasura.io/jwt/claims']) {
+  //               return token
+  //             }
+  //             const endpoint = 'https://xxx.cloudfunctions.net/refreshToken'
+  //             return fetch(`${endpoint}?uid=${user.uid}`).then((res) => {
+  //               if (res.status === 200) {
+  //                 return user.getIdToken(true)
+  //               }
+  //               return res.json().then((e) => {
+  //                 throw e
+  //               })
+  //             })
+  //           }),
+  //         )
+  //         .then((validToken) => {
+  //           // Store Token / Or create Apollo with your new token!
+  //         })
+  //         .catch(console.error)
+  //     }
+
+  //     return getToken
+  //   })
+  // })
+
   useEffect(() => {
     const getToken = auth.onAuthStateChanged((user) => {
       if (user) {
