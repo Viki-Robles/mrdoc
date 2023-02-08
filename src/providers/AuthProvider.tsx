@@ -6,6 +6,7 @@ import React, {
   createContext,
 } from 'react'
 import { auth, db } from '../config/firebase'
+
 import {
   Auth,
   UserCredential,
@@ -70,7 +71,7 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
       if (user !== null) {
         await addDoc(collection(db, 'users'), {
           uid: user?.uid,
-          displayName: user?.displayName,
+          displayName: displayName,
           authProvider: 'local',
           email: user?.email,
         })
