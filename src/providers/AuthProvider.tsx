@@ -67,12 +67,15 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password)
       const user = res.user
-      await addDoc(collection(db, 'users'), {
-        uid: user?.uid,
-        displayName,
-        authProvider: 'local',
-        email: user?.email,
-      })
+      if (user !== null) {
+        await addDoc(collection(db, 'users'), {
+          uid: user?.uid,
+          displayName: user?.displayName,
+          authProvider: 'local',
+          email: user?.email,
+        })
+        await user.reload()
+      }
     } catch (err) {
       console.error(err)
       alert(err)
