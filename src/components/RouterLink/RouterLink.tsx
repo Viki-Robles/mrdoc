@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, ThemeUIStyleObject } from 'theme-ui'
-import { Link, LinkProps } from 'react-router-dom'
+import { jsx, ThemeUIStyleObject } from "theme-ui";
+import { Link, LinkProps } from "react-router-dom";
 
 // export interface RouterLinkProps extends LinkProps {
 //   sx?: ThemeUIStyleObject

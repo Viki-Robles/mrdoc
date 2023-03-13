@@ -1,29 +1,29 @@
-import React, { ReactNode } from 'react'
-import { Box } from 'theme-ui'
+import React, { ReactNode } from "react";
+import { Box } from "theme-ui";
 
 interface WrapperContainerProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const WrapperContainer = ({ children }: WrapperContainerProps): JSX.Element => {
   return (
     <Box
       sx={{
-        width: '100%',
+        width: "100%",
         mr: 4,
         mt: 5,
         ml: 2,
         mb: 5,
-        borderRadius: '2%',
-        border: '1px solid',
-        borderColor: '#f3f8ff',
-        backgroundColor: '#f3f8ff',
+        borderRadius: "2%",
+        border: "1px solid",
+        borderColor: "#f3f8ff",
+        backgroundColor: "#ecf2ff",
         padding: 4,
       }}
     >
       {children}
     </Box>
-  )
-}
+  );
+};
 
-export default WrapperContainer
+export default WrapperContainer;

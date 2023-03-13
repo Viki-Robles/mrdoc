@@ -1,32 +1,32 @@
-import { Theme } from 'theme-ui'
+import { Theme } from "theme-ui";
 
-import { borders, borderWidths } from './borders'
-import { buttons } from './buttons'
-import { colors } from './colors'
-import { shadows } from './shadows'
-import { space } from './space'
+import { borders, borderWidths } from "./borders";
+import { buttons } from "./buttons";
+import { colors } from "./colors";
+import { shadows } from "./shadows";
+import { space } from "./space";
 import {
   letterSpacings,
   lineHeights,
   fonts,
   fontSizes,
   fontWeights,
-} from './fonts'
-import { links } from './links'
-import { sizes } from './sizes'
-import { images } from './images'
-import { motion } from './motion'
-import { lists } from './lists'
-import { utils } from './utils'
-import { alerts } from './alerts'
-import { styles } from './styles'
+} from "./fonts";
+import { links } from "./links";
+import { sizes } from "./sizes";
+import { images } from "./images";
+import { motion } from "./motion";
+import { lists } from "./lists";
+import { utils } from "./utils";
+import { alerts } from "./alerts";
+import { styles } from "./styles";
 
-declare module 'theme-ui' {
+declare module "theme-ui" {
   interface Theme {
     // colors: Colors
-    motion: unknown
-    utils: unknown
-    lists: unknown
+    motion: unknown;
+    utils: unknown;
+    lists: unknown;
   }
 }
 
@@ -51,6 +51,6 @@ export const theme: Theme = {
   space,
   // custom
   motion,
-}
+};
 
-export default theme
+export default theme;

@@ -1,36 +1,36 @@
 module.exports = {
-  description: 'Generates new React hook',
+  description: "Generates new React hook",
   prompts: [
     {
-      type: 'input',
-      name: 'name',
+      type: "input",
+      name: "name",
       message: "What's the name of the hook? (ensure you prefix it with 'use')",
       validate: function (value) {
-        let message = true
+        let message = true;
         if (!/.+/.test(value)) {
-          message = console.error('Missing', 'you must define a hook name')
+          message = console.error("Missing", "you must define a hook name");
         } else if (value.length < 3) {
           message = console.error(
-            'Too Short',
+            "Too Short",
             `"${value}" is not descriptive enough`,
-          )
+          );
         }
-        return message
+        return message;
       },
     },
   ],
   actions: function () {
     return [
       {
-        type: 'add',
-        path: 'src/hooks/{{camelCase name}}/{{camelCase name}}.ts',
-        templateFile: './generate/hook/templates/hook.hbs',
+        type: "add",
+        path: "src/hooks/{{camelCase name}}/{{camelCase name}}.ts",
+        templateFile: "./generate/hook/templates/hook.hbs",
       },
       {
-        type: 'add',
-        path: 'src/hooks/{{camelCase name}}/{{camelCase name}}.stories.mdx',
-        templateFile: './generate/hook/templates/docs.hbs',
+        type: "add",
+        path: "src/hooks/{{camelCase name}}/{{camelCase name}}.stories.mdx",
+        templateFile: "./generate/hook/templates/docs.hbs",
       },
-    ]
+    ];
   },
-}
+};

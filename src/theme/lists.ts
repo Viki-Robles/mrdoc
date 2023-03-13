@@ -1,6 +1,6 @@
 export const lists = {
   unstyled: {
-    listStyleType: 'none',
+    listStyleType: "none",
     pl: 0,
   },
-}
+};

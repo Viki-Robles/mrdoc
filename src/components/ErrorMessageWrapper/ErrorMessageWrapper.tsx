@@ -1,9 +1,9 @@
-import React from 'react'
-import { ThemeUIStyleObject, Text } from 'theme-ui'
+import React from "react";
+import { ThemeUIStyleObject, Text } from "theme-ui";
 
 export interface ErrorMessageWrapperProps {
-  sx?: ThemeUIStyleObject
-  message: string
+  sx?: ThemeUIStyleObject;
+  message: string;
 }
 
 export const ErrorMessageWrapper = ({
@@ -13,8 +13,8 @@ export const ErrorMessageWrapper = ({
   return (
     <Text
       sx={{
-        backgroundColor: '#fb6161',
-        color: '#ffff',
+        backgroundColor: "#fb6161",
+        color: "#ffff",
         p: 2,
         borderRadius: 2,
         ...sx,
@@ -22,5 +22,5 @@ export const ErrorMessageWrapper = ({
     >
       {message}
     </Text>
-  )
-}
+  );
+};

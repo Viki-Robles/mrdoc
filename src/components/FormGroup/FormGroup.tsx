@@ -1,13 +1,13 @@
-import React, { ReactNode } from 'react'
-import { ErrorMessage } from 'formik'
-import { ThemeUIStyleObject, Box, Label } from 'theme-ui'
+import React, { ReactNode } from "react";
+import { ErrorMessage } from "formik";
+import { ThemeUIStyleObject, Box, Label } from "theme-ui";
 
 export interface FormGroupProps {
-  label: string
-  note?: string
-  name: string
-  sx?: ThemeUIStyleObject
-  children: ReactNode
+  label: string;
+  note?: string;
+  name: string;
+  sx?: ThemeUIStyleObject;
+  children: ReactNode;
 }
 
 export const FormGroup = ({
@@ -19,16 +19,16 @@ export const FormGroup = ({
 }: FormGroupProps): JSX.Element => {
   return (
     <Box sx={{ mb: 4, ...sx }}>
-      <Label htmlFor={name} sx={{ mb: 1, alignItems: 'center', width: 'auto' }}>
+      <Label htmlFor={name} sx={{ mb: 1, alignItems: "center", width: "auto" }}>
         {label}
       </Label>
       {children}
-      {note ? <Box sx={{ variant: 'text.small', m: 1 }}>{note}</Box> : null}
+      {note ? <Box sx={{ variant: "text.small", m: 1 }}>{note}</Box> : null}
       <ErrorMessage name={name}>
         {(msg) => (
-          <Box sx={{ m: 1, variant: 'text.small', color: 'error' }}>{msg}</Box>
+          <Box sx={{ m: 1, variant: "text.small", color: "error" }}>{msg}</Box>
         )}
       </ErrorMessage>
     </Box>
-  )
-}
+  );
+};

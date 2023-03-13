@@ -1,5 +1,5 @@
-import React from 'react'
-import { Global, css } from '@emotion/react'
+import React from "react";
+import { Global, css } from "@emotion/react";
 
 const globalFontStyles = `
   @font-face {
@@ -40,11 +40,11 @@ const globalFontStyles = `
     font-weight: 600;
   }
  
-`
+`;
 export const GlobalStyles = (): JSX.Element => (
   <Global
     styles={css`
       ${globalFontStyles}
     `}
   />
-)
+);

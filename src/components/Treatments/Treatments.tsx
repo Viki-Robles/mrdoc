@@ -1,8 +1,8 @@
-import React from 'react'
-import WrapperContainer from '../WrapperContainer/WrapperContainer'
+import React from "react";
+import WrapperContainer from "../WrapperContainer/WrapperContainer";
 
 const Treatments = (): JSX.Element => {
-  return <WrapperContainer>treatments</WrapperContainer>
-}
+  return <WrapperContainer>treatments</WrapperContainer>;
+};
 
-export default Treatments
+export default Treatments;

@@ -1,7 +1,7 @@
-import React, { Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { AuthProvider } from './providers/AuthProvider'
-import { QueryClientProvider, QueryClient } from 'react-query'
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { AuthProvider } from "./providers/AuthProvider";
+import { QueryClientProvider, QueryClient } from "react-query";
 import {
   SIGN_IN_PAGE_PATH,
   SIGN_UP_PAGE_PATH,
@@ -10,18 +10,18 @@ import {
   DOCTOR_PROFILE_PAGE_PATH,
   TREATMENTS_PAGE_PATH,
   USER_PROFILE_PAGE_PATH,
-} from './config/paths'
+} from "./config/paths";
 
-const SignIn = lazy(() => import('./components/SignIn/SignIn'))
-const SignUp = lazy(() => import('./components/SignUp/SignUp'))
-const Layout = lazy(() => import('./components/Layout/Layout'))
+const SignIn = lazy(() => import("./components/SignIn/SignIn"));
+const SignUp = lazy(() => import("./components/SignUp/SignUp"));
+const Layout = lazy(() => import("./components/Layout/Layout"));
 const DoctorProfile = lazy(
-  () => import('./components/DoctorProfile/DoctorProfile'),
-)
-const Dashboard = lazy(() => import('./components/Dashboard/Dashboard'))
-const Treatments = lazy(() => import('./components/Treatments/Treatments'))
-const UserProfile = lazy(() => import('./components/UserProfile/UserProfile'))
-const NotFound = lazy(() => import('./components/NotFound/NotFound'))
+  () => import("./components/DoctorProfile/DoctorProfile"),
+);
+const Dashboard = lazy(() => import("./components/Dashboard/Dashboard"));
+const Treatments = lazy(() => import("./components/Treatments/Treatments"));
+const UserProfile = lazy(() => import("./components/UserProfile/UserProfile"));
+const NotFound = lazy(() => import("./components/NotFound/NotFound"));
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,14 +30,14 @@ export const queryClient = new QueryClient({
       suspense: true,
     },
   },
-})
+});
 
 function App(): JSX.Element {
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Suspense fallback={'Loading'}>
+          <Suspense fallback={"Loading"}>
             <Router>
               <Switch>
                 <Route exact path={SIGN_UP_PAGE_PATH} component={SignUp} />
@@ -72,7 +72,7 @@ function App(): JSX.Element {
         </AuthProvider>
       </QueryClientProvider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

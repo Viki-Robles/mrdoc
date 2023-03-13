@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request'
+import { gql } from "graphql-request";
 
 export const GET_ALL_DOCTORS = gql`
   query getAllDoctors {
@@ -18,7 +18,7 @@ export const GET_ALL_DOCTORS = gql`
       language_name
     }
   }
-`
+`;
 
 export const GET_DOCTOR_BY_LANGUAGE_NAME = gql`
 doctors(where: {doctors_by_language: {language_name: {_eq: $language_name}}}) {
@@ -27,7 +27,7 @@ doctors(where: {doctors_by_language: {language_name: {_eq: $language_name}}}) {
   nationality
   profession
 }
-`
+`;
 
 export const GET_DOCTOR_BY_ID = gql`
   query getDoctorById($doctor_id: String!) {
@@ -42,7 +42,7 @@ export const GET_DOCTOR_BY_ID = gql`
       contact_number
     }
   }
-`
+`;
 export const GET_DOCTORS_NY_NATIONALITY = gql`
   query getDoctorsByNationality($nationality: String!) {
     doctors(where: { nationality: { _eq: $nationality } }) {
@@ -55,4 +55,4 @@ export const GET_DOCTORS_NY_NATIONALITY = gql`
       languages
     }
   }
-`
+`;

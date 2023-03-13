@@ -1,27 +1,27 @@
-import React, { Fragment, useState } from 'react'
-import { Flex, Input, Box } from 'theme-ui'
-import { Doctor } from '../../types/doctors'
-import DoctorItem from '../DoctorItem/DoctorItem'
-import SmallWrapper from '../SmallWrapper/SmallWrapper'
+import React, { Fragment, useState } from "react";
+import { Flex, Input, Box } from "theme-ui";
+import { Doctor } from "../../types/doctors";
+import DoctorItem from "../DoctorItem/DoctorItem";
+import SmallWrapper from "../SmallWrapper/SmallWrapper";
 
 export interface DoctorsGalleryItemsProps {
-  data: Doctor[] | undefined
+  data: Doctor[] | undefined;
 }
 
 export default function DoctorsGalleryItems({
   data,
 }: DoctorsGalleryItemsProps): JSX.Element {
-  const [searchTerm, setSearchTerm] = useState('')
-  const doctorsSum = data?.length
+  const [searchTerm, setSearchTerm] = useState("");
+  const doctorsSum = data?.length;
 
   return (
     <Fragment>
       <Box>
         <Input
           sx={{
-            width: '100%',
-            backgroundColor: 'bright',
-            border: 'transparent',
+            width: "100%",
+            backgroundColor: "bright",
+            border: "transparent",
             br: 8,
             mb: 6,
           }}
@@ -29,19 +29,19 @@ export default function DoctorsGalleryItems({
           onChange={(event) => setSearchTerm(event.target.value)}
         />
         <SmallWrapper data={doctorsSum} />
-        <Flex sx={{ gap: 4, flexWrap: 'wrap' }}>
+        <Flex sx={{ gap: 4, flexWrap: "wrap" }}>
           {data &&
             data
               ?.filter((val) => {
-                if (searchTerm === '') {
-                  return val
+                if (searchTerm === "") {
+                  return val;
                 } else if (
                   val.languages &&
                   val.languages
                     .toLocaleLowerCase()
                     .includes(searchTerm.toLocaleLowerCase())
                 ) {
-                  return val
+                  return val;
                 }
               })
               .map(
@@ -61,11 +61,11 @@ export default function DoctorsGalleryItems({
                       languages={languages}
                       doctor_id={doctor_id}
                     />
-                  )
+                  );
                 },
               )}
         </Flex>
       </Box>
     </Fragment>
-  )
+  );
 }

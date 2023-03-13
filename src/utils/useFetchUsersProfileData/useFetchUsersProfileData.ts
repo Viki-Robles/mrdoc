@@ -1,5 +1,5 @@
-import { getDocs, collection } from 'firebase/firestore'
-import { getFirestore } from 'firebase/firestore'
+import { getDocs, collection } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 // create a  function that fetches user from firebase by uuid
 // and passes as a parameter to the second function

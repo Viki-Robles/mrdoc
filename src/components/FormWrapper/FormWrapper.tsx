@@ -1,12 +1,12 @@
-import React, { ReactNode } from 'react'
-import { ThemeUIStyleObject, Grid, Text, Image } from 'theme-ui'
+import React, { ReactNode } from "react";
+import { ThemeUIStyleObject, Grid, Text, Image } from "theme-ui";
 
 export interface FormWrapperProps {
-  sx?: ThemeUIStyleObject
-  title?: string
-  subheader?: string
-  children: ReactNode
-  icon?: string
+  sx?: ThemeUIStyleObject;
+  title?: string;
+  subheader?: string;
+  children: ReactNode;
+  icon?: string;
 }
 export const FormWrapper = ({
   sx,
@@ -18,35 +18,35 @@ export const FormWrapper = ({
   return (
     <Grid
       sx={{
-        maxWidth: '500px',
-        width: '100%',
-        position: 'fixed',
-        alignItems: 'center',
-        justifyItems: 'center',
-        border: '1px solid',
+        maxWidth: "500px",
+        width: "100%",
+        position: "fixed",
+        alignItems: "center",
+        justifyItems: "center",
+        border: "1px solid",
         borderRadius: 8,
-        borderColor: 'rgb(240, 243, 247)',
-        backgroundColor: '#ffff',
-        boxShadow: 'xl',
-        p: '1em 3em',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
+        borderColor: "rgb(240, 243, 247)",
+        backgroundColor: "#ffff",
+        boxShadow: "xl",
+        p: "1em 3em",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
         ...sx,
       }}
     >
       {icon && (
         <Image
           src={icon}
-          sx={{ width: '50px', height: '50px', borderRadius: 8 }}
+          sx={{ width: "50px", height: "50px", borderRadius: 8 }}
         />
       )}
 
       <Text
         sx={{
           fontSize: 5,
-          fontWeight: 'bold',
-          color: '#4B4A4A',
+          fontWeight: "bold",
+          color: "#4B4A4A",
           mt: 2,
         }}
       >
@@ -55,7 +55,7 @@ export const FormWrapper = ({
       <Text
         sx={{
           fontSize: 2,
-          color: '#4B4A4A',
+          color: "#4B4A4A",
           mb: 4,
         }}
       >
@@ -63,5 +63,5 @@ export const FormWrapper = ({
       </Text>
       {children}
     </Grid>
-  )
-}
+  );
+};

@@ -1,6 +1,6 @@
-import React from 'react'
-import { getDocs, collection } from 'firebase/firestore'
-import { getFirestore } from 'firebase/firestore'
+import React from "react";
+import { getDocs, collection } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 // class ProfilePage extends React.Component {
 //   state = {

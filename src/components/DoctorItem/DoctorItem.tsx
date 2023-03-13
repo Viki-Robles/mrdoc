@@ -1,16 +1,16 @@
-import React from 'react'
-import { Box, Flex, Text, Grid, Image } from 'theme-ui'
-import { Link } from 'react-router-dom'
-import { DOCTOR_PROFILE_PAGE_PATH } from '../../config/paths'
-import { Favourite } from '../Favourite/Favourite'
-import avatar from '../../images/avatar.png'
+import React from "react";
+import { Box, Flex, Text, Grid, Image } from "theme-ui";
+import { Link } from "react-router-dom";
+import { DOCTOR_PROFILE_PAGE_PATH } from "../../config/paths";
+import { Favourite } from "../Favourite/Favourite";
+import avatar from "../../images/avatar.png";
 
 export interface DoctorItemProps {
-  first_name?: string
-  last_name?: string
-  profession?: string
-  languages?: string
-  doctor_id: string
+  first_name?: string;
+  last_name?: string;
+  profession?: string;
+  languages?: string;
+  doctor_id: string;
 }
 
 export default function DoctorItem({
@@ -23,10 +23,10 @@ export default function DoctorItem({
   return (
     <Grid
       sx={{
-        textAlign: 'center',
-        backgroundColor: 'bright',
+        textAlign: "center",
+        backgroundColor: "bright",
         borderRadius: 8,
-        boxShadow: 'lg',
+        boxShadow: "lg",
         gap: 0,
         p: 4,
       }}
@@ -35,19 +35,19 @@ export default function DoctorItem({
       <div>
         <Image src={avatar} variant="images.avatar" />
       </div>
-      <Text sx={{ color: 'neutral.980', fontWeight: 'bold', pt: 6 }}>
+      <Text sx={{ color: "neutral.980", fontWeight: "bold", pt: 6 }}>
         Dr. {`${first_name} ${last_name}`}
       </Text>
 
       <Flex
-        sx={{ gap: 4, alignItems: 'center', mt: 4, mb: 4, flexWrap: 'wrap' }}
+        sx={{ gap: 4, alignItems: "center", mt: 4, mb: 4, flexWrap: "wrap" }}
       >
         <Box
           sx={{
-            color: '#5165CF',
-            backgroundColor: '#D2DBF9',
-            fontWeight: 'medium',
-            borderRadius: '20px',
+            color: "#5165CF",
+            backgroundColor: "#D2DBF9",
+            fontWeight: "medium",
+            borderRadius: "20px",
             fontSize: 2,
             p: 2,
           }}
@@ -57,14 +57,14 @@ export default function DoctorItem({
         <Link to={`${DOCTOR_PROFILE_PAGE_PATH}/${doctor_id}`}>
           <Text
             sx={{
-              display: 'inline-block',
-              border: '2px solid',
-              borderRadius: '20px',
-              color: '#5165CF',
-              borderColor: '#5165CF',
-              backgroundColor: 'bright',
-              fontWeight: 'medium',
-              textDecoration: 'none',
+              display: "inline-block",
+              border: "2px solid",
+              borderRadius: "20px",
+              color: "#5165CF",
+              borderColor: "#5165CF",
+              backgroundColor: "bright",
+              fontWeight: "medium",
+              textDecoration: "none",
               fontSize: 2,
               p: 2,
             }}
@@ -76,5 +76,5 @@ export default function DoctorItem({
       <Text>Languages</Text>
       <Text>{languages}</Text>
     </Grid>
-  )
+  );
 }

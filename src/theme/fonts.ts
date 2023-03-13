@@ -3,14 +3,14 @@ export const baseFonts = {
   serif:
     '"Frank Ruhl Libre", Georgia, Cambria, "Times New Roman", Times, serif',
   mono: '"IBM Plex Mono", "JetBrains Mono", "Fira Code", "Input Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-}
+};
 
 export const fonts = {
   ...baseFonts,
   body: baseFonts.sans,
   heading: baseFonts.sans,
   monospace: baseFonts.mono,
-}
+};
 
 // prettier-ignore
 export const fontSizes = [
@@ -40,33 +40,33 @@ export const baseFontWeights = {
   bold: 700,
   extrabold: 800,
   black: 900,
-}
+};
 
 export const fontWeights = {
   ...baseFontWeights,
   body: baseFontWeights.light,
-}
+};
 
 export const letterSpacings = {
-  tighter: '-0.05em',
-  tight: '-0.025em',
-  normal: '0',
-  wide: '0.025em',
-  wider: '0.05em',
-  widest: '0.1em',
-}
+  tighter: "-0.05em",
+  tight: "-0.025em",
+  normal: "0",
+  wide: "0.025em",
+  wider: "0.05em",
+  widest: "0.1em",
+};
 
 export const baseLineHeights = {
-  none: '1',
-  tight: '1.25',
-  snug: '1.375',
-  normal: '1.5',
-  relaxed: '1.625',
-  loose: '2',
-}
+  none: "1",
+  tight: "1.25",
+  snug: "1.375",
+  normal: "1.5",
+  relaxed: "1.625",
+  loose: "2",
+};
 
 export const lineHeights = {
   ...baseLineHeights,
   body: baseLineHeights.relaxed,
   heading: 1.15,
-}
+};

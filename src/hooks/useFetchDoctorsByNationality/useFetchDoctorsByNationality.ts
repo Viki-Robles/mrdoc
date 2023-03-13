@@ -1,14 +1,14 @@
-import { useGqlQuery } from '../useGqlQuery/useGqlQuery'
-import { GET_DOCTORS_NY_NATIONALITY } from '../../graphql/doctors'
-import { Doctor } from '../../types/doctors'
-import { UseQueryResult } from 'react-query'
+import { useGqlQuery } from "../useGqlQuery/useGqlQuery";
+import { GET_DOCTORS_NY_NATIONALITY } from "../../graphql/doctors";
+import { Doctor } from "../../types/doctors";
+import { UseQueryResult } from "react-query";
 
 interface Response {
-  doctors: Doctor[]
+  doctors: Doctor[];
 }
 
 interface QueryVariables {
-  nationality: string
+  nationality: string;
 }
 
 /**
@@ -19,10 +19,10 @@ export const useFetchDoctorsByNationality = (
   nationality: string,
 ): UseQueryResult<Response, Error> => {
   return useGqlQuery<Response, QueryVariables>(
-    ['nationality', nationality],
+    ["nationality", nationality],
     GET_DOCTORS_NY_NATIONALITY,
     {
       nationality,
     },
-  )
-}
+  );
+};

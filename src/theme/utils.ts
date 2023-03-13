@@ -1,22 +1,22 @@
-import { Theme } from 'theme-ui'
+import { Theme } from "theme-ui";
 
 export const utils = {
   // variant: 'utils.visuallyHidden',
   visuallyHidden: {
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: '1px',
-    overflow: 'hidden',
-    position: 'absolute',
-    whiteSpace: 'nowrap',
-    width: '1px',
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: "1px",
+    overflow: "hidden",
+    position: "absolute",
+    whiteSpace: "nowrap",
+    width: "1px",
   },
 
   // variant: 'utils.flexCenter',
   flexCenter: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   // variant: 'utils.focus',
@@ -54,43 +54,43 @@ export const utils = {
 
   // variant: 'utils.focusVisibleOutset',
   focusVisibleOutset: {
-    '&:focus': {
+    "&:focus": {
       outline: 0,
-      variant: 'utils.focusOutset',
+      variant: "utils.focusOutset",
     },
-    '&:focus-visible': {
-      variant: 'utils.focusOutset',
+    "&:focus-visible": {
+      variant: "utils.focusOutset",
     },
-    '&:focus:not(:focus-visible)': {
-      boxShadow: 'none',
+    "&:focus:not(:focus-visible)": {
+      boxShadow: "none",
     },
   },
 
   // variant: 'utils.focusVisibleInset',
   focusVisibleInset: {
-    '&:focus': {
+    "&:focus": {
       outline: 0,
-      variant: 'utils.focus',
+      variant: "utils.focus",
     },
-    '&:focus-visible': {
-      variant: 'utils.focus',
+    "&:focus-visible": {
+      variant: "utils.focus",
     },
-    '&:focus:not(:focus-visible)': {
-      boxShadow: 'none',
+    "&:focus:not(:focus-visible)": {
+      boxShadow: "none",
     },
   },
 
   // variant: 'utils.shadedBox',
   shadedBox: {
-    bg: 'neutral.100',
-    borderRadius: 'm',
+    bg: "neutral.100",
+    borderRadius: "m",
     p: 3,
   },
 
   // variant: 'utils.dialogOverlay',
   dialogOverlay: {
-    bg: 'rgba(0, 0, 0, .15)',
-    position: 'fixed',
+    bg: "rgba(0, 0, 0, .15)",
+    position: "fixed",
     top: 0,
     right: 0,
     bottom: 0,
@@ -99,20 +99,20 @@ export const utils = {
 
   // variant: 'utils.dialogContent',
   dialogContent: {
-    '&:focus': {
+    "&:focus": {
       outline: 0,
-      variant: 'utils.focusOutset',
+      variant: "utils.focusOutset",
     },
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    maxWidth: 'dialogSmall',
-    width: '90%',
-    bg: 'background',
-    borderRadius: 'm',
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    maxWidth: "dialogSmall",
+    width: "90%",
+    bg: "background",
+    borderRadius: "m",
     p: 5,
-    maxHeight: '90vh',
-    overflowY: 'auto',
+    maxHeight: "90vh",
+    overflowY: "auto",
   },
-}
+};

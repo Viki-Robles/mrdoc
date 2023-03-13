@@ -1,58 +1,58 @@
-import { ThemeUIStyleObject } from 'theme-ui'
+import { ThemeUIStyleObject } from "theme-ui";
 
 export const heading = {
-  fontFamily: 'heading',
-  lineHeight: 'heading',
-  fontWeight: 'light',
+  fontFamily: "heading",
+  lineHeight: "heading",
+  fontWeight: "light",
   mb: 4,
   mt: 6,
-}
+};
 
 export const styles: Record<string, ThemeUIStyleObject> = {
   root: {
-    fontFamily: 'body',
-    lineHeight: 'snug',
-    fontWeight: 'body',
+    fontFamily: "body",
+    lineHeight: "snug",
+    fontWeight: "body",
     fontSize: 3,
-    scrollBehavior: 'smooth',
-    overflowY: 'scroll',
-    bg: '#f3f8ff',
+    scrollBehavior: "smooth",
+    overflowY: "scroll",
+    bg: "#f3f8ff",
 
     b: {
-      fontWeight: 'medium',
+      fontWeight: "medium",
     },
   },
 
   a: {
-    cursor: 'pointer',
-    borderBottom: '1px solid transparent',
-    '&, &:link, &:visited': {
-      color: 'primary',
-      textDecoration: 'none',
-      fontWeight: 'body',
+    cursor: "pointer",
+    borderBottom: "1px solid transparent",
+    "&, &:link, &:visited": {
+      color: "primary",
+      textDecoration: "none",
+      fontWeight: "body",
     },
-    '&:hover': {
-      color: 'blue.800',
-      borderBottomColor: 'currentcolor',
+    "&:hover": {
+      color: "blue.800",
+      borderBottomColor: "currentcolor",
     },
-    '&:active': {
-      color: 'blue.900',
-      borderBottomColor: 'currentcolor',
+    "&:active": {
+      color: "blue.900",
+      borderBottomColor: "currentcolor",
     },
-    '&': {
-      variant: 'utils.focusVisibleOutset',
+    "&": {
+      variant: "utils.focusVisibleOutset",
     },
   },
 
   b: {
-    fontWeight: 'medium',
+    fontWeight: "medium",
   },
 
   p: {
-    fontFamily: 'body',
-    lineHeight: 'normal',
-    fontWeight: 'body',
-    color: 'subdued',
+    fontFamily: "body",
+    lineHeight: "normal",
+    fontWeight: "body",
+    color: "subdued",
     mb: 4,
     mt: 0,
   },
@@ -60,7 +60,7 @@ export const styles: Record<string, ThemeUIStyleObject> = {
   h1: {
     ...heading,
     fontSize: 11,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     mt: 9,
   },
   h2: {
@@ -86,18 +86,18 @@ export const styles: Record<string, ThemeUIStyleObject> = {
   },
 
   thematicBreak: {
-    bg: 'muted',
+    bg: "muted",
     border: 0,
-    height: '1px',
+    height: "1px",
     m: 3,
   },
   hr: {
-    variant: 'styles.thematicBreak',
+    variant: "styles.thematicBreak",
   },
   img: {
     my: 4,
-    display: 'block',
-    borderRadius: 'default',
+    display: "block",
+    borderRadius: "default",
   },
 
   ol: {
@@ -109,28 +109,28 @@ export const styles: Record<string, ThemeUIStyleObject> = {
     mb: 4,
   },
   li: {
-    fontSize: 'inherit',
+    fontSize: "inherit",
   },
 
   blockquote: {
-    position: 'relative',
+    position: "relative",
     quotes: '"“" "”"',
-    fontFamily: 'heading',
-    fontWeight: 'light',
+    fontFamily: "heading",
+    fontWeight: "light",
     lineHeight: 1.4,
     pl: 6,
     p: {
-      fontSize: 'inherit',
-      color: 'inherit',
-      lineHeight: 'inherit',
-      '&::before': {
-        content: 'open-quote',
-        position: 'absolute',
-        top: '-1rem',
+      fontSize: "inherit",
+      color: "inherit",
+      lineHeight: "inherit",
+      "&::before": {
+        content: "open-quote",
+        position: "absolute",
+        top: "-1rem",
         left: 0,
-        fontSize: '3.5rem',
-        color: 'subdued',
+        fontSize: "3.5rem",
+        color: "subdued",
       },
     },
   },
-}
+};

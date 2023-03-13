@@ -1,5 +1,5 @@
-import { QueryKey, useQuery, UseQueryResult } from 'react-query'
-import { graphQlClient } from '../../graphql/client'
+import { QueryKey, useQuery, UseQueryResult } from "react-query";
+import { graphQlClient } from "../../graphql/client";
 
 export const useGqlQuery = <ResponseData = unknown, Variables = unknown>(
   queryKey: QueryKey,
@@ -8,10 +8,10 @@ export const useGqlQuery = <ResponseData = unknown, Variables = unknown>(
 ): UseQueryResult<ResponseData, Error> => {
   return useQuery(queryKey, async () => {
     try {
-      const response = await graphQlClient.request(query, variables)
-      return response
+      const response = await graphQlClient.request(query, variables);
+      return response;
     } catch (error) {
-      console.log(`🚀 ~ useGqlQuery ~ error`, error)
+      console.log(`🚀 ~ useGqlQuery ~ error`, error);
     }
-  })
-}
+  });
+};

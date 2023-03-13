@@ -1,15 +1,15 @@
-import React, { Fragment, ReactNode } from 'react'
-import { Flex } from 'theme-ui'
-import { useUserContext } from '../../providers/AuthProvider'
-import NavBar from '../NavBar/NavBar'
-import WrapperContainer from '../WrapperContainer/WrapperContainer'
+import React, { Fragment, ReactNode } from "react";
+import { Flex } from "theme-ui";
+import { useUserContext } from "../../providers/AuthProvider";
+import NavBar from "../NavBar/NavBar";
+import WrapperContainer from "../WrapperContainer/WrapperContainer";
 
 export interface LayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
-  const { isLoading } = useUserContext()
+  const { isLoading } = useUserContext();
   return (
     <Fragment>
       <Flex>
@@ -17,7 +17,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
         <WrapperContainer>{children}</WrapperContainer>
       </Flex>
     </Fragment>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

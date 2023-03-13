@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactLoading from 'react-loading'
-import { Box } from 'theme-ui'
+import React from "react";
+import ReactLoading from "react-loading";
+import { Box } from "theme-ui";
 
 const Loader = (): JSX.Element => {
   return (
@@ -8,11 +8,11 @@ const Loader = (): JSX.Element => {
       <ReactLoading
         type="spinningBubbles"
         color="black"
-        height={'20%'}
-        width={'20%'}
+        height={"20%"}
+        width={"20%"}
       />
     </Box>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;
