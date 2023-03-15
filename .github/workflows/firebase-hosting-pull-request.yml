@@ -19,3 +19,19 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_MRDOC_1419A }}"
           projectId: mrdoc-1419a
+        env:
+          REACT_APP_FIREBASE_TOKEN: '${{ secrets.REACT_APP_FIREBASE_TOKEN }}'
+          REACT_APP_FIREBASE_API_KEY: '${{ secrets.REACT_APP_FIREBASE_API_KEY }}'
+          REACT_APP_FIREBASE_APP_ID: '${{ secrets.REACT_APP_FIREBASE_APP_ID }}'
+          REACT_APP_FIREBASE_AUTH_DOMAIN: '${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN }}'
+          REACT_APP_FIREBASE_MESSAGING_SENDER_ID: '${{ secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }}'
+          REACT_APP_FIREBASE_PROJECT_ID: '${{ secrets.REACT_APP_FIREBASE_PROJECT_ID }}'
+          REACT_APP_FIREBASE_STORAGE_BUCKET: '${{ secrets.FIREBASE_STORAGE_BUCKET }}'
+          REACT_APP_HASURA_GRAPHQL_ADMIN_SECRET: '${{ secrets.REACT_APP_HASURA_GRAPHQL_ADMIN_SECRET }}'
+          REACT_APP_API_BASE_PATH_V1: '${{ secrets.REACT_APP_API_BASE_PATH_V1 }}'
+          REACT_APP_HEROKU_GIT_URL: '${{ secrets.REACT_APP_HEROKU_GIT_URL }}'
+      - name: Upload artifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: Bundle stats
+          path: stats.html
