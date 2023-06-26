@@ -18,7 +18,7 @@ import {
 } from "firebase/auth";
 import { MrDocRoles, MrDocContactType } from "../types/mrDocRoles";
 import { collection } from "@firebase/firestore";
-import { addDoc } from "firebase/firestore";
+import { addDoc, getFirestore } from "firebase/firestore";
 
 export interface AuthProviderProps {
   children?: ReactNode;
@@ -59,6 +59,11 @@ export function useAuth(): AuthContextModel {
 
 export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   const [user, setUser] = useState<User>();
+  const [authState, setAuthState] = useState<{
+    status: string;
+    firebaseUser?: User | null;
+    token?: string;
+  }>({ status: "loading", firebaseUser: null, token: "" });
 
   const signUp = async (
     displayName: string,
@@ -95,52 +100,27 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   }
 
   useEffect(() => {
-    auth.onAuthStateChanged((firebaseUser) => {
+    return auth.onAuthStateChanged(async (firebaseUser) => {
       if (firebaseUser) {
-        return firebaseUser
-          .getIdToken()
-          .then(
-            (token) =>
-              auth.currentUser &&
-              auth?.currentUser.getIdTokenResult().then((result) => {
-                if (result.claims["https://hasura.io/jwt/claims"]) {
-                  return token;
-                }
-                const endpoint = "https://xxx.cloudfunctions.net/refreshToken";
-                return fetch(`${endpoint}?uid=${firebaseUser.uid}`).then(
-                  (res) => {
-                    if (res.status === 200) {
-                      return firebaseUser.getIdToken(true);
-                    }
-                    return res.json().then((e) => {
-                      throw e;
-                    });
-                  },
-                );
-              }),
-          )
-          .then((validToken) => {
-            // Store Token / Or create Apollo with your new token!
-          })
-          .catch(console.error);
+        const token = await firebaseUser.getIdToken();
+        const idTokenResult = await firebaseUser.getIdTokenResult();
+        const hasuraClaim =
+          idTokenResult.claims["https://hasura.io/jwt/claims"];
+
+        console.log("token:", token);
+        console.log(
+          "firebase-displayname:",
+          authState.firebaseUser?.displayName,
+        );
+
+        if (hasuraClaim) {
+          setAuthState({ status: "in", firebaseUser, token });
+        }
+      } else {
+        setAuthState({ status: "out" });
       }
     });
-    // const getToken = auth.onAuthStateChanged((user) => {
-    //   if (user) {
-    //     user
-    //       ?.getIdToken(true)
-    //       .then((token) => {
-    //         console.log("token:", token);
-    //       })
-    //       .catch((Error) => {
-    //         console.log(Error);
-    //       });
-    //   } else {
-    //     console.log("no token available");
-    //   }
-    //   return getToken;
-    // });
-  });
+  }, []);
 
   const values = {
     signUp,
@@ -156,3 +136,50 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
 export const useUserContext = (): UserContextState => {
   return useContext(UserStateContext);
 };
+
+// const getToken = auth.onAuthStateChanged((user) => {
+//   if (user) {
+//     user
+//       ?.getIdToken(true)
+//       .then((token) => {
+//         console.log("token:", token);
+//       })
+//       .catch((Error) => {
+//         console.log(Error);
+//       });
+//   } else {
+//     console.log("no token available");
+//   }
+//   return getToken;
+// });
+
+// auth.onAuthStateChanged((firebaseUser) => {
+//   if (firebaseUser) {
+//     return firebaseUser
+//       .getIdToken()
+//       .then(
+//         (token) =>
+//           auth.currentUser &&
+//           auth?.currentUser.getIdTokenResult().then((result) => {
+//             if (result.claims["https://hasura.io/jwt/claims"]) {
+//               return token;
+//             }
+//             const endpoint = "https://xxx.cloudfunctions.net/refreshToken";
+//             return fetch(`${endpoint}?uid=${firebaseUser.uid}`).then(
+//               (res) => {
+//                 if (res.status === 200) {
+//                   return firebaseUser.getIdToken(true);
+//                 }
+//                 return res.json().then((e) => {
+//                   throw e;
+//                 });
+//               },
+//             );
+//           }),
+//       )
+//       .then((validToken) => {
+//         // Store Token / Or create Apollo with your new token!
+//       })
+//       .catch(console.error);
+//   }
+// });

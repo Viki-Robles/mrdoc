@@ -10,6 +10,7 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "suppressImplicitAnyIndexErrors": true,
+    "ignoreDeprecations": "5.0",
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",

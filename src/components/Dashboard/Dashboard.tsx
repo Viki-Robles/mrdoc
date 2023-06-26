@@ -15,7 +15,7 @@ export default function Dashboard({
   const { doctorsData } = useFetchDoctors();
   const auth = getAuth();
 
-  // console.log('username', auth.currentUser?.displayName)
+  console.log("username", auth.currentUser?.displayName);
 
   return (
     <FavouriteProvider doctor_id={doctor_id}>
