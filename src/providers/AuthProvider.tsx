@@ -6,7 +6,6 @@ import React, {
   createContext,
 } from "react";
 import { auth, db } from "../config/firebase";
-
 import {
   Auth,
   UserCredential,
@@ -19,6 +18,8 @@ import {
 import { MrDocRoles, MrDocContactType } from "../types/mrDocRoles";
 import { collection } from "@firebase/firestore";
 import { addDoc, getFirestore } from "firebase/firestore";
+import { INSERT_USER_DETAILS } from "../graphql/mutations";
+import { useInsertUsers } from "../hooks/useInsertUsers/useInsertUsers";
 
 export interface AuthProviderProps {
   children?: ReactNode;
@@ -81,10 +82,11 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
           email: user?.email,
         });
         await user.reload();
+        await useInsertUsers();
+        console.log("mutation is running!!!");
       }
     } catch (err) {
-      console.error(err);
-      alert(err);
+      throw new Error(err);
     }
   };
 
