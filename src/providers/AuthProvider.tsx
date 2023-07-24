@@ -81,6 +81,12 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
           authProvider: "local",
           email: user?.email,
         });
+        // Fire another action  to save the user to hasura with same datails 
+        // hasuaraUSer = {
+        //   user_id: user?.uid,
+        //   email_id: user?.email,
+        //   displayName: displayName
+        // }
         await user.reload();
         await useInsertUsers();
         console.log("mutation is running!!!");
