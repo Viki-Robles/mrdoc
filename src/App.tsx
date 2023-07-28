@@ -13,7 +13,7 @@ import {
 } from "./config/paths";
 
 const SignIn = lazy(() => import("./components/SignIn/SignIn"));
-const SignUp = lazy(() => import("./components/Signup/Signup"));
+const SignUp = lazy(() => import("./components/SignUp/SignUp"));
 const Layout = lazy(() => import("./components/Layout/Layout"));
 const DoctorProfile = lazy(
   () => import("./components/DoctorProfile/DoctorProfile"),

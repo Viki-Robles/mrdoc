@@ -20,6 +20,9 @@ import { collection } from "@firebase/firestore";
 import { addDoc, getFirestore } from "firebase/firestore";
 import { INSERT_USER_DETAILS } from "../graphql/mutations";
 import { useInsertUsers } from "../hooks/useInsertUsers/useInsertUsers";
+import { useQueryClient } from "react-query";
+import { useGqlMutation } from "../hooks/useGqlMutation/useGqlMutation";
+import { graphQlClient } from "../graphql/client";
 
 export interface AuthProviderProps {
   children?: ReactNode;
@@ -82,11 +85,15 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
           email: user?.email,
         });
         await user.reload();
-        await useInsertUsers();
-        console.log("mutation is running!!!");
+        await graphQlClient.request(INSERT_USER_DETAILS, {
+          uid: user?.uid,
+          displayName: displayName,
+          authProvider: "local",
+          email: user?.email,
+        });
       }
     } catch (err) {
-      throw new Error(err);
+      console.log(err);
     }
   };
 
