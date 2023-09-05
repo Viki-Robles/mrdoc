@@ -26,3 +26,10 @@ export interface MrDocUser {
     organisation?: string;
   } | null;
 }
+
+export interface User {
+  authProvider?: string;
+  displayName: string;
+  email: string;
+  uid?: string;
+}

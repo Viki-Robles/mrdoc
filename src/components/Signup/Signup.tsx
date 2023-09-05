@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input, ThemeUIStyleObject, Grid, Button, Text, Alert } from "theme-ui";
-import { Form, Formik } from "formik";
+import { Form, Formik, validateYupSchema } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import { FormGroup } from "../FormGroup/FormGroup";
@@ -9,12 +9,16 @@ import { useAuth } from "../../providers/AuthProvider";
 import { passwordValidation } from "../../utils/passwordValidation/passwordValidation";
 import { FormWrapper } from "../FormWrapper/FormWrapper";
 import { Link } from "react-router-dom";
+import { useInsertUsers } from "../../hooks/useInsertUsers/useInsertUsers";
+import { queryClient } from "../../App";
 
 interface SignUpFormValues {
   email: string;
   password: string;
   repeatPassword: string;
   displayName: string;
+  authProvider?: string;
+  uid?: string;
 }
 
 const SignUpSchema = Yup.object().shape({
@@ -38,6 +42,12 @@ export default function SignUp({ sx }: SignUpProps): JSX.Element {
   const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
   const history = useHistory();
 
+  const updateHsuraUsers = useInsertUsers({
+    onSuccess: () => {
+      queryClient.invalidateQueries("user-info");
+    },
+  });
+
   return (
     <FormWrapper title="Create account" sx={{ ...sx }}>
       <Formik
@@ -51,6 +61,12 @@ export default function SignUp({ sx }: SignUpProps): JSX.Element {
           setFormSubmitting(true);
           try {
             await signUp(values.displayName, values.email, values.password);
+            await updateHsuraUsers.mutate({
+              displayName: values.displayName,
+              email: values.email,
+              authProvider: values.authProvider,
+              uid: values.uid,
+            });
             try {
               history.push(DASHBOARD_PAGE_PATH);
             } catch (error) {

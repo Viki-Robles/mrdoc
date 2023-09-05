@@ -14,12 +14,11 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   updateEmail,
+  UserInfo,
 } from "firebase/auth";
 import { MrDocRoles, MrDocContactType } from "../types/mrDocRoles";
 import { collection } from "@firebase/firestore";
-import { addDoc, getFirestore } from "firebase/firestore";
-import { INSERT_USER_DETAILS } from "../graphql/mutations";
-import { useInsertUsers } from "../hooks/useInsertUsers/useInsertUsers";
+import { addDoc } from "firebase/firestore";
 
 export interface AuthProviderProps {
   children?: ReactNode;
@@ -28,10 +27,15 @@ export interface AuthProviderProps {
 export interface UserContextState {
   isAuthenticated: boolean;
   isLoading: boolean;
-  user: User;
+  user: UserInfo;
   id?: string;
   role?: MrDocRoles;
   contactType?: MrDocContactType;
+  signUp: (
+    displayName: string,
+    email: string,
+    password: string,
+  ) => Promise<void>;
 }
 
 export const UserStateContext = createContext<UserContextState>(
@@ -39,7 +43,7 @@ export const UserStateContext = createContext<UserContextState>(
 );
 export interface AuthContextModel {
   auth: Auth;
-  user: User | null | undefined;
+  user: UserInfo | null | undefined;
   signIn: (email: string, password: string) => Promise<UserCredential>;
   signUp: (
     displayName: string,
@@ -59,47 +63,12 @@ export function useAuth(): AuthContextModel {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<UserInfo>();
   const [authState, setAuthState] = useState<{
     status: string;
-    firebaseUser?: User | null;
+    firebaseUser?: UserInfo | null;
     token?: string;
   }>({ status: "loading", firebaseUser: null, token: "" });
-
-  const signUp = async (
-    displayName: string,
-    email: string,
-    password: string,
-  ): Promise<void> => {
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      const user = res.user;
-      if (user !== null) {
-        await addDoc(collection(db, "users"), {
-          uid: user?.uid,
-          displayName: displayName,
-          authProvider: "local",
-          email: user?.email,
-        });
-        await user.reload();
-        await useInsertUsers();
-        console.log("mutation is running!!!");
-      }
-    } catch (err) {
-      throw new Error(err);
-    }
-  };
-
-  function signIn(email: string, password: string): Promise<UserCredential> {
-    return signInWithEmailAndPassword(auth, email, password);
-  }
-  function resetPassword(email: string): Promise<void> {
-    return sendPasswordResetEmail(auth, email);
-  }
-
-  function updateUserEmail(newEmail: string, user: User): Promise<void> {
-    return updateEmail(user, newEmail);
-  }
 
   useEffect(() => {
     return auth.onAuthStateChanged(async (firebaseUser) => {
@@ -123,6 +92,48 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
       }
     });
   }, []);
+
+  const signUp = async (
+    displayName: string,
+    email: string,
+    password: string,
+  ): Promise<void> => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const user = res.user;
+      if (user !== null) {
+        await addDoc(collection(db, "users"), {
+          uid: user?.uid,
+          displayName: displayName,
+          authProvider: "local",
+          email: user?.email,
+        });
+        await user.reload();
+        // await useInsertUsers();
+        console.log("mutation is running!!!");
+      }
+    } catch (err) {
+      console.log("signUp error", err);
+    }
+  };
+
+  // useEffect(() => {
+  //   const addUsers = async () => {
+  //     await useInsertUsers();
+  //   };
+  //   addUsers();
+  // }, []);
+
+  function signIn(email: string, password: string): Promise<UserCredential> {
+    return signInWithEmailAndPassword(auth, email, password);
+  }
+  function resetPassword(email: string): Promise<void> {
+    return sendPasswordResetEmail(auth, email);
+  }
+
+  function updateUserEmail(newEmail: string, user: User): Promise<void> {
+    return updateEmail(user, newEmail);
+  }
 
   const values = {
     signUp,
