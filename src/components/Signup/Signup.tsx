@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input, ThemeUIStyleObject, Grid, Button, Text, Alert } from "theme-ui";
-import { Form, Formik, validateYupSchema } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import { FormGroup } from "../FormGroup/FormGroup";
@@ -44,7 +44,7 @@ export default function SignUp({ sx }: SignUpProps): JSX.Element {
 
   const updateHsuraUsers = useInsertUsers({
     onSuccess: () => {
-      queryClient.invalidateQueries("user-info");
+      queryClient.invalidateQueries("user-info-updated-on-hasura");
     },
   });
 
