@@ -1,28 +1,18 @@
-import { MrDocContactType, MrDocRoles } from "../types/mrDocRoles";
-
-export enum AccountStatus {
-  new = "new",
-  active = "active",
-  inactive = "inactive",
+export interface UserData {
+  data: UserResponseData;
 }
 
-export interface MrDocUser {
-  id: string;
-  uid: string;
-  first_name: string;
-  last_name: string;
+export interface UserResponseData {
+  insert_users: UserResponseValues;
+}
+
+export interface UserResponseValues {
+  returning: UserDetails[];
+}
+
+export interface UserDetails {
   displayName: string | null;
-  contact_number: string | null;
-  profileImageUrl?: string | null;
-  email?: string | null;
-  contactType?: MrDocContactType;
-  mrDocUser: {
-    role: MrDocRoles;
-    accountStatus: AccountStatus;
-  };
-  client: {
-    job_title: string | null;
-    location: string | null;
-    organisation?: string;
-  } | null;
+  email: string;
+  password: string | null;
+  repeatPassword: string | null;
 }

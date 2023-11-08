@@ -13,12 +13,11 @@ import { useInsertUsers } from "../../hooks/useInsertUsers/useInsertUsers";
 import { queryClient } from "../../App";
 
 interface SignUpFormValues {
-  email: string;
   password: string;
   repeatPassword: string;
-  displayName: string;
-  authProvider?: string;
-  uid?: string;
+  displayName: string | null;
+  email: string;
+  uid?: string | null;
 }
 
 const SignUpSchema = Yup.object().shape({
@@ -61,17 +60,14 @@ export default function SignUp({ sx }: SignUpProps): JSX.Element {
           setFormSubmitting(true);
           try {
             await signUp(values.displayName, values.email, values.password);
+            console.log("values:", values);
             await updateHsuraUsers.mutate({
               displayName: values.displayName,
               email: values.email,
-              authProvider: values.authProvider,
-              uid: values.uid,
+              password: values.password,
+              repeatPassword: values.repeatPassword,
             });
-            try {
-              history.push(DASHBOARD_PAGE_PATH);
-            } catch (error) {
-              console.log(`🚀 ~ signup error`, error);
-            }
+            history.push(DASHBOARD_PAGE_PATH);
           } catch (error) {
             console.log(error);
             setFormError(formError);

@@ -32,7 +32,7 @@ export interface UserContextState {
   role?: MrDocRoles;
   contactType?: MrDocContactType;
   signUp: (
-    displayName: string,
+    displayName: string | null,
     email: string,
     password: string,
   ) => Promise<void>;
@@ -46,7 +46,7 @@ export interface AuthContextModel {
   user: UserInfo | null | undefined;
   signIn: (email: string, password: string) => Promise<UserCredential>;
   signUp: (
-    displayName: string,
+    displayName: string | null,
     email: string,
     password: string,
   ) => Promise<void>;
@@ -77,13 +77,6 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
         const idTokenResult = await firebaseUser.getIdTokenResult();
         const hasuraClaim =
           idTokenResult.claims["https://hasura.io/jwt/claims"];
-
-        console.log("token:", token);
-        console.log(
-          "firebase-displayname:",
-          authState.firebaseUser?.displayName,
-        );
-
         if (hasuraClaim) {
           setAuthState({ status: "in", firebaseUser, token });
         }
@@ -94,7 +87,7 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   }, []);
 
   const signUp = async (
-    displayName: string,
+    displayName: string | null,
     email: string,
     password: string,
   ): Promise<void> => {
@@ -109,20 +102,12 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
           email: user?.email,
         });
         await user.reload();
-        // await useInsertUsers();
-        console.log("mutation is running!!!");
+        console.log("sign up successfull!!!");
       }
     } catch (err) {
       console.log("signUp error", err);
     }
   };
-
-  // useEffect(() => {
-  //   const addUsers = async () => {
-  //     await useInsertUsers();
-  //   };
-  //   addUsers();
-  // }, []);
 
   function signIn(email: string, password: string): Promise<UserCredential> {
     return signInWithEmailAndPassword(auth, email, password);
