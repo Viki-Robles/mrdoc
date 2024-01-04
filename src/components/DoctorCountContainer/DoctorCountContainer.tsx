@@ -1,11 +1,13 @@
 import React from "react";
 import { Box, Flex, Text } from "theme-ui";
 
-interface SmallWrapperProps {
+interface DoctorCountContainerProps {
   data: any;
 }
 
-function SmallWrapper({ data }: SmallWrapperProps): JSX.Element {
+function DoctorCountContainer({
+  data,
+}: DoctorCountContainerProps): JSX.Element {
   return (
     <Flex
       sx={{
@@ -50,4 +52,4 @@ function SmallWrapper({ data }: SmallWrapperProps): JSX.Element {
   );
 }
 
-export default SmallWrapper;
+export default DoctorCountContainer;

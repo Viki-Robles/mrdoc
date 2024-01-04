@@ -1,16 +1,15 @@
+/* eslint-disable no-debugger */
 import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "../../providers/AuthProvider";
 import { Input, ThemeUIStyleObject, Grid, Button, Text, Alert } from "theme-ui";
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
-import { useHistory } from "react-router-dom";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { DASHBOARD_PAGE_PATH, SIGN_IN_PAGE_PATH } from "../../config/paths";
-import { useAuth } from "../../providers/AuthProvider";
-import { passwordValidation } from "../../utils/passwordValidation/passwordValidation";
 import { FormWrapper } from "../FormWrapper/FormWrapper";
-import { Link } from "react-router-dom";
 import { useInsertUsers } from "../../hooks/useInsertUsers/useInsertUsers";
 import { queryClient } from "../../App";
+import { SignUpSchema } from "./Signup.form";
 
 interface SignUpFormValues {
   password: string;
@@ -19,17 +18,6 @@ interface SignUpFormValues {
   email: string;
   uid?: string | null;
 }
-
-const SignUpSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: passwordValidation,
-  repeatPassword: Yup.string().when("password", {
-    is: (val: string) => val && val.length > 0,
-    then: Yup.string()
-      .oneOf([Yup.ref("password")], "Both passwords need to be the same")
-      .required("Required"),
-  }),
-});
 
 export interface SignUpProps {
   sx?: ThemeUIStyleObject;
@@ -58,15 +46,18 @@ export default function SignUp({ sx }: SignUpProps): JSX.Element {
         }}
         onSubmit={async (values: SignUpFormValues) => {
           setFormSubmitting(true);
+
           try {
+            debugger;
             await signUp(values.displayName, values.email, values.password);
             console.log("values:", values);
             await updateHsuraUsers.mutate({
-              displayName: values.displayName,
               email: values.email,
+              displayName: values.displayName,
               password: values.password,
               repeatPassword: values.repeatPassword,
             });
+            console.log("values:", updateHsuraUsers.variables?.email);
             history.push(DASHBOARD_PAGE_PATH);
           } catch (error) {
             console.log(error);

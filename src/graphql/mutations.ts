@@ -9,15 +9,15 @@ export const INSERT_USER = gql`
   ) {
     insert_users(
       objects: {
-        displayName: $displayName
         email: $email
+        displayName: $displayName
         password: $password
         repeatPassword: $repeatPassword
       }
     ) {
       returning {
-        displayName
         email
+        displayName
         password
         repeatPassword
       }

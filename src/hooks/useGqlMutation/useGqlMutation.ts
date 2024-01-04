@@ -1,5 +1,6 @@
 import { useMutation, UseMutationResult } from "react-query";
 import { graphQlClient } from "../../graphql/client";
+import { Variables } from "graphql-request/dist/types";
 
 export const useGqlMutation = <Response = unknown, Variables = unknown>(
   variables,

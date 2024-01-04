@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Flex, Input, Box } from "theme-ui";
 import { Doctor } from "../../types/doctors";
 import DoctorItem from "../DoctorItem/DoctorItem";
-import SmallWrapper from "../SmallWrapper/SmallWrapper";
+import DoctorCountContainer from "../DoctorCountContainer/DoctorCountContainer";
 
 export interface DoctorsGalleryItemsProps {
   data: Doctor[] | undefined;
@@ -28,7 +28,7 @@ export default function DoctorsGalleryItems({
           placeholder="Search by language.."
           onChange={(event) => setSearchTerm(event.target.value)}
         />
-        <SmallWrapper data={doctorsSum} />
+        <DoctorCountContainer data={doctorsSum} />
         <Flex sx={{ gap: 4, flexWrap: "wrap" }}>
           {data &&
             data
